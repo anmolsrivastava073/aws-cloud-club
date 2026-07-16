@@ -92,7 +92,7 @@ export default function Footer() {
             <div className="flex gap-3">
 
               <a
-                href="https://www.instagram.com/awscloudclub_muj/"
+                href="https://www.instagram.com/awssbg_muj/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2 rounded-md border border-black/10 bg-white hover:border-[#9b5cff]/50 hover:-translate-y-[1px] transition-all duration-200"
