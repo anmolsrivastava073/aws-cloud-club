@@ -77,5 +77,27 @@ export const EVENTS: Event[] = [
         '/images/aws-launchevent-members.jpeg',
       ],
     },
+
+    {
+      id: '3',
+      title: 'Prompt To Production',
+      date: 'August 5, 2026',
+      time: '10:30 AM - 12:30 PM',
+      venue: 'LHC 103 AB4',
+      shortDescription: 'A hands-on AWS Student Builder Group workshop exploring how to take AI-powered prototypes built with prompts and ship them as real, production-ready cloud applications.',
+      fullDescription: 'The "Prompt To Production" workshop is a hands-on session organized by the AWS Student Builder Group at Manipal University Jaipur, designed for students who want to move beyond prompt-based prototyping and understand what it actually takes to ship an AI-powered application. The session covers the full journey from structuring an idea with the right prompts, to building a working application around it, and finally deploying it reliably on cloud infrastructure. Participants will learn practical techniques for testing, refining, and hardening AI-assisted code, along with best practices for scaling and monitoring applications once they go live. The workshop is conducted in a hybrid mode, allowing participants to join both offline and online, ensuring accessibility to a wider audience. Whether you have only experimented with prompting tools or already built small projects, this session will help you bridge the gap between "it works on my machine" and "it works in production."',
+    
+      meetupLink: 'MEETUP_LINK_HERE',
+    
+      registrationOpen: true,
+      speakers: [
+        {
+          name: 'SPEAKER_NAME',
+          designation: 'SPEAKER_DESIGNATION',
+          image: '/images/SPEAKER_IMAGE.jpeg',
+          bio: 'SPEAKER_BIO',
+        },
+      ],
+    },
   },
 ];
