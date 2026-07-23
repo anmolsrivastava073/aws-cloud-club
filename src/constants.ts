@@ -45,7 +45,6 @@ export const EVENTS: Event[] = [
     shortDescription: 'We are excited to share that the AWS Student Builder Group at Manipal University Jaipur has been officially launched...',
     fullDescription: 'The AWS Student Builder Group MUJ was officially launched with an inspiring inaugural event, marking the beginning of a dynamic cloud-focused student community at Manipal University Jaipur. The event brought together enthusiastic students eager to explore cloud computing, AWS technologies, and future career opportunities in this domain. The session was graced by esteemed speakers Mr. Pawan Sharma and Mr. Somil Jain, who shared valuable insights into the world of cloud, industry trends, and practical career guidance. Their experiences and perspectives provided students with a clear understanding of real-world applications of AWS and the growing importance of cloud technologies. The event set a strong foundation for innovation, collaboration, and learning, encouraging students to actively engage, build projects, and grow within the AWS ecosystem.',
 
-    
     meetupLink: '',
 
     registrationOpen: false,
@@ -77,27 +76,26 @@ export const EVENTS: Event[] = [
         '/images/aws-launchevent-members.jpeg',
       ],
     },
+  },
+  {
+    id: '3',
+    title: 'Prompt To Production',
+    date: 'August 5, 2026',
+    time: '10:30 AM - 12:30 PM',
+    venue: 'LHC 103 AB4',
+    shortDescription: 'A hands-on AWS Student Builder Group workshop exploring how to take AI-powered prototypes built with prompts and ship them as real, production-ready cloud applications.',
+    fullDescription: 'The "Prompt To Production" workshop is a hands-on session organized by the AWS Student Builder Group at Manipal University Jaipur, designed for students who want to move beyond prompt-based prototyping and understand what it actually takes to ship an AI-powered application. The session covers the full journey from structuring an idea with the right prompts, to building a working application around it, and finally deploying it reliably on cloud infrastructure. Participants will learn practical techniques for testing, refining, and hardening AI-assisted code, along with best practices for scaling and monitoring applications once they go live. The workshop is conducted in a hybrid mode, allowing participants to join both offline and online, ensuring accessibility to a wider audience. Whether you have only experimented with prompting tools or already built small projects, this session will help you bridge the gap between "it works on my machine" and "it works in production."',
 
-    {
-      id: '3',
-      title: 'Prompt To Production',
-      date: 'August 5, 2026',
-      time: '10:30 AM - 12:30 PM',
-      venue: 'LHC 103 AB4',
-      shortDescription: 'A hands-on AWS Student Builder Group workshop exploring how to take AI-powered prototypes built with prompts and ship them as real, production-ready cloud applications.',
-      fullDescription: 'The "Prompt To Production" workshop is a hands-on session organized by the AWS Student Builder Group at Manipal University Jaipur, designed for students who want to move beyond prompt-based prototyping and understand what it actually takes to ship an AI-powered application. The session covers the full journey from structuring an idea with the right prompts, to building a working application around it, and finally deploying it reliably on cloud infrastructure. Participants will learn practical techniques for testing, refining, and hardening AI-assisted code, along with best practices for scaling and monitoring applications once they go live. The workshop is conducted in a hybrid mode, allowing participants to join both offline and online, ensuring accessibility to a wider audience. Whether you have only experimented with prompting tools or already built small projects, this session will help you bridge the gap between "it works on my machine" and "it works in production."',
-    
-      meetupLink: 'MEETUP_LINK_HERE',
-    
-      registrationOpen: true,
-      speakers: [
-        {
-          name: 'SPEAKER_NAME',
-          designation: 'SPEAKER_DESIGNATION',
-          image: '/images/SPEAKER_IMAGE.jpeg',
-          bio: 'SPEAKER_BIO',
-        },
-      ],
-    },
+    meetupLink: 'MEETUP_LINK_HERE',
+
+    registrationOpen: true,
+    speakers: [
+      {
+        name: 'SPEAKER_NAME',
+        designation: 'SPEAKER_DESIGNATION',
+        image: '/images/SPEAKER_IMAGE.jpeg',
+        bio: 'SPEAKER_BIO',
+      },
+    ],
   },
 ];
