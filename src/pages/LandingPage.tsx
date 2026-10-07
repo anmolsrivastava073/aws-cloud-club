@@ -1,12 +1,19 @@
+import { useState } from 'react';
 import { ArrowRight, Code, Users, Zap } from 'lucide-react';
 import EventCard from '../components/EventCard';
 import { EVENTS, MEMBERS } from '../constants';
 import CloudVisual from '../components/CloudVisual';
 
 export default function LandingPage() {
+  // State for member category tabs (defaults to Core so only Captains show initially)
+  const [activeTab, setActiveTab] = useState('Core');
+  const categories = ['Core', 'Technical', 'Event Management', 'GDXSM', 'Finance'];
+
   const sortedEvents = [...EVENTS].sort((a, b) => {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
+
+  const filteredMembers = MEMBERS.filter(member => member.category === activeTab);
 
   return (
     <div className="pt-20 bg-[#f5f3ef] text-black aws-grid-bg">
@@ -185,7 +192,7 @@ export default function LandingPage() {
         className="py-28 border-t border-black/10 bg-white"
       >
         <div className="max-w-6xl mx-auto px-4">
-          <div className="mb-14 text-center">
+          <div className="mb-10 text-center">
             <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.05em] leading-none mb-3">
               Our Team
             </h2>
@@ -194,8 +201,26 @@ export default function LandingPage() {
             </p>
           </div>
 
+          {/* TABS FOR MEMBER CATEGORIES */}
+          <div className="flex flex-wrap justify-center gap-2 mb-12">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setActiveTab(category)}
+                className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 ${
+                  activeTab === category
+                    ? 'bg-[#9b5cff] text-white shadow-md'
+                    : 'bg-[#f3f4f6] text-[#666666] hover:bg-[#ececec]'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+
+          {/* FILTERED MEMBERS GRID */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {MEMBERS.map((member) => (
+            {filteredMembers.map((member) => (
               <div 
                 key={member.id} 
                 className="aws-card p-6 flex flex-col items-center text-center h-full"
