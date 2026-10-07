@@ -98,78 +98,78 @@ export const MEMBERS: Member[] = [
     name: 'Aabha Rajpal',
     position: 'Club Captain',
     category: ['Core'],
-    image: '/newlogo.jpg',
+    image: '/images/newlogo.jpg',
   },
   {
     id: '2',
     name: 'Ayush Goyal',
     position: 'Club Co-Captain',
     category: ['Core'],
-    image: '/newlogo.jpg',
+    image: '/images/newlogo.jpg',
   },
   {
     id: '3',
     name: 'Aanya Singh Saini',
     position: 'Technical Team Lead',
-    category: ['Core', 'Technical'], // Added Core
+    category: ['Core', 'Technical'],
     number: '+91 7982875604',
-    image: '/newlogo.jpg',
+    image: '/images/newlogo.jpg',
   },
   {
     id: '4',
     name: 'Aditya Raj',
     position: 'Technical Team Co-Lead',
-    category: ['Core', 'Technical'], // Added Core
+    category: ['Core', 'Technical'], 
     number: '+91 9511389189',
-    image: '/newlogo.jpg',
+    image: '/images/newlogo.jpg',
   },
   {
     id: '5',
     name: 'Shreyans Chordia',
     position: 'Event Management Team Lead',
-    category: ['Core', 'Event Management'], // Added Core
+    category: ['Core', 'Event Management'],
     number: '+91 6268088544',
-    image: '/newlogo.jpg',
+    image: '/images/newlogo.jpg',
   },
   {
     id: '6',
     name: 'Lavisha Rohra',
     position: 'Event Management Team Co-Lead',
-    category: ['Core', 'Event Management'], // Added Core
+    category: ['Core', 'Event Management'],
     number: '+91 8595800533',
-    image: '/newlogo.jpg',
+    image: '/images/newlogo.jpg',
   },
   {
     id: '7',
     name: 'Akhil Prakash',
     position: 'SM Team Lead',
-    category: ['Core', 'GDXSM'], // Added Core
+    category: ['Core', 'GDXSM'], 
     number: '+91 7858818551',
-    image: '/newlogo.jpg',
+    image: '/images/newlogo.jpg',
   },
   {
     id: '8',
     name: 'Praneel Kapoor',
     position: 'GD Team Lead',
-    category: ['Core', 'GDXSM'], // Added Core
+    category: ['Core', 'GDXSM'], 
     number: '+91 8726233333',
-    image: '/newlogo.jpg',
+    image: '/images/newlogo.jpg',
   },
   {
     id: '9',
     name: 'Varun Nevatia',
     position: 'Finance Team Lead',
-    category: ['Core', 'Finance'], // Added Core
+    category: ['Core', 'Finance'], 
     number: '+91 7987091622',
-    image: '/newlogo.jpg',
+    image: '/images/newlogo.jpg',
   },
   {
     id: '10',
     name: 'Aditya Pathak',
     position: 'Finance Team Co-Lead',
-    category: ['Core', 'Finance'], // Added Core
+    category: ['Core', 'Finance'], 
     number: '+91 9902994004',
-    image: '/newlogo.jpg',
+    image: '/images/newlogo.jpg',
   },
   {
     id: '11',
@@ -177,7 +177,7 @@ export const MEMBERS: Member[] = [
     position: 'Technical SWT Member',
     category: ['Technical'],
     number: '+91 9756007078',
-    image: '/newlogo.jpg',
+    image: '/images/newlogo.jpg',
   },
   {
     id: '12',
@@ -185,7 +185,7 @@ export const MEMBERS: Member[] = [
     position: 'Technical SWT Member',
     category: ['Technical'],
     number: '+91 8429631456',
-    image: '/newlogo.jpg',
+    image: '/images/newlogo.jpg',
   },
   {
     id: '13',
@@ -193,7 +193,7 @@ export const MEMBERS: Member[] = [
     position: 'Technical SWT Member',
     category: ['Technical'],
     number: '+91 9818263927',
-    image: '/newlogo.jpg',
+    image: '/images/newlogo.jpg',
   },
   {
     id: '14',
@@ -201,7 +201,7 @@ export const MEMBERS: Member[] = [
     position: 'Event Management SWT Member',
     category: ['Event Management'],
     number: '+91 8487061509',
-    image: '/newlogo.jpg',
+    image: '/images/newlogo.jpg',
   },
   {
     id: '15',
@@ -209,7 +209,7 @@ export const MEMBERS: Member[] = [
     position: 'Event Management SWT Member',
     category: ['Event Management'],
     number: '+91 6396717971',
-    image: '/newlogo.jpg',
+    image: '/images/newlogo.jpg',
   },
   {
     id: '16',
@@ -217,7 +217,7 @@ export const MEMBERS: Member[] = [
     position: 'Event Management SWT Member',
     category: ['Event Management'],
     number: '+91 7021769024',
-    image: '/newlogo.jpg',
+    image: '/images/newlogo.jpg',
   },
   {
     id: '17',
@@ -225,7 +225,7 @@ export const MEMBERS: Member[] = [
     position: 'GDXSM SWT Member',
     category: ['GDXSM'],
     number: '+91 7815859797',
-    image: '/newlogo.jpg',
+    image: '/images/newlogo.jpg',
   },
   {
     id: '18',
@@ -233,7 +233,7 @@ export const MEMBERS: Member[] = [
     position: 'GDXSM SWT Member',
     category: ['GDXSM'],
     number: '+91 7763912105',
-    image: '/newlogo.jpg',
+    image: '/images/newlogo.jpg',
   },
   {
     id: '19',
@@ -241,6 +241,6 @@ export const MEMBERS: Member[] = [
     position: 'GDXSM SWT Member',
     category: ['GDXSM'],
     number: '+91 8825701627',
-    image: '/newlogo.jpg',
+    image: '/images/newlogo.jpg',
   }
 ];
