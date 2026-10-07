@@ -1,4 +1,4 @@
-import { Event } from './types';
+import { Event, Member } from './types';
 
 export const EVENTS: Event[] = [
   {
@@ -9,9 +9,7 @@ export const EVENTS: Event[] = [
     venue: 'LHC 103 AB4',
     shortDescription: 'A hands-on AWS Student Builder Group workshop where participants build a backend application using Python and Flask while understanding real-world development workflows.',
     fullDescription: 'The "Localhost to Cloud Host: Build & Deploy" workshop is a hands-on session organized by the AWS Student Builder Group at Manipal University Jaipur. The workshop aims to provide participants with a practical understanding of how backend applications are developed and structured using modern technologies. During the session, participants will build a backend application using Python and Flask, gaining insight into how applications are designed, managed, and prepared for deployment. The focus is on understanding the development workflow and the key components involved in taking an application beyond the local environment. This workshop is conducted in a hybrid mode, allowing participants to join both offline and online, ensuring accessibility to a wider audience. The session will be led by Shubham Londhe, who will guide participants through the process with a focus on clarity and practical learning.',
-
     meetupLink: 'https://www.meetup.com/aws-cloud-club-at-manipal-university-jaipur/events/313966432/',
-
     registrationOpen: true,
     speakers: [
       {
@@ -21,7 +19,6 @@ export const EVENTS: Event[] = [
         bio: 'Senior Developer Advocate focused on helping developers build and ship cloud-native apps on AWS.',
       },
     ],
-
     recap: {
       title: 'Session Recap — Localhost to Cloud Host',
       paragraphs: [
@@ -44,9 +41,7 @@ export const EVENTS: Event[] = [
     venue: 'LHC 103 AB4',
     shortDescription: 'We are excited to share that the AWS Student Builder Group at Manipal University Jaipur has been officially launched...',
     fullDescription: 'The AWS Student Builder Group MUJ was officially launched with an inspiring inaugural event, marking the beginning of a dynamic cloud-focused student community at Manipal University Jaipur. The event brought together enthusiastic students eager to explore cloud computing, AWS technologies, and future career opportunities in this domain. The session was graced by esteemed speakers Mr. Pawan Sharma and Mr. Somil Jain, who shared valuable insights into the world of cloud, industry trends, and practical career guidance. Their experiences and perspectives provided students with a clear understanding of real-world applications of AWS and the growing importance of cloud technologies. The event set a strong foundation for innovation, collaboration, and learning, encouraging students to actively engage, build projects, and grow within the AWS ecosystem.',
-
     meetupLink: '',
-
     registrationOpen: false,
     speakers: [
       {
@@ -62,7 +57,6 @@ export const EVENTS: Event[] = [
         bio: 'Shared practical industry experiences.',
       },
     ],
-
     recap: {
       title: 'Launch Event Recap',
       paragraphs: [
@@ -85,9 +79,7 @@ export const EVENTS: Event[] = [
     venue: 'LHC 103 AB4',
     shortDescription: 'A hands-on AWS Student Builder Group workshop exploring how to take AI-powered prototypes built with prompts and ship them as real, production-ready cloud applications.',
     fullDescription: 'The "Prompt To Production" workshop is a hands-on session organized by the AWS Student Builder Group at Manipal University Jaipur, designed for students who want to move beyond prompt-based prototyping and understand what it actually takes to ship an AI-powered application. The session covers the full journey from structuring an idea with the right prompts, to building a working application around it, and finally deploying it reliably on cloud infrastructure. Participants will learn practical techniques for testing, refining, and hardening AI-assisted code, along with best practices for scaling and monitoring applications once they go live. The workshop is conducted in a hybrid mode, allowing participants to join both offline and online, ensuring accessibility to a wider audience. Whether you have only experimented with prompting tools or already built small projects, this session will help you bridge the gap between "it works on my machine" and "it works in production."',
-
     meetupLink: 'MEETUP_LINK_HERE',
-
     registrationOpen: true,
     speakers: [
       {
@@ -98,4 +90,138 @@ export const EVENTS: Event[] = [
       },
     ],
   },
+];
+
+export const MEMBERS: Member[] = [
+  {
+    id: '1',
+    name: 'Aabha Rajpal',
+    position: 'Club Captain',
+    image: '/newlogo.jpg',
+  },
+  {
+    id: '2',
+    name: 'Ayush Goyal',
+    position: 'Club Co-Captain',
+    image: '/newlogo.jpg',
+  },
+  {
+    id: '3',
+    name: 'Aanya Singh Saini',
+    position: 'Technical Team Lead',
+    number: '+91 7982875604',
+    image: '/newlogo.jpg',
+  },
+  {
+    id: '4',
+    name: 'Aditya Raj',
+    position: 'Technical Team Co-Lead',
+    number: '+91 9511389189',
+    image: '/newlogo.jpg',
+  },
+  {
+    id: '5',
+    name: 'Shreyans Chordia',
+    position: 'Event Management Team Lead',
+    number: '+91 6268088544',
+    image: '/newlogo.jpg',
+  },
+  {
+    id: '6',
+    name: 'Lavisha Rohra',
+    position: 'Event Management Team Co-Lead',
+    number: '+91 8595800533',
+    image: '/newlogo.jpg',
+  },
+  {
+    id: '7',
+    name: 'Akhil Prakash',
+    position: 'SM Team Lead',
+    number: '+91 7858818551',
+    image: '/newlogo.jpg',
+  },
+  {
+    id: '8',
+    name: 'Praneel Kapoor',
+    position: 'GD Team Lead',
+    number: '+91 8726233333',
+    image: '/newlogo.jpg',
+  },
+  {
+    id: '9',
+    name: 'Varun Nevatia',
+    position: 'Finance Team Lead',
+    number: '+91 7987091622',
+    image: '/newlogo.jpg',
+  },
+  {
+    id: '10',
+    name: 'Aditya Pathak',
+    position: 'Finance Team Co-Lead',
+    number: '+91 9902994004',
+    image: '/newlogo.jpg',
+  },
+  {
+    id: '11',
+    name: 'Bhargavi Chaudhary',
+    position: 'Technical SWT Member',
+    number: '+91 9756007078',
+    image: '/newlogo.jpg',
+  },
+  {
+    id: '12',
+    name: 'Anmol Srivastava',
+    position: 'Technical SWT Member',
+    number: '+91 8429631456',
+    image: '/newlogo.jpg',
+  },
+  {
+    id: '13',
+    name: 'Satyam Jha',
+    position: 'Technical SWT Member',
+    number: '+91 9818263927',
+    image: '/newlogo.jpg',
+  },
+  {
+    id: '14',
+    name: 'Prerna Vaidya',
+    position: 'Event Management SWT Member',
+    number: '+91 8487061509',
+    image: '/newlogo.jpg',
+  },
+  {
+    id: '15',
+    name: 'Aarush Modi',
+    position: 'Event Management SWT Member',
+    number: '+91 6396717971',
+    image: '/newlogo.jpg',
+  },
+  {
+    id: '16',
+    name: 'Shivang Ravindra Pratap Singh',
+    position: 'Event Management SWT Member',
+    number: '+91 7021769024',
+    image: '/newlogo.jpg',
+  },
+  {
+    id: '17',
+    name: 'Lakshita annapareddy',
+    position: 'GDXSM SWT Member',
+    number: '+91 7815859797',
+    image: '/newlogo.jpg',
+  },
+  {
+    id: '18',
+    name: 'Adarsh',
+    position: 'GDXSM SWT Member',
+    number: '+91 7763912105',
+    image: '/newlogo.jpg',
+  },
+  {
+    id: '19',
+    name: 'Shivansh Yadav',
+    position: 'GDXSM SWT Member',
+    number: '+91 8825701627',
+    image: '/newlogo.jpg',
+  }
 ];
