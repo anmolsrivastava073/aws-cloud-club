@@ -5,7 +5,6 @@ import { EVENTS, MEMBERS } from '../constants';
 import CloudVisual from '../components/CloudVisual';
 
 export default function LandingPage() {
-  // State for member category tabs (defaults to Core so only Captains show initially)
   const [activeTab, setActiveTab] = useState('Core');
   const categories = ['Core', 'Technical', 'Event Management', 'GDXSM', 'Finance'];
 
@@ -13,7 +12,8 @@ export default function LandingPage() {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
 
-  const filteredMembers = MEMBERS.filter(member => member.category === activeTab);
+  // <-- Updated to use .includes() instead of ===
+  const filteredMembers = MEMBERS.filter(member => member.category.includes(activeTab));
 
   return (
     <div className="pt-20 bg-[#f5f3ef] text-black aws-grid-bg">
