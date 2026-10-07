@@ -35,7 +35,7 @@ export interface Member {
   id: string;
   name: string;
   position: string;
-  category: string; // Added category for filtering
+  category: string[]; 
   number?: string;
   image?: string;
 }
