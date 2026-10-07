@@ -30,3 +30,11 @@ export interface Registration {
   missed_classes: string;
   faculty_names: string;
 }
+
+export interface Member {
+  id: string;
+  name: string;
+  position: string;
+  number?: string;
+  image?: string;
+}
