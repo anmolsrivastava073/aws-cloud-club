@@ -249,7 +249,7 @@ export const MEMBERS: Member[] = [
   },
   {
     id: '17',
-    name: 'Lakshita annapareddy',
+    name: 'Lakshita Annapareddy',
     position: 'GDXSM SWT Member',
     category: ['GDXSM'],
     number: '+91 7815859797',

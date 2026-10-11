@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { 
   ArrowRight, Code, Users, Zap, Cloud, Server, Target, 
-  BookOpen, Database, Terminal, ChevronRight, LayoutTemplate, Globe, 
-  CheckCircle2, GitBranch, Shield, Mail
+  BookOpen, Database, Terminal, LayoutTemplate, Globe, 
+  CheckCircle2, GitBranch, Shield, Mail, MoveRight
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import EventCard from '../components/EventCard';
@@ -46,15 +46,12 @@ const WORKFLOW_STEPS = [
 ];
 
 export default function LandingPage() {
-  const [activeTab, setActiveTab] = useState('Core');
   const [activeWorkflowIndex, setActiveWorkflowIndex] = useState(0);
-  const categories = ['Core', 'Technical', 'Event Management', 'GDXSM', 'Finance'];
+  const membersScrollRef = useRef<HTMLDivElement>(null);
 
   const sortedEvents = [...EVENTS].sort((a, b) => {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
-
-  const filteredMembers = MEMBERS.filter(member => member.category.includes(activeTab));
 
   // Auto-cycle through workflow steps every 4 seconds
   useEffect(() => {
@@ -64,7 +61,139 @@ export default function LandingPage() {
     return () => clearInterval(timer);
   }, []);
 
-  // Enhanced Educational Diagrams (Optimized for 4-second cycle)
+  // --------------------------------------------------------
+  // INFINITE LOOPING & DRAGGABLE MEMBERS SLIDER LOGIC
+  // --------------------------------------------------------
+  
+  // We duplicate the array 3 times (Prev Set | Current Set | Next Set) 
+  // This allows the last person to sit perfectly to the left of the Captain
+  const loopingMembers = [...MEMBERS, ...MEMBERS, ...MEMBERS];
+
+  useEffect(() => {
+    const container = membersScrollRef.current;
+    if (!container || container.children.length === 0) return;
+
+    let animationFrameId: number;
+    let isPaused = false;
+    let isDown = false;
+    let startX: number;
+    let scrollLeft: number;
+    
+    let accumulatedScroll = 0;
+    const autoScrollSpeed = 1.5; // Speed of automatic sliding
+    let direction = 1;
+
+    let setWidth = 0;
+    let centerOffset = 0;
+
+    // Calculate dimensions for perfect centering and seamless looping
+    const calculateLayout = () => {
+      if (!container.children[MEMBERS.length]) return;
+      
+      const firstChild = container.children[0] as HTMLElement;
+      const nthChild = container.children[MEMBERS.length] as HTMLElement;
+      
+      // The exact width of one complete set of members (including gaps)
+      setWidth = nthChild.offsetLeft - firstChild.offsetLeft;
+      
+      // Calculate how much we need to offset to put the active card dead-center
+      const cardWidth = firstChild.clientWidth;
+      centerOffset = (container.clientWidth / 2) - (cardWidth / 2);
+    };
+
+    // Initialize position so the Captain of the middle set is perfectly centered
+    setTimeout(() => {
+      calculateLayout();
+      container.scrollLeft = setWidth - centerOffset;
+    }, 100); // Small timeout allows images/fonts to render first
+
+    window.addEventListener('resize', calculateLayout);
+
+    // Main animation loop
+    const step = () => {
+      if (!isPaused && !isDown && setWidth > 0) {
+        accumulatedScroll += autoScrollSpeed * direction;
+        
+        // Move scroll container cleanly pixel by pixel
+        if (Math.abs(accumulatedScroll) >= 1) {
+          const scrollStep = Math.sign(accumulatedScroll);
+          container.scrollLeft += scrollStep;
+          accumulatedScroll -= scrollStep;
+        }
+      }
+
+      // INFINITE LOOP SEAMLESS JUMP:
+      if (setWidth > 0) {
+        // If we scroll into the 3rd set, instantly jump back exactly 1 set to the right
+        if (container.scrollLeft >= (setWidth * 2) - centerOffset) {
+          container.scrollLeft -= setWidth;
+        } 
+        // If we scroll backward into the 1st set, instantly jump forward exactly 1 set
+        else if (container.scrollLeft <= centerOffset) {
+          container.scrollLeft += setWidth;
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(step);
+    };
+
+    animationFrameId = requestAnimationFrame(step);
+
+    // Mouse & Touch Dragging Listeners
+    const pause = () => { isPaused = true; };
+    const resume = () => { isPaused = false; };
+
+    const handleMouseDown = (e: MouseEvent) => {
+      isDown = true;
+      isPaused = true;
+      startX = e.pageX - container.offsetLeft;
+      scrollLeft = container.scrollLeft;
+      container.style.cursor = 'grabbing';
+    };
+    
+    const handleMouseLeave = () => {
+      isDown = false;
+      isPaused = false;
+      container.style.cursor = 'grab';
+    };
+    
+    const handleMouseUp = () => {
+      isDown = false;
+      isPaused = false;
+      container.style.cursor = 'grab';
+    };
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDown) return;
+      e.preventDefault(); // prevents highlighting images while dragging
+      const x = e.pageX - container.offsetLeft;
+      const walk = (x - startX) * 1.5; // Drag sensitivity
+      container.scrollLeft = scrollLeft - walk;
+    };
+
+    container.addEventListener('mouseenter', pause);
+    container.addEventListener('mouseleave', handleMouseLeave);
+    container.addEventListener('mousedown', handleMouseDown);
+    container.addEventListener('mouseup', handleMouseUp);
+    container.addEventListener('mousemove', handleMouseMove);
+    
+    container.addEventListener('touchstart', pause, { passive: true });
+    container.addEventListener('touchend', resume);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('resize', calculateLayout);
+      container.removeEventListener('mouseenter', pause);
+      container.removeEventListener('mouseleave', handleMouseLeave);
+      container.removeEventListener('mousedown', handleMouseDown);
+      container.removeEventListener('mouseup', handleMouseUp);
+      container.removeEventListener('mousemove', handleMouseMove);
+      container.removeEventListener('touchstart', pause);
+      container.removeEventListener('touchend', resume);
+    };
+  }, []);
+
+  // Enhanced Educational Diagrams
   const renderDiagram = (type: string) => {
     switch(type) {
       case 'learning':
@@ -97,7 +226,6 @@ export default function LandingPage() {
               ))}
             </div>
 
-            {/* Animated Connection Line */}
             <div className="absolute top-[35%] left-[15%] right-[15%] h-0.5 bg-[#9b5cff]/20 -z-0">
               <motion.div 
                 className="h-full bg-[#9b5cff]" 
@@ -134,7 +262,6 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Translation Box */}
             <motion.div initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1.5 }} className="bg-white border border-[#9b5cff]/20 p-3 rounded-lg shadow-sm flex gap-3 items-center">
               <div className="bg-green-100 p-1.5 rounded-md shrink-0">
                 <CheckCircle2 className="w-4 h-4 text-green-600" />
@@ -151,7 +278,6 @@ export default function LandingPage() {
         return (
           <div className="w-full h-full flex flex-col items-center justify-center relative pt-4">
             <div className="flex items-center justify-between w-full max-w-sm relative z-10 px-2">
-              
               <div className="flex flex-col items-center gap-2">
                 <div className="w-10 h-10 bg-white rounded-lg shadow-sm border border-black/10 flex items-center justify-center relative">
                   <Terminal className="w-5 h-5 text-gray-600" />
@@ -159,7 +285,6 @@ export default function LandingPage() {
                 <span className="text-[10px] font-semibold text-gray-500">Client</span>
               </div>
               
-              {/* Data Packet 1 */}
               <div className="flex-1 h-0.5 bg-gray-200 relative mx-2">
                 <motion.div className="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-[#9b5cff] rounded-full" animate={{ left: ["0%", "100%"] }} transition={{ repeat: Infinity, duration: 1.5 }} />
               </div>
@@ -171,7 +296,6 @@ export default function LandingPage() {
                 <span className="text-[10px] font-semibold text-[#9b5cff]">API / Lambda</span>
               </div>
 
-              {/* Data Packet 2 */}
               <div className="flex-1 h-0.5 bg-gray-200 relative mx-2">
                 <motion.div className="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-[#9b5cff] rounded-full" animate={{ left: ["0%", "100%"] }} transition={{ repeat: Infinity, duration: 1.5, delay: 0.75 }} />
               </div>
@@ -545,8 +669,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* FACULTY SECTION */}
-      <section id="faculty" className="py-28 border-b border-black/10 bg-white">
+      {/* FACULTY SECTION (STATIC ALBUM CARDS) */}
+      <section id="faculty" className="py-28 border-b border-black/10 bg-white overflow-hidden">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -558,49 +682,62 @@ export default function LandingPage() {
               Faculty <span className="text-[#9b5cff]">Coordinators</span>
             </h2>
             <p className="text-[#5f5f5f] text-sm md:text-base max-w-2xl mx-auto">
-              Our guiding pillars who provide continuous support and mentorship to the AWS Student Builder Group.
+              Our guiding pillars who provide continuous support and mentorship.
             </p>
           </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          
+          {/* Static Container for Faculty */}
+          <div className="flex flex-col md:flex-row justify-center gap-8 md:gap-12 px-4">
             {FACULTY.map((faculty, index) => (
               <motion.div 
                 key={faculty.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="aws-card p-8 flex flex-col sm:flex-row items-center gap-6 text-center sm:text-left hover:border-[#9b5cff]/30"
+                transition={{ delay: index * 0.15, duration: 0.5 }}
+                className="relative w-full max-w-[380px] h-[480px] rounded-3xl overflow-hidden group shadow-lg shrink-0 border border-black/10"
               >
-                <div className="w-28 h-28 shrink-0 rounded-full border border-black/10 overflow-hidden bg-[#f5f3ef]">
-                  <img 
-                    src={faculty.image} 
-                    alt={faculty.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="w-full">
-                  <h3 className="text-2xl font-semibold tracking-tight text-[#18181b] mb-1">
+                {/* Full Cover Image */}
+                <img 
+                  src={faculty.image} 
+                  alt={faculty.name}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                
+                {/* Cinematic Dark Gradient - Always dark enough to read text */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/70 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Text Content Overlay - Fixed Position */}
+                <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col justify-end">
+                  
+                  {/* Always Visible: Name & Position */}
+                  <h3 className="text-3xl font-bold tracking-tight text-white mb-1">
                     {faculty.name}
                   </h3>
-                  <p className="text-[#9b5cff] font-medium text-sm mb-2">
+                  <p className="text-[#b784ff] font-medium text-sm mb-0 group-hover:mb-2 transition-all duration-300">
                     {faculty.position}
                   </p>
-                  <p className="text-[#666666] text-xs">
-                    {faculty.department}
-                  </p>
                   
-                  {faculty.email && (
-                    <div className="mt-4 pt-4 border-t border-black/5">
+                  {/* Hidden Content: Expanding on Hover */}
+                  <div className="max-h-0 opacity-0 overflow-hidden group-hover:max-h-40 group-hover:opacity-100 transition-all duration-500 ease-in-out">
+                    <p className="text-gray-300 text-xs mb-4 mt-2">
+                      {faculty.department}
+                    </p>
+                    
+                    {/* Decorative Line */}
+                    <div className="h-0.5 w-16 bg-[#9b5cff] mb-4" />
+
+                    {faculty.email && (
                       <a 
                         href={`mailto:${faculty.email}`} 
-                        className="inline-flex items-center gap-2 text-xs font-medium text-[#666666] hover:text-[#9b5cff] transition-colors"
+                        className="inline-flex w-fit items-center gap-2 text-xs font-medium text-gray-300 hover:text-white transition-colors"
                       >
                         <Mail className="w-4 h-4" />
                         {faculty.email}
                       </a>
-                    </div>
-                  )}
+                    )}
+                  </div>
+
                 </div>
               </motion.div>
             ))}
@@ -608,71 +745,76 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* MEMBERS */}
-      <section id="members" className="py-28">
-        <div className="max-w-6xl mx-auto px-4">
+      {/* MEMBERS SECTION (INTERACTIVE DRAGGABLE & INFINITE SLIDER) */}
+      <section id="members" className="py-28 overflow-hidden bg-[#f5f3ef]">
+        <div className="w-full">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-10 text-center"
+            className="mb-16 text-center px-4"
           >
             <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.05em] leading-none mb-3">
-              Our Team
+              Our <span className="text-[#9b5cff]">Team</span>
             </h2>
             <p className="text-[#5f5f5f] text-sm md:text-base max-w-2xl mx-auto">
               Meet the passionate builders and leaders driving the AWS Student Builder Group MUJ.
             </p>
           </motion.div>
 
-          {/* TABS FOR MEMBER CATEGORIES */}
-          <div className="flex flex-wrap justify-center gap-2 mb-12">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setActiveTab(category)}
-                className={`px-5 py-2 text-sm font-medium rounded-full transition-all duration-200 ${
-                  activeTab === category
-                    ? 'bg-[#9b5cff] text-white shadow-md'
-                    : 'bg-white border border-black/10 text-[#666666] hover:border-[#9b5cff]/30'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
+          <div className="flex items-center justify-center text-xs text-gray-400 font-medium uppercase tracking-widest mb-6 gap-2">
+            Click & Drag or Hover to Pause <MoveRight className="w-4 h-4 animate-pulse" />
           </div>
 
-          {/* FILTERED MEMBERS GRID */}
-          <motion.div 
-            key={activeTab}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
-          >
-            {filteredMembers.map((member) => (
-              <div 
-                key={member.id} 
-                className="aws-card p-6 flex flex-col items-center text-center h-full group"
-              >
-                <div className="w-24 h-24 rounded-full bg-[#f3f4f6] mb-5 overflow-hidden border border-black/10 shadow-inner group-hover:border-[#9b5cff]/30 transition-colors">
+          {/* Interactive Native Auto-Scroll Container */}
+          <div className="relative w-full overflow-hidden flex">
+            {/* Fade edges */}
+            <div className="absolute top-0 left-0 w-8 md:w-24 h-full bg-gradient-to-r from-[#f5f3ef] to-transparent z-10 pointer-events-none" />
+            <div className="absolute top-0 right-0 w-8 md:w-24 h-full bg-gradient-to-l from-[#f5f3ef] to-transparent z-10 pointer-events-none" />
+
+            {/* Scroll Area */}
+            <div 
+              ref={membersScrollRef}
+              className="flex overflow-x-auto gap-6 pb-12 pt-4 select-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] cursor-grab active:cursor-grabbing"
+              style={{
+                scrollBehavior: 'auto',
+                WebkitOverflowScrolling: 'touch'
+              }}
+            >
+              {loopingMembers.map((member, index) => (
+                <div 
+                  key={`${member.id}-${index}`} 
+                  className="relative w-[260px] md:w-[280px] h-[380px] shrink-0 rounded-2xl overflow-hidden group shadow-lg border border-black/5 pointer-events-none"
+                >
                   <img
                     src={member.image || "/newlogo.jpg"}
                     alt={member.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    draggable="false"
                   />
+                  {/* Dark gradient to ensure text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/60 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  {/* Fixed Text Container */}
+                  <div className="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end pointer-events-auto">
+                    
+                    {/* Always visible text */}
+                    <h3 className="font-bold text-2xl tracking-tight text-white mb-1">
+                      {member.name}
+                    </h3>
+                    <p className="text-[#b784ff] text-sm font-semibold mb-0 group-hover:mb-3 transition-all duration-300">
+                      {member.position}
+                    </p>
+                    
+                    {/* Expanding decorative line on hover */}
+                    <div className="max-h-0 opacity-0 group-hover:max-h-10 group-hover:opacity-100 transition-all duration-500">
+                      <div className="h-0.5 w-12 bg-[#9b5cff]" />
+                    </div>
+                  </div>
                 </div>
-                
-                <h3 className="font-semibold text-lg tracking-tight text-[#18181b] mb-1">
-                  {member.name}
-                </h3>
-                
-                <p className="text-[#9b5cff] text-sm font-medium">
-                  {member.position}
-                </p>
-              </div>
-            ))}
-          </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
