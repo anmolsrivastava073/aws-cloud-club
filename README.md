@@ -1,6 +1,6 @@
 # AWS Student Builder Group MUJ - Official Website ☁️
 
-> **Live Environment:** <https://awscloudclubmuj.vercel.app/>
+> **Live Environment:** <https://awssbgmuj.vercel.app/>
 
 ## 🏗️ Mission & Purpose
 
