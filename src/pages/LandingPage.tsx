@@ -389,7 +389,24 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* INTERACTIVE DIAGRAM DASHBOARD */}
+      {/* HOW WE WORK / WORKFLOW SECTION */}
+      <section id="what-we-do" className="py-28 border-b border-black/10 bg-white">
+        <div className="max-w-6xl mx-auto px-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.05em] leading-none mb-4">
+              How We <span className="text-[#9b5cff]">Work</span>
+            </h2>
+            <p className="text-[#5f5f5f] text-sm md:text-base max-w-2xl mx-auto">
+              The journey of an AWS Student Builder. From grasping the cloud fundamentals to shipping production-ready applications.
+            </p>
+          </motion.div>
+
+          {/* INTERACTIVE DIAGRAM DASHBOARD */}
           <div className="bg-[#fcfcfc] border border-black/10 rounded-2xl p-4 md:p-6 mb-16 shadow-[0_8px_30px_rgba(0,0,0,0.04)] grid lg:grid-cols-12 gap-6 md:gap-8 items-stretch">
             
             {/* Left side: Workflow Steps */}
@@ -470,7 +487,8 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
-      {/* PILLARS GRID */}
+
+          {/* PILLARS GRID */}
           <div className="grid md:grid-cols-3 gap-8">
             {[
               { title: 'Cloud Infrastructure', icon: Cloud, desc: 'Master AWS core services like EC2, S3, RDS, and Lambda through hands-on deployment exercises.' },
@@ -589,7 +607,8 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-  {/* MEMBERS */}
+
+      {/* MEMBERS */}
       <section id="members" className="py-28">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div 
