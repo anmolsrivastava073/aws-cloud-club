@@ -56,15 +56,15 @@ export default function LandingPage() {
 
   const filteredMembers = MEMBERS.filter(member => member.category.includes(activeTab));
 
-  // Auto-cycle through workflow steps
+  // Auto-cycle through workflow steps every 4 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveWorkflowIndex((prev) => (prev + 1) % WORKFLOW_STEPS.length);
-    }, 7000);
+    }, 4000);
     return () => clearInterval(timer);
   }, []);
 
-  // Enhanced Educational Diagrams
+  // Enhanced Educational Diagrams (Optimized for 4-second cycle)
   const renderDiagram = (type: string) => {
     switch(type) {
       case 'learning':
@@ -80,7 +80,7 @@ export default function LandingPage() {
                   <motion.div 
                     initial={{ y: 10, opacity: 0 }} 
                     animate={{ y: 0, opacity: 1 }} 
-                    transition={{ delay: i * 0.3 }} 
+                    transition={{ delay: i * 0.2 }} 
                     className="w-12 h-12 bg-white rounded-xl flex items-center justify-center shadow-md border border-[#9b5cff]/20 z-10"
                   >
                     <node.icon className="w-6 h-6 text-[#9b5cff]" />
@@ -88,7 +88,7 @@ export default function LandingPage() {
                   <motion.span 
                     initial={{ opacity: 0 }} 
                     animate={{ opacity: 1 }} 
-                    transition={{ delay: (i * 0.3) + 0.2 }}
+                    transition={{ delay: (i * 0.2) + 0.3 }}
                     className="text-[10px] font-bold uppercase tracking-wider text-gray-500 mt-3 bg-white/80 px-2 py-1 rounded"
                   >
                     {node.label}
@@ -103,7 +103,7 @@ export default function LandingPage() {
                 className="h-full bg-[#9b5cff]" 
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
-                transition={{ duration: 2, ease: "easeInOut", repeat: Infinity, repeatDelay: 1 }}
+                transition={{ duration: 1.5, ease: "easeInOut", repeat: Infinity, repeatDelay: 0.5 }}
               />
             </div>
 
@@ -126,16 +126,16 @@ export default function LandingPage() {
               </div>
               <div className="text-gray-300 space-y-2">
                 <p><span className="text-green-400">student@muj:~$</span> aws ec2 run-instances</p>
-                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>  --image-id ami-0c55b159cbfafe1f0</motion.p>
-                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>  --instance-type t2.micro</motion.p>
-                <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} transition={{ delay: 2 }} className="text-[#9b5cff] mt-2 pt-2 border-t border-white/10">
+                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>  --image-id ami-0c55b159cbfafe1f0</motion.p>
+                <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>  --instance-type t2.micro</motion.p>
+                <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} transition={{ delay: 1 }} className="text-[#9b5cff] mt-2 pt-2 border-t border-white/10">
                   {`{\n  "InstanceId": "i-123456789",\n  "State": "pending"\n}`}
                 </motion.div>
               </div>
             </div>
 
             {/* Translation Box */}
-            <motion.div initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 2.5 }} className="bg-white border border-[#9b5cff]/20 p-3 rounded-lg shadow-sm flex gap-3 items-center">
+            <motion.div initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1.5 }} className="bg-white border border-[#9b5cff]/20 p-3 rounded-lg shadow-sm flex gap-3 items-center">
               <div className="bg-green-100 p-1.5 rounded-md shrink-0">
                 <CheckCircle2 className="w-4 h-4 text-green-600" />
               </div>
