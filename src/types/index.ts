@@ -39,3 +39,11 @@ export interface Member {
   number?: string;
   image?: string;
 }
+
+export interface Faculty {
+  id: string;
+  name: string;
+  position: string;
+  image?: string;
+  department?: string;
+}

@@ -32,7 +32,7 @@ export default function Navbar() {
           </Link>
 
           {/* CENTER NAV */}
-          <div className="hidden md:flex items-center gap-8 text-sm">
+          <div className="hidden md:flex items-center gap-6 text-sm">
             <Link
               to="/"
               onClick={handleHomeClick}
@@ -41,10 +41,28 @@ export default function Navbar() {
               Home
             </Link>
             <a
+              href="#about"
+              className="text-[#666666] hover:text-[#18181b] transition-colors"
+            >
+              About
+            </a>
+            <a
+              href="#what-we-do"
+              className="text-[#666666] hover:text-[#18181b] transition-colors"
+            >
+              Initiatives
+            </a>
+            <a
               href="#events"
               className="text-[#666666] hover:text-[#18181b] transition-colors"
             >
               Events
+            </a>
+            <a
+              href="#faculty"
+              className="text-[#666666] hover:text-[#18181b] transition-colors"
+            >
+              Faculty
             </a>
             <a
               href="#members"

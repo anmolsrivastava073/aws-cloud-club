@@ -1,4 +1,4 @@
-import { Instagram, Linkedin } from 'lucide-react';
+import { Instagram, Linkedin, MapPin, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Footer() {
@@ -6,9 +6,9 @@ export default function Footer() {
     <footer className="border-t border-black/10 bg-[#f5f3ef] pt-20 pb-8">
       <div className="max-w-6xl mx-auto px-4">
         {/* TOP */}
-        <div className="grid md:grid-cols-3 gap-10 mb-14">
-          {/* LOGO */}
-          <div>
+        <div className="grid md:grid-cols-4 gap-10 mb-14">
+          {/* LOGO & DESC */}
+          <div className="md:col-span-2">
             <Link
               to="/"
               className="flex items-center gap-3 mb-4"
@@ -16,9 +16,9 @@ export default function Footer() {
               <img
                 src="/newlogo.jpg"
                 alt="AWS Cloud Club Logo"
-                className="h-6 w-6 rounded-md object-contain"
+                className="h-8 w-8 rounded-md object-contain"
               />
-              <span className="text-sm font-medium tracking-[-0.02em] text-[#18181b]">
+              <span className="text-base font-semibold tracking-[-0.02em] text-[#18181b]">
                 AWS
                 <span className="text-[#9b5cff]">
                   {" "}Student Builder Group MUJ
@@ -26,41 +26,46 @@ export default function Footer() {
               </span>
             </Link>
 
-            <p className="text-sm text-[#666666] leading-relaxed max-w-sm">
+            <p className="text-sm text-[#666666] leading-relaxed max-w-sm mb-6">
               Empowering students to learn, build, and grow with
               AWS cloud technologies through workshops, collaboration,
               and hands-on learning experiences.
             </p>
+            
+            <div className="flex flex-col gap-2 text-xs text-[#666666]">
+              <div className="flex items-center gap-2">
+                <MapPin className="w-3.5 h-3.5 text-[#9b5cff]" />
+                Manipal University Jaipur, Rajasthan
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail className="w-3.5 h-3.5 text-[#9b5cff]" />
+                Contact the Core Team via LinkedIn
+              </div>
+            </div>
           </div>
 
           {/* LINKS */}
           <div>
-            <h4 className="text-xs font-medium uppercase tracking-[0.08em] text-[#18181b] mb-4">
+            <h4 className="text-xs font-bold uppercase tracking-[0.08em] text-[#18181b] mb-4">
               Quick Links
             </h4>
             <div className="flex flex-col gap-3 text-sm">
-              <a
-                href="/"
-                className="text-[#666666] hover:text-[#18181b] transition-colors"
-              >
+              <a href="/" className="text-[#666666] hover:text-[#9b5cff] transition-colors">
                 Home
               </a>
-              <a
-                href="#about"
-                className="text-[#666666] hover:text-[#18181b] transition-colors"
-              >
-                About
+              <a href="#about" className="text-[#666666] hover:text-[#9b5cff] transition-colors">
+                About Us
               </a>
-              <a
-                href="#events"
-                className="text-[#666666] hover:text-[#18181b] transition-colors"
-              >
+              <a href="#what-we-do" className="text-[#666666] hover:text-[#9b5cff] transition-colors">
+                Initiatives
+              </a>
+              <a href="#events" className="text-[#666666] hover:text-[#9b5cff] transition-colors">
                 Events
               </a>
-              <a
-                href="#members"
-                className="text-[#666666] hover:text-[#18181b] transition-colors"
-              >
+              <a href="#faculty" className="text-[#666666] hover:text-[#9b5cff] transition-colors">
+                Faculty
+              </a>
+              <a href="#members" className="text-[#666666] hover:text-[#9b5cff] transition-colors">
                 Team
               </a>
             </div>
@@ -68,7 +73,7 @@ export default function Footer() {
 
           {/* SOCIALS */}
           <div>
-            <h4 className="text-xs font-medium uppercase tracking-[0.08em] text-[#18181b] mb-4">
+            <h4 className="text-xs font-bold uppercase tracking-[0.08em] text-[#18181b] mb-4">
               Connect
             </h4>
             <div className="flex gap-3">
@@ -76,17 +81,17 @@ export default function Footer() {
                 href="https://www.instagram.com/awssbg_muj/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-md border border-black/10 bg-white hover:border-[#9b5cff]/50 hover:-translate-y-[1px] transition-all duration-200"
+                className="p-2.5 rounded-md border border-black/10 bg-white hover:border-[#9b5cff]/50 hover:text-[#9b5cff] hover:-translate-y-[2px] transition-all duration-200 shadow-sm text-[#52525b]"
               >
-                <Instagram className="w-4 h-4 text-[#52525b]" />
+                <Instagram className="w-5 h-5" />
               </a>
               <a
                 href="https://www.linkedin.com/company/aws-cloud-club-muj/posts/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-md border border-black/10 bg-white hover:border-[#9b5cff]/50 hover:-translate-y-[1px] transition-all duration-200"
+                className="p-2.5 rounded-md border border-black/10 bg-white hover:border-[#9b5cff]/50 hover:text-[#9b5cff] hover:-translate-y-[2px] transition-all duration-200 shadow-sm text-[#52525b]"
               >
-                <Linkedin className="w-4 h-4 text-[#52525b]" />
+                <Linkedin className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -95,11 +100,11 @@ export default function Footer() {
         {/* BOTTOM */}
         <div className="border-t border-black/10 pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-[#666666]">
           <p>
-            © 2026 AWS Student Builder Group MUJ
+            © 2026 AWS Student Builder Group MUJ. All rights reserved.
           </p>
-          <p className="mt-3 md:mt-0">
+          <p className="mt-3 md:mt-0 font-medium">
             Built with
-            <span className="mx-1 text-[#9b5cff]">
+            <span className="mx-1.5 text-[#9b5cff] text-sm">
               ♥
             </span>
             by AWS Student Builder Group Team — MUJ

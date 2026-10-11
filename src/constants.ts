@@ -1,4 +1,30 @@
-import { Event, Member } from './types';
+import { Event, Member, Faculty } from './types';
+
+// New Faculty Data
+export const FACULTY: Faculty[] = [
+  {
+    id: 'f1',
+    name: 'Dr. Vaishali Chauhan',
+    position: 'Assistant Professor(Senior Scale)',
+    department: 'Department of Computer Science Engineering',
+    image: '/images/newlogo.jpg', 
+  },
+  {
+    id: 'f2',
+    name: 'Dr. Divya Thakur',
+    position: 'Assistant Professor',
+    department: 'Department of Computer Science Engineering',
+    image: '/images/newlogo.jpg',
+  }
+];
+
+// Club Stats Data
+export const CLUB_STATS = [
+  { label: 'Active Members', value: '250+' },
+  { label: 'Events Hosted', value: '15+' },
+  { label: 'Cloud Certifications', value: '50+' },
+  { label: 'Projects Built', value: '30+' },
+];
 
 export const EVENTS: Event[] = [
   {

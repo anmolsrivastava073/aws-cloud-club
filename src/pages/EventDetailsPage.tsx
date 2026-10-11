@@ -1,45 +1,33 @@
 import { useParams, Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { Calendar, MapPin, Clock, ArrowLeft } from 'lucide-react';
+import { Calendar, MapPin, Clock, ArrowLeft, Lock, Unlock } from 'lucide-react';
+import { motion } from 'motion/react';
 import { EVENTS } from '../constants';
 
 export default function EventDetailsPage() {
-
   const { id } = useParams();
-
   const event = EVENTS.find((e) => e.id === id);
 
-  const [activeTab, setActiveTab] =
-    useState<'meetup' | 'classes'>('meetup');
-
+  const [activeTab, setActiveTab] = useState<'meetup' | 'classes'>('meetup');
   const [accessCode, setAccessCode] = useState('');
-
   const [isUnlocked, setIsUnlocked] = useState(false);
 
   const isEventExpired = (eventDate: string) => {
     const today = new Date();
     const eventD = new Date(eventDate);
-
     today.setHours(0, 0, 0, 0);
     eventD.setHours(0, 0, 0, 0);
-
     return eventD < today;
   };
 
   const expired = event ? isEventExpired(event.date) : false;
 
   const handleUnlock = () => {
-
     if (accessCode.trim() === "AWS2026") {
-
       setIsUnlocked(true);
-
       setActiveTab("classes");
-
     } else {
-
       alert("Invalid Code ❌");
-
     }
   };
 
@@ -48,335 +36,243 @@ export default function EventDetailsPage() {
   }, []);
 
   if (!event) {
-
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0b0f14]">
-
+      <div className="min-h-screen flex items-center justify-center bg-[#f5f3ef]">
         <div className="text-center">
-
-          <h2 className="text-base font-medium mb-4">
+          <h2 className="text-xl font-semibold mb-4 text-[#18181b]">
             Event not found
           </h2>
-
-          <Link
-            to="/"
-            className="aws-button-primary"
-          >
-            Go Back
+          <Link to="/" className="aws-button-primary">
+            Go Back Home
           </Link>
-
         </div>
-
       </div>
     );
   }
 
   return (
-
-    <div className="pt-24 pb-24 bg-[#f5f3ef] min-h-screen text-[#18181b]">
-
+    <div className="pt-24 pb-24 bg-[#f5f3ef] min-h-screen text-[#18181b] aws-grid-bg">
       <div className="max-w-6xl mx-auto px-4">
-
-        {/* BACK */}
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 text-[#666666] hover:text-[#9b5cff] transition-colors mb-10 text-sm"
-        >
-
-          <ArrowLeft className="w-4 h-4" />
-
-          Back to Events
-
-        </Link>
+        
+        {/* BACK LINK */}
+        <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 text-[#666666] hover:text-[#9b5cff] transition-colors mb-10 text-sm font-medium"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Events
+          </Link>
+        </motion.div>
 
         <div className="grid lg:grid-cols-3 gap-12">
-
-          {/* LEFT */}
-          <div className="lg:col-span-2">
-
+          {/* LEFT CONTENT */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            className="lg:col-span-2"
+          >
             {/* TITLE */}
             <h1 className="text-4xl md:text-6xl font-semibold tracking-[-0.05em] leading-[0.95] mb-6">
-
               {event.title}
-
             </h1>
 
-            {/* META */}
-            <div className="flex flex-wrap gap-6 text-[#666666] text-sm mb-10">
-
-              <div className="flex items-center gap-2">
-
-                <Calendar className="w-4 h-4 text-[#9b5cff]" />
-
+            {/* META LABELS */}
+            <div className="flex flex-wrap gap-6 text-[#666666] text-sm mb-10 p-5 bg-white rounded-xl border border-black/10 shadow-sm">
+              <div className="flex items-center gap-2.5 font-medium">
+                <div className="p-2 bg-[#9b5cff]/10 rounded-md"><Calendar className="w-4 h-4 text-[#9b5cff]" /></div>
                 {event.date}
-
               </div>
-
-              <div className="flex items-center gap-2">
-
-                <Clock className="w-4 h-4 text-[#9b5cff]" />
-
+              <div className="flex items-center gap-2.5 font-medium">
+                <div className="p-2 bg-[#9b5cff]/10 rounded-md"><Clock className="w-4 h-4 text-[#9b5cff]" /></div>
                 {event.time}
-
               </div>
-
-              <div className="flex items-center gap-2">
-
-                <MapPin className="w-4 h-4 text-[#9b5cff]" />
-
+              <div className="flex items-center gap-2.5 font-medium">
+                <div className="p-2 bg-[#9b5cff]/10 rounded-md"><MapPin className="w-4 h-4 text-[#9b5cff]" /></div>
                 {event.venue}
-
               </div>
-
             </div>
 
             {/* DESCRIPTION */}
             <div className="mb-14">
-
-              <h3 className="text-lg font-medium mb-4">
+              <h3 className="text-2xl font-semibold tracking-tight mb-4">
                 About the Event
               </h3>
-
-              <p className="text-[#52525b] text-sm md:text-base leading-relaxed">
+              <p className="text-[#52525b] text-base leading-relaxed">
                 {event.fullDescription}
               </p>
-
             </div>
+
+            {/* SPEAKERS */}
+            {event.speakers.length > 0 && (
+              <div className="mb-14">
+                <h3 className="text-2xl font-semibold tracking-tight mb-6">Speakers</h3>
+                <div className="grid sm:grid-cols-2 gap-6">
+                  {event.speakers.map((speaker, i) => (
+                    <div key={i} className="aws-card p-5 flex items-center gap-4">
+                      <img src={speaker.image} alt={speaker.name} className="w-16 h-16 rounded-full object-cover border border-black/10" />
+                      <div>
+                        <h4 className="font-semibold text-lg">{speaker.name}</h4>
+                        <p className="text-sm text-[#9b5cff] font-medium">{speaker.designation}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* RECAP */}
             {expired && event.recap && (
-
-              <div>
-
-                <h3 className="text-lg font-medium mb-5">
+              <div className="border-t border-black/10 pt-10">
+                <h3 className="text-2xl font-semibold tracking-tight mb-5">
                   {event.recap.title}
                 </h3>
-
-                <div className="space-y-4 text-[#52525b] text-sm md:text-base leading-relaxed">
-
+                <div className="space-y-4 text-[#52525b] text-base leading-relaxed mb-8">
                   {event.recap.paragraphs.map((p, i) => (
                     <p key={i}>{p}</p>
                   ))}
-
                 </div>
-
-                <div className="grid md:grid-cols-3 gap-4 mt-8">
-
+                <div className="grid md:grid-cols-3 gap-4">
                   {event.recap.photos.map((img, i) => (
-
                     <img
                       key={i}
                       src={img}
-                      className="rounded-md border border-black/10 object-cover h-44 w-full hover:opacity-95 transition duration-300"
+                      className="rounded-xl border border-black/10 object-cover h-48 w-full hover:opacity-90 transition duration-300 shadow-sm"
                     />
-
                   ))}
-
                 </div>
-
               </div>
-
             )}
+          </motion.div>
 
-          </div>
-
-          {/* RIGHT */}
-          <div className="space-y-6">
-
-            {/* MAIN PANEL */}
-            <div className="bg-white border border-black/10 rounded-md p-5 sticky top-24 shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
-
+          {/* RIGHT SIDEBAR */}
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }} 
+            animate={{ opacity: 1, x: 0 }} 
+            className="space-y-6"
+          >
+            {/* WIDGET PANEL */}
+            <div className="bg-white border border-black/10 rounded-xl p-6 sticky top-24 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
               {expired ? (
-
-                <div className="text-center py-6">
-
-                  <h3 className="text-[#18181b] text-sm font-medium mb-1">
+                <div className="text-center py-8">
+                  <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Lock className="w-5 h-5 text-gray-400" />
+                  </div>
+                  <h3 className="text-[#18181b] text-lg font-semibold mb-1">
                     Event Completed
                   </h3>
-
-                  <p className="text-[#666666] text-xs">
+                  <p className="text-[#666666] text-sm">
                     Registrations are closed
                   </p>
-
                 </div>
-
               ) : (
-
                 <>
-
-                  {/* UNLOCK */}
+                  {/* UNLOCK SECTION */}
                   {!isUnlocked && (
-
-                    <div className="mb-5">
-
-                      <p className="text-xs text-[#666666] mb-2">
-                        Access code
+                    <div className="mb-6 p-5 bg-[#fcfcfc] border border-black/5 rounded-lg">
+                      <div className="flex items-center gap-2 mb-3">
+                        <Lock className="w-4 h-4 text-[#9b5cff]" />
+                        <h4 className="font-semibold text-sm">Access Event Resources</h4>
+                      </div>
+                      <p className="text-xs text-[#666666] mb-4">
+                        Enter the code provided during the session to unlock attendance and class resources.
                       </p>
-
                       <input
                         value={accessCode}
                         onChange={(e) => setAccessCode(e.target.value)}
-                        className="aws-input mb-3"
-                        placeholder="Enter code"
+                        className="aws-input mb-3 bg-white"
+                        placeholder="e.g. AWS2026"
+                        type="password"
                       />
-
                       <button
                         onClick={handleUnlock}
-                        className="aws-button-primary w-full text-sm"
+                        className="aws-button-primary w-full text-sm flex justify-center items-center gap-2"
                       >
-                        Unlock
+                        <Unlock className="w-4 h-4" /> Unlock Access
                       </button>
-
                     </div>
-
                   )}
 
                   {/* TABS */}
-                  <div className="flex gap-2 mb-4">
-
+                  <div className="flex gap-2 mb-5 p-1 bg-[#f3f4f6] rounded-lg">
                     {['meetup', 'classes'].map((tab) => {
-
-                      const locked =
-                        !isUnlocked && tab !== 'meetup';
-
+                      const locked = !isUnlocked && tab !== 'meetup';
                       return (
-
                         <button
                           key={tab}
                           onClick={() => setActiveTab(tab as any)}
-                          className={`px-3 py-1.5 text-xs rounded-md transition-all ${
+                          className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-medium rounded-md transition-all ${
                             activeTab === tab
-                              ? 'bg-[#9b5cff] text-white'
-                              : 'bg-[#f3f4f6] text-[#666666] hover:bg-[#ececec]'
+                              ? 'bg-white text-[#9b5cff] shadow-sm'
+                              : 'text-[#666666] hover:text-[#18181b]'
                           }`}
                         >
-
-                          {tab}
-
-                          {locked && " 🔒"}
-
+                          <span className="capitalize">{tab}</span>
+                          {locked && <Lock className="w-3 h-3 opacity-60" />}
                         </button>
-
                       );
                     })}
-
                   </div>
 
-                  {/* MEETUP */}
+                  {/* MEETUP CONTENT */}
                   {activeTab === 'meetup' && (
-
                     <a
                       href={event.meetupLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="aws-button-primary w-full text-center text-sm"
+                      className="aws-button-primary w-full flex justify-center text-sm"
                     >
-
                       Register on Meetup
-
                     </a>
-
                   )}
 
-                  {/* CLASSES */}
+                  {/* CLASSES CONTENT */}
                   {activeTab === 'classes' && (
-
                     !isUnlocked ? (
-
-                      <p className="text-[#666666] text-center py-5 text-xs">
-                        🔒 Enter code to access
-                      </p>
-
+                      <div className="text-center py-10 border-2 border-dashed border-black/10 rounded-lg">
+                        <Lock className="w-6 h-6 text-gray-300 mx-auto mb-2" />
+                        <p className="text-[#666666] text-sm font-medium">
+                          Content Locked
+                        </p>
+                      </div>
                     ) : (
-
                       <iframe
                         src="https://forms.office.com/Pages/ResponsePage.aspx?id=3S8oJwtM-026kSKM2D_fcRezTgSnBGVIthb_f4OG52FUNkJNVkpMSjY0ODMwRjhTOUJYMzA2SkVLVC4u&embed=true"
-                        className="w-full h-[460px] rounded-md border border-black/10"
+                        className="w-full h-[460px] rounded-lg border border-black/10 bg-[#f9f9f9]"
                       />
-
                     )
-
                   )}
-
                 </>
-
               )}
-
             </div>
 
-            {/* STEPS */}
+            {/* STEPS TO ACCESS */}
             {!expired && (
-
-              <div className="bg-white border border-black/10 rounded-md p-5 shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
-
-                <h3 className="text-sm font-medium mb-4">
+              <div className="bg-white border border-black/10 rounded-xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
+                <h3 className="text-base font-semibold mb-5 tracking-tight">
                   Steps to Access
                 </h3>
-
-                <div className="space-y-3 text-xs text-[#52525b]">
-
-                  <div className="flex gap-2">
-
-                    <span className="text-[#9b5cff] font-medium">
-                      1.
-                    </span>
-
-                    <p>Register on Meetup</p>
-
-                  </div>
-
-                  <div className="flex gap-2">
-
-                    <span className="text-[#9b5cff] font-medium">
-                      2.
-                    </span>
-
-                    <p>Get the code for class attendance</p>
-
-                  </div>
-
-                  <div className="flex gap-2">
-
-                    <span className="text-[#9b5cff] font-medium">
-                      3.
-                    </span>
-
-                    <p>Enter the code in the textbox</p>
-
-                  </div>
-
-                  <div className="flex gap-2">
-
-                    <span className="text-[#9b5cff] font-medium">
-                      4.
-                    </span>
-
-                    <p>Unlock the classes</p>
-
-                  </div>
-
-                  <div className="flex gap-2">
-
-                    <span className="text-[#9b5cff] font-medium">
-                      5.
-                    </span>
-
-                    <p>Fill the form and get attendance</p>
-
-                  </div>
-
+                <div className="space-y-4 text-sm text-[#52525b]">
+                  {[
+                    "Register on the official Meetup page.",
+                    "Attend the event to receive the secret access code.",
+                    "Enter the code in the widget above.",
+                    "Unlock the attendance and feedback forms.",
+                    "Submit your details to mark your attendance."
+                  ].map((step, idx) => (
+                    <div key={idx} className="flex gap-3">
+                      <span className="flex items-center justify-center w-5 h-5 rounded-full bg-[#9b5cff]/10 text-[#9b5cff] font-semibold text-xs shrink-0 mt-0.5">
+                        {idx + 1}
+                      </span>
+                      <p className="leading-snug">{step}</p>
+                    </div>
+                  ))}
                 </div>
-
               </div>
-
             )}
-
-          </div>
-
+          </motion.div>
         </div>
-
       </div>
-
     </div>
   );
 }
