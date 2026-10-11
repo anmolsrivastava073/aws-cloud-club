@@ -36,7 +36,6 @@ export interface Member {
   name: string;
   position: string;
   category: string[]; 
-  number?: string;
   image?: string;
 }
 
@@ -46,4 +45,5 @@ export interface Faculty {
   position: string;
   image?: string;
   department?: string;
+  email?: string;
 }
