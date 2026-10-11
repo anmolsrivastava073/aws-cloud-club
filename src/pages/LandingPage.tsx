@@ -66,7 +66,6 @@ export default function LandingPage() {
   // --------------------------------------------------------
   
   // We duplicate the array 3 times (Prev Set | Current Set | Next Set) 
-  // This allows the last person to sit perfectly to the left of the Captain
   const loopingMembers = [...MEMBERS, ...MEMBERS, ...MEMBERS];
 
   useEffect(() => {
@@ -80,41 +79,35 @@ export default function LandingPage() {
     let scrollLeft: number;
     
     let accumulatedScroll = 0;
-    const autoScrollSpeed = 1.5; // Speed of automatic sliding
+    const autoScrollSpeed = 1.5; 
     let direction = 1;
 
     let setWidth = 0;
     let centerOffset = 0;
 
-    // Calculate dimensions for perfect centering and seamless looping
     const calculateLayout = () => {
       if (!container.children[MEMBERS.length]) return;
       
       const firstChild = container.children[0] as HTMLElement;
       const nthChild = container.children[MEMBERS.length] as HTMLElement;
       
-      // The exact width of one complete set of members (including gaps)
       setWidth = nthChild.offsetLeft - firstChild.offsetLeft;
       
-      // Calculate how much we need to offset to put the active card dead-center
       const cardWidth = firstChild.clientWidth;
       centerOffset = (container.clientWidth / 2) - (cardWidth / 2);
     };
 
-    // Initialize position so the Captain of the middle set is perfectly centered
     setTimeout(() => {
       calculateLayout();
       container.scrollLeft = setWidth - centerOffset;
-    }, 100); // Small timeout allows images/fonts to render first
+    }, 100); 
 
     window.addEventListener('resize', calculateLayout);
 
-    // Main animation loop
     const step = () => {
       if (!isPaused && !isDown && setWidth > 0) {
         accumulatedScroll += autoScrollSpeed * direction;
         
-        // Move scroll container cleanly pixel by pixel
         if (Math.abs(accumulatedScroll) >= 1) {
           const scrollStep = Math.sign(accumulatedScroll);
           container.scrollLeft += scrollStep;
@@ -122,13 +115,10 @@ export default function LandingPage() {
         }
       }
 
-      // INFINITE LOOP SEAMLESS JUMP:
       if (setWidth > 0) {
-        // If we scroll into the 3rd set, instantly jump back exactly 1 set to the right
         if (container.scrollLeft >= (setWidth * 2) - centerOffset) {
           container.scrollLeft -= setWidth;
         } 
-        // If we scroll backward into the 1st set, instantly jump forward exactly 1 set
         else if (container.scrollLeft <= centerOffset) {
           container.scrollLeft += setWidth;
         }
@@ -139,7 +129,6 @@ export default function LandingPage() {
 
     animationFrameId = requestAnimationFrame(step);
 
-    // Mouse & Touch Dragging Listeners
     const pause = () => { isPaused = true; };
     const resume = () => { isPaused = false; };
 
@@ -165,9 +154,9 @@ export default function LandingPage() {
     
     const handleMouseMove = (e: MouseEvent) => {
       if (!isDown) return;
-      e.preventDefault(); // prevents highlighting images while dragging
+      e.preventDefault(); 
       const x = e.pageX - container.offsetLeft;
-      const walk = (x - startX) * 1.5; // Drag sensitivity
+      const walk = (x - startX) * 1.5; 
       container.scrollLeft = scrollLeft - walk;
     };
 
@@ -357,43 +346,97 @@ export default function LandingPage() {
 
   return (
     <div className="pt-20 bg-[#f5f3ef] text-black aws-grid-bg">
-      {/* HERO SECTION */}
-      <section className="py-24 border-b border-black/10 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#9b5cff]/5 blur-[120px] rounded-full pointer-events-none" />
+
+      {/* 🚀 HIGHLY ANIMATED & GRAPHIC-FILLED HERO SECTION */}
+      <section className="relative pt-24 pb-28 border-b border-black/10 overflow-hidden min-h-[85vh] flex items-center justify-center">
         
-        <div className="max-w-6xl mx-auto px-4 text-center relative z-10">
+        {/* Dynamic Background Graphics */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          {/* Animated Gradient Orbs */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3], x: [0, 50, 0] }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-[#9b5cff]/15 blur-[120px] rounded-full"
+          />
+          <motion.div
+            animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.5, 0.2], x: [0, -50, 0] }}
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-blue-400/10 blur-[150px] rounded-full"
+          />
+
+          {/* Floating Icons Background */}
+          <div className="absolute inset-0 overflow-hidden opacity-25">
+            {[
+              { Icon: Cloud, top: '20%', left: '15%', size: 48, delay: 0 },
+              { Icon: Server, top: '65%', left: '10%', size: 36, delay: 2 },
+              { Icon: Database, top: '25%', right: '15%', size: 54, delay: 1 },
+              { Icon: Zap, top: '75%', right: '20%', size: 40, delay: 3 },
+              { Icon: Code, top: '45%', right: '8%', size: 32, delay: 1.5 },
+              { Icon: Target, top: '50%', left: '8%', size: 28, delay: 2.5 },
+            ].map((item, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ y: 0 }}
+                animate={{ y: [-20, 20, -20], rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 6 + idx, repeat: Infinity, ease: "easeInOut", delay: item.delay }}
+                className="absolute text-[#9b5cff]"
+                style={{ top: item.top, left: item.left, right: item.right }}
+              >
+                <item.Icon size={item.size} />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Foreground Content */}
+        <div className="max-w-6xl mx-auto px-4 text-center relative z-10 w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex flex-col items-center"
           >
-            <h1 className="text-5xl md:text-7xl font-semibold mb-6 tracking-[-0.06em] leading-[0.92]"> 
+            {/* Gradient Headline */}
+            <h1 className="text-6xl md:text-8xl font-bold mb-6 tracking-[-0.05em] leading-[1.05] drop-shadow-sm"> 
               AWS Student <br /> 
-              <span className="text-[#9b5cff]"> Builder Group</span>
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#9b5cff] to-[#6a2bc7]"> 
+                Builder Group
+              </span>
               <br /> MUJ
             </h1>
             
-            <p className="text-[#5f5f5f] text-sm md:text-base max-w-2xl mx-auto mb-10 leading-relaxed">
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              className="text-[#5f5f5f] text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed font-medium"
+            >
               A student-led community at Manipal University Jaipur focused on learning,
               building, and growing with cloud technologies through real-world exposure
               and collaboration.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+            {/* Staggered Buttons */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto"
+            >
               <a
                 href="#events"
-                className="aws-button-primary flex items-center gap-2 justify-center"
+                className="px-8 py-3.5 rounded-lg bg-[#9b5cff] text-white font-semibold flex items-center justify-center gap-2 hover:bg-[#8748f5] hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-[#9b5cff]/30 group"
               >
                 Explore Events
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </a>
               <a
                 href="#about"
-                className="aws-button-secondary flex items-center justify-center"
+                className="px-8 py-3.5 rounded-lg bg-white border border-black/10 text-black font-semibold flex items-center justify-center hover:bg-black/5 hover:-translate-y-1 transition-all duration-300 shadow-sm"
               >
                 Learn More
               </a>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -686,7 +729,6 @@ export default function LandingPage() {
             </p>
           </motion.div>
           
-          {/* Static Container for Faculty */}
           <div className="flex flex-col md:flex-row justify-center gap-8 md:gap-12 px-4">
             {FACULTY.map((faculty, index) => (
               <motion.div 
@@ -697,20 +739,16 @@ export default function LandingPage() {
                 transition={{ delay: index * 0.15, duration: 0.5 }}
                 className="relative w-full max-w-[380px] h-[480px] rounded-3xl overflow-hidden group shadow-lg shrink-0 border border-black/10"
               >
-                {/* Full Cover Image */}
                 <img 
                   src={faculty.image} 
                   alt={faculty.name}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 
-                {/* Cinematic Dark Gradient - Always dark enough to read text */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/70 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
                 
-                {/* Text Content Overlay - Fixed Position */}
                 <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col justify-end">
                   
-                  {/* Always Visible: Name & Position */}
                   <h3 className="text-3xl font-bold tracking-tight text-white mb-1">
                     {faculty.name}
                   </h3>
@@ -718,13 +756,11 @@ export default function LandingPage() {
                     {faculty.position}
                   </p>
                   
-                  {/* Hidden Content: Expanding on Hover */}
                   <div className="max-h-0 opacity-0 overflow-hidden group-hover:max-h-40 group-hover:opacity-100 transition-all duration-500 ease-in-out">
                     <p className="text-gray-300 text-xs mb-4 mt-2">
                       {faculty.department}
                     </p>
                     
-                    {/* Decorative Line */}
                     <div className="h-0.5 w-16 bg-[#9b5cff] mb-4" />
 
                     {faculty.email && (
@@ -766,13 +802,10 @@ export default function LandingPage() {
             Click & Drag or Hover to Pause <MoveRight className="w-4 h-4 animate-pulse" />
           </div>
 
-          {/* Interactive Native Auto-Scroll Container */}
           <div className="relative w-full overflow-hidden flex">
-            {/* Fade edges */}
             <div className="absolute top-0 left-0 w-8 md:w-24 h-full bg-gradient-to-r from-[#f5f3ef] to-transparent z-10 pointer-events-none" />
             <div className="absolute top-0 right-0 w-8 md:w-24 h-full bg-gradient-to-l from-[#f5f3ef] to-transparent z-10 pointer-events-none" />
 
-            {/* Scroll Area */}
             <div 
               ref={membersScrollRef}
               className="flex overflow-x-auto gap-6 pb-12 pt-4 select-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] cursor-grab active:cursor-grabbing"
@@ -792,13 +825,10 @@ export default function LandingPage() {
                     className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     draggable="false"
                   />
-                  {/* Dark gradient to ensure text readability */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-[#111111]/60 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
                   
-                  {/* Fixed Text Container */}
                   <div className="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end pointer-events-auto">
                     
-                    {/* Always visible text */}
                     <h3 className="font-bold text-2xl tracking-tight text-white mb-1">
                       {member.name}
                     </h3>
@@ -806,7 +836,6 @@ export default function LandingPage() {
                       {member.position}
                     </p>
                     
-                    {/* Expanding decorative line on hover */}
                     <div className="max-h-0 opacity-0 group-hover:max-h-10 group-hover:opacity-100 transition-all duration-500">
                       <div className="h-0.5 w-12 bg-[#9b5cff]" />
                     </div>
