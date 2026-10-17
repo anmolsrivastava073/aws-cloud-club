@@ -119,7 +119,7 @@ export const MEMBERS: Member[] = [
   {
     id: '3',
     name: 'Aanya Singh Saini',
-    position: 'Technical Team Lead',
+    position: 'Technical Lead',
     category: ['Core', 'Technical'],
     number: '+91 7982875604',
     image: '/people/aanya.png',
@@ -127,7 +127,7 @@ export const MEMBERS: Member[] = [
   {
     id: '4',
     name: 'Aditya Raj',
-    position: 'Technical Team Co-Lead',
+    position: 'Technical Co-Lead',
     category: ['Core', 'Technical'], 
     number: '+91 9511389189',
     image: '/people/aditya.png',
@@ -135,7 +135,7 @@ export const MEMBERS: Member[] = [
   {
     id: '5',
     name: 'Shreyans Chordia',
-    position: 'Event Management Team Lead',
+    position: 'Event Management Lead',
     category: ['Core', 'Event Management'],
     number: '+91 6268088544',
     image: '/people/shreyans.png',
@@ -143,7 +143,7 @@ export const MEMBERS: Member[] = [
   {
     id: '6',
     name: 'Lavisha Rohra',
-    position: 'Event Management Team Co-Lead',
+    position: 'Event Management Co-Lead',
     category: ['Core', 'Event Management'],
     number: '+91 8595800533',
     image: '/people/lavisha.png',
@@ -151,7 +151,7 @@ export const MEMBERS: Member[] = [
   {
     id: '7',
     name: 'Akhil Prakash',
-    position: 'SM Team Lead',
+    position: 'Social Media Lead',
     category: ['Core', 'GDXSM'], 
     number: '+91 7858818551',
     image: '/people/akhil.png',
@@ -159,7 +159,7 @@ export const MEMBERS: Member[] = [
   {
     id: '8',
     name: 'Praneel Kapoor',
-    position: 'GD Team Lead',
+    position: 'Graphic Design Lead',
     category: ['Core', 'GDXSM'], 
     number: '+91 8726233333',
     image: '/people/praneel.png',
@@ -167,7 +167,7 @@ export const MEMBERS: Member[] = [
   {
     id: '9',
     name: 'Varun Nevatia',
-    position: 'Finance Team Lead',
+    position: 'Finance Lead',
     category: ['Core', 'Finance'], 
     number: '+91 7987091622',
     image: '/people/varun.png',
@@ -175,7 +175,7 @@ export const MEMBERS: Member[] = [
   {
     id: '10',
     name: 'Aditya Pathak',
-    position: 'Finance Team Co-Lead',
+    position: 'Finance Co-Lead',
     category: ['Core', 'Finance'], 
     number: '+91 9902994004',
     image: '/people/adityapathak.png',
