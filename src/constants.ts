@@ -194,7 +194,7 @@ export const MEMBERS: Member[] = [
     position: 'Technical SWT Member',
     category: ['Technical'],
     number: '+91 8429631456',
-    image: '/people/anmol.jpeg',
+    image: '/people/anmol.jpg',
   },
   {
     id: '13',
