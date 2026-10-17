@@ -8,7 +8,7 @@ export const FACULTY: Faculty[] = [
     position: 'Assistant Professor(Senior Scale)',
     department: 'Department of Computer Science Engineering',
     email: 'vaishali.chauhan@jaipur.manipal.edu',
-    image: '/people/vaishali.jpg', 
+    image: '/people/vaishali.png', 
   },
   {
     id: 'f2',
@@ -16,7 +16,7 @@ export const FACULTY: Faculty[] = [
     position: 'Assistant Professor',
     department: 'Department of Computer Science Engineering',
     email: 'divya.thakur@jaipur.manipal.edu',
-    image: '/people/divya.jpg',
+    image: '/people/divya.png',
   }
 ];
 
@@ -107,14 +107,14 @@ export const MEMBERS: Member[] = [
     name: 'Aabha Rajpal',
     position: 'Club Captain',
     category: ['Core'],
-    image: '/people/aabha.jpg',
+    image: '/people/aabha.png',
   },
   {
     id: '2',
     name: 'Ayush Goyal',
     position: 'Club Co-Captain',
     category: ['Core'],
-    image: '/people/ayush.jpg',
+    image: '/people/ayush.png',
   },
   {
     id: '3',
@@ -122,7 +122,7 @@ export const MEMBERS: Member[] = [
     position: 'Technical Team Lead',
     category: ['Core', 'Technical'],
     number: '+91 7982875604',
-    image: '/people/aanya.jpg',
+    image: '/people/aanya.png',
   },
   {
     id: '4',
@@ -130,7 +130,7 @@ export const MEMBERS: Member[] = [
     position: 'Technical Team Co-Lead',
     category: ['Core', 'Technical'], 
     number: '+91 9511389189',
-    image: '/people/aditya.jpg',
+    image: '/people/aditya.png',
   },
   {
     id: '5',
@@ -138,7 +138,7 @@ export const MEMBERS: Member[] = [
     position: 'Event Management Team Lead',
     category: ['Core', 'Event Management'],
     number: '+91 6268088544',
-    image: '/people/shreyans.jpg',
+    image: '/people/shreyans.png',
   },
   {
     id: '6',
@@ -146,7 +146,7 @@ export const MEMBERS: Member[] = [
     position: 'Event Management Team Co-Lead',
     category: ['Core', 'Event Management'],
     number: '+91 8595800533',
-    image: '/people/lavisha.jpg',
+    image: '/people/lavisha.png',
   },
   {
     id: '7',
@@ -154,7 +154,7 @@ export const MEMBERS: Member[] = [
     position: 'SM Team Lead',
     category: ['Core', 'GDXSM'], 
     number: '+91 7858818551',
-    image: '/people/akhil.jpg',
+    image: '/people/akhil.png',
   },
   {
     id: '8',
@@ -162,7 +162,7 @@ export const MEMBERS: Member[] = [
     position: 'GD Team Lead',
     category: ['Core', 'GDXSM'], 
     number: '+91 8726233333',
-    image: '/people/praneel.jpg',
+    image: '/people/praneel.png',
   },
   {
     id: '9',
@@ -170,7 +170,7 @@ export const MEMBERS: Member[] = [
     position: 'Finance Team Lead',
     category: ['Core', 'Finance'], 
     number: '+91 7987091622',
-    image: '/people/varun.jpg',
+    image: '/people/varun.png',
   },
   {
     id: '10',
@@ -178,7 +178,7 @@ export const MEMBERS: Member[] = [
     position: 'Finance Team Co-Lead',
     category: ['Core', 'Finance'], 
     number: '+91 9902994004',
-    image: '/people/adityapathak.jpg',
+    image: '/people/adityapathak.png',
   },
   {
     id: '11',
@@ -186,7 +186,7 @@ export const MEMBERS: Member[] = [
     position: 'Technical SWT Member',
     category: ['Technical'],
     number: '+91 9756007078',
-    image: '/people/bhargavi.jpg',
+    image: '/people/bhargavi.png',
   },
   {
     id: '12',
@@ -194,7 +194,7 @@ export const MEMBERS: Member[] = [
     position: 'Technical SWT Member',
     category: ['Technical'],
     number: '+91 8429631456',
-    image: '/people/anmol.jpg',
+    image: '/people/anmol.png',
   },
   {
     id: '13',
@@ -202,7 +202,7 @@ export const MEMBERS: Member[] = [
     position: 'Technical SWT Member',
     category: ['Technical'],
     number: '+91 9818263927',
-    image: '/people/satyam.jpg',
+    image: '/people/satyam.png',
   },
   {
     id: '14',
@@ -210,7 +210,7 @@ export const MEMBERS: Member[] = [
     position: 'Event Management SWT Member',
     category: ['Event Management'],
     number: '+91 8487061509',
-    image: '/people/prerna.jpg',
+    image: '/people/prerna.png',
   },
   {
     id: '15',
@@ -218,7 +218,7 @@ export const MEMBERS: Member[] = [
     position: 'Event Management SWT Member',
     category: ['Event Management'],
     number: '+91 6396717971',
-    image: '/people/aarush.jpg',
+    image: '/people/aarush.png',
   },
   {
     id: '16',
@@ -226,7 +226,7 @@ export const MEMBERS: Member[] = [
     position: 'Event Management SWT Member',
     category: ['Event Management'],
     number: '+91 7021769024',
-    image: '/people/shivang.jpg',
+    image: '/people/shivang.png',
   },
   {
     id: '17',
@@ -234,7 +234,7 @@ export const MEMBERS: Member[] = [
     position: 'GDXSM SWT Member',
     category: ['GDXSM'],
     number: '+91 7815859797',
-    image: '/people/lakshita.jpg',
+    image: '/people/lakshita.png',
   },
   {
     id: '18',
@@ -242,7 +242,7 @@ export const MEMBERS: Member[] = [
     position: 'GDXSM SWT Member',
     category: ['GDXSM'],
     number: '+91 7763912105',
-    image: '/people/adarsh.jpg',
+    image: '/people/adarsh.png',
   },
   {
     id: '19',
@@ -250,6 +250,6 @@ export const MEMBERS: Member[] = [
     position: 'GDXSM SWT Member',
     category: ['GDXSM'],
     number: '+91 8825701627',
-    image: '/people/shivansh.jpg',
+    image: '/people/shivansh.png',
   }
 ];
