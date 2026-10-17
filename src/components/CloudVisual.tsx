@@ -199,8 +199,8 @@ export default function CloudVisual() {
                   y1={`${a.y}%`}
                   x2={`${b.x}%`}
                   y2={`${b.y}%`}
-                  stroke="rgba(155,92,255,0.12)"
-                  strokeWidth="1"
+                  stroke="rgba(155,92,255,0.25)"
+                  strokeWidth="1.2"
                 />
 
               );
@@ -284,7 +284,7 @@ export default function CloudVisual() {
 
       {/* SCAN LINE */}
       <motion.div
-        className="absolute h-[1px] bg-gradient-to-r from-transparent via-[#9b5cff]/20 to-transparent w-[150%]"
+        className="absolute h-[1.5px] bg-gradient-to-r from-transparent via-[#9B5CFF]/40 to-transparent w-[150%]"
         style={{
           top: "50%",
           left: "-25%"

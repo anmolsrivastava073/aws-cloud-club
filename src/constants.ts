@@ -8,7 +8,7 @@ export const FACULTY: Faculty[] = [
     position: 'Assistant Professor(Senior Scale)',
     department: 'Department of Computer Science Engineering',
     email: 'vaishali.chauhan@jaipur.manipal.edu',
-    image: '/images/newlogo.jpg', 
+    image: '/people/vaishali.png', 
   },
   {
     id: 'f2',
@@ -16,7 +16,7 @@ export const FACULTY: Faculty[] = [
     position: 'Assistant Professor',
     department: 'Department of Computer Science Engineering',
     email: 'divya.thakur@jaipur.manipal.edu',
-    image: '/images/newlogo.jpg',
+    image: '/people/divya.png',
   }
 ];
 
@@ -48,7 +48,7 @@ export const EVENTS: Event[] = [
       },
     ],
     recap: {
-      title: 'Session Recap — Localhost to Cloud Host',
+      title: 'Session Recap: Localhost to Cloud Host',
       paragraphs: [
         'The second session of AWS Student Builder Group MUJ was conducted seamlessly by Shubham Londhe Sir, covering the complete journey of deploying a backend application from a local machine to the cloud.',
         'Participants got hands-on experience building a Python Flask application, understanding project structure, environment setup, and the step-by-step deployment workflow using AWS services.',
@@ -99,25 +99,6 @@ export const EVENTS: Event[] = [
       ],
     },
   },
-  {
-    id: '3',
-    title: 'Prompt To Production',
-    date: 'August 23, 2026',
-    time: '12:00 PM - 1:30 PM',
-    venue: 'LHC 103 AB4',
-    shortDescription: 'A hands-on AWS Student Builder Group workshop exploring how to take AI-powered prototypes built with prompts and ship them as real, production-ready cloud applications.',
-    fullDescription: 'The "Prompt To Production" workshop is a hands-on session organized by the AWS Student Builder Group at Manipal University Jaipur, designed for students who want to move beyond prompt-based prototyping and understand what it actually takes to ship an AI-powered application. The session covers the full journey from structuring an idea with the right prompts, to building a working application around it, and finally deploying it reliably on cloud infrastructure. Participants will learn practical techniques for testing, refining, and hardening AI-assisted code, along with best practices for scaling and monitoring applications once they go live. The workshop is conducted in a hybrid mode, allowing participants to join both offline and online, ensuring accessibility to a wider audience. Whether you have only experimented with prompting tools or already built small projects, this session will help you bridge the gap between "it works on my machine" and "it works in production."',
-    meetupLink: 'MEETUP_LINK_HERE',
-    registrationOpen: true,
-    speakers: [
-      {
-        name: 'SPEAKER_NAME',
-        designation: 'SPEAKER_DESIGNATION',
-        image: '/images/SPEAKER_IMAGE.jpeg',
-        bio: 'SPEAKER_BIO',
-      },
-    ],
-  },
 ];
 
 export const MEMBERS: Member[] = [
@@ -126,14 +107,14 @@ export const MEMBERS: Member[] = [
     name: 'Aabha Rajpal',
     position: 'Club Captain',
     category: ['Core'],
-    image: '/images/newlogo.jpg',
+    image: '/people/aabha.png',
   },
   {
     id: '2',
     name: 'Ayush Goyal',
     position: 'Club Co-Captain',
     category: ['Core'],
-    image: '/images/newlogo.jpg',
+    image: '/people/ayush.png',
   },
   {
     id: '3',
@@ -141,7 +122,7 @@ export const MEMBERS: Member[] = [
     position: 'Technical Team Lead',
     category: ['Core', 'Technical'],
     number: '+91 7982875604',
-    image: '/images/newlogo.jpg',
+    image: '/people/aanya.png',
   },
   {
     id: '4',
@@ -149,7 +130,7 @@ export const MEMBERS: Member[] = [
     position: 'Technical Team Co-Lead',
     category: ['Core', 'Technical'], 
     number: '+91 9511389189',
-    image: '/images/newlogo.jpg',
+    image: '/people/aditya.png',
   },
   {
     id: '5',
@@ -157,7 +138,7 @@ export const MEMBERS: Member[] = [
     position: 'Event Management Team Lead',
     category: ['Core', 'Event Management'],
     number: '+91 6268088544',
-    image: '/images/newlogo.jpg',
+    image: '/people/shreyans.png',
   },
   {
     id: '6',
@@ -165,7 +146,7 @@ export const MEMBERS: Member[] = [
     position: 'Event Management Team Co-Lead',
     category: ['Core', 'Event Management'],
     number: '+91 8595800533',
-    image: '/images/newlogo.jpg',
+    image: '/people/lavisha.png',
   },
   {
     id: '7',
@@ -173,7 +154,7 @@ export const MEMBERS: Member[] = [
     position: 'SM Team Lead',
     category: ['Core', 'GDXSM'], 
     number: '+91 7858818551',
-    image: '/images/newlogo.jpg',
+    image: '/people/akhil.png',
   },
   {
     id: '8',
@@ -181,7 +162,7 @@ export const MEMBERS: Member[] = [
     position: 'GD Team Lead',
     category: ['Core', 'GDXSM'], 
     number: '+91 8726233333',
-    image: '/images/newlogo.jpg',
+    image: '/people/praneel.png',
   },
   {
     id: '9',
@@ -189,7 +170,7 @@ export const MEMBERS: Member[] = [
     position: 'Finance Team Lead',
     category: ['Core', 'Finance'], 
     number: '+91 7987091622',
-    image: '/images/newlogo.jpg',
+    image: '/people/varun.png',
   },
   {
     id: '10',
@@ -197,7 +178,7 @@ export const MEMBERS: Member[] = [
     position: 'Finance Team Co-Lead',
     category: ['Core', 'Finance'], 
     number: '+91 9902994004',
-    image: '/images/newlogo.jpg',
+    image: '/people/adityapathak.png',
   },
   {
     id: '11',
@@ -205,7 +186,7 @@ export const MEMBERS: Member[] = [
     position: 'Technical SWT Member',
     category: ['Technical'],
     number: '+91 9756007078',
-    image: '/images/newlogo.jpg',
+    image: '/people/bhargavi.png',
   },
   {
     id: '12',
@@ -213,7 +194,7 @@ export const MEMBERS: Member[] = [
     position: 'Technical SWT Member',
     category: ['Technical'],
     number: '+91 8429631456',
-    image: '/images/newlogo.jpg',
+    image: '/people/anmol.png',
   },
   {
     id: '13',
@@ -221,7 +202,7 @@ export const MEMBERS: Member[] = [
     position: 'Technical SWT Member',
     category: ['Technical'],
     number: '+91 9818263927',
-    image: '/images/newlogo.jpg',
+    image: '/people/satyam.png',
   },
   {
     id: '14',
@@ -229,7 +210,7 @@ export const MEMBERS: Member[] = [
     position: 'Event Management SWT Member',
     category: ['Event Management'],
     number: '+91 8487061509',
-    image: '/images/newlogo.jpg',
+    image: '/people/prerna.png',
   },
   {
     id: '15',
@@ -237,7 +218,7 @@ export const MEMBERS: Member[] = [
     position: 'Event Management SWT Member',
     category: ['Event Management'],
     number: '+91 6396717971',
-    image: '/images/newlogo.jpg',
+    image: '/people/aarush.png',
   },
   {
     id: '16',
@@ -245,7 +226,7 @@ export const MEMBERS: Member[] = [
     position: 'Event Management SWT Member',
     category: ['Event Management'],
     number: '+91 7021769024',
-    image: '/images/newlogo.jpg',
+    image: '/people/shivang.png',
   },
   {
     id: '17',
@@ -253,7 +234,7 @@ export const MEMBERS: Member[] = [
     position: 'GDXSM SWT Member',
     category: ['GDXSM'],
     number: '+91 7815859797',
-    image: '/images/newlogo.jpg',
+    image: '/people/lakshita.png',
   },
   {
     id: '18',
@@ -261,7 +242,7 @@ export const MEMBERS: Member[] = [
     position: 'GDXSM SWT Member',
     category: ['GDXSM'],
     number: '+91 7763912105',
-    image: '/images/newlogo.jpg',
+    image: '/people/adarsh.png',
   },
   {
     id: '19',
@@ -269,6 +250,6 @@ export const MEMBERS: Member[] = [
     position: 'GDXSM SWT Member',
     category: ['GDXSM'],
     number: '+91 8825701627',
-    image: '/images/newlogo.jpg',
+    image: '/people/shivansh.png',
   }
 ];

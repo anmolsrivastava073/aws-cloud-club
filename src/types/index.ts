@@ -14,6 +14,7 @@ export interface Event {
   shortDescription: string;
   fullDescription: string;
   registrationOpen: boolean;
+  meetupLink?: string;
   speakers: Speaker[];
   recap?: {
     title: string;
@@ -37,6 +38,8 @@ export interface Member {
   position: string;
   category: string[]; 
   image?: string;
+  number?: string;
+  role?: 'captain' | 'co-captain' | 'lead' | 'co-lead' | 'swt';
 }
 
 export interface Faculty {

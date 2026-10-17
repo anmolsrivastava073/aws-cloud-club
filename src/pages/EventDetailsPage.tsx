@@ -58,7 +58,7 @@ export default function EventDetailsPage() {
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-[#666666] hover:text-[#9b5cff] transition-colors mb-10 text-sm font-medium"
+            className="inline-flex items-center gap-2 text-[#666666] hover:text-[#9B5CFF] transition-colors mb-10 text-sm font-semibold"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Events
@@ -73,22 +73,22 @@ export default function EventDetailsPage() {
             className="lg:col-span-2"
           >
             {/* TITLE */}
-            <h1 className="text-4xl md:text-6xl font-semibold tracking-[-0.05em] leading-[0.95] mb-6">
+            <h1 className="text-4xl md:text-6xl font-bold tracking-[-0.05em] leading-[0.95] mb-6 text-[#18181b]">
               {event.title}
             </h1>
 
             {/* META LABELS */}
             <div className="flex flex-wrap gap-6 text-[#666666] text-sm mb-10 p-5 bg-white rounded-xl border border-black/10 shadow-sm">
               <div className="flex items-center gap-2.5 font-medium">
-                <div className="p-2 bg-[#9b5cff]/10 rounded-md"><Calendar className="w-4 h-4 text-[#9b5cff]" /></div>
+                <div className="p-2 bg-[#9B5CFF]/10 rounded-md"><Calendar className="w-4 h-4 text-[#9B5CFF]" /></div>
                 {event.date}
               </div>
               <div className="flex items-center gap-2.5 font-medium">
-                <div className="p-2 bg-[#9b5cff]/10 rounded-md"><Clock className="w-4 h-4 text-[#9b5cff]" /></div>
+                <div className="p-2 bg-[#9B5CFF]/10 rounded-md"><Clock className="w-4 h-4 text-[#9B5CFF]" /></div>
                 {event.time}
               </div>
               <div className="flex items-center gap-2.5 font-medium">
-                <div className="p-2 bg-[#9b5cff]/10 rounded-md"><MapPin className="w-4 h-4 text-[#9b5cff]" /></div>
+                <div className="p-2 bg-[#9B5CFF]/10 rounded-md"><MapPin className="w-4 h-4 text-[#9B5CFF]" /></div>
                 {event.venue}
               </div>
             </div>
@@ -106,14 +106,14 @@ export default function EventDetailsPage() {
             {/* SPEAKERS */}
             {event.speakers.length > 0 && (
               <div className="mb-14">
-                <h3 className="text-2xl font-semibold tracking-tight mb-6">Speakers</h3>
+                <h3 className="text-2xl font-bold tracking-tight mb-6">Featured Speakers</h3>
                 <div className="grid sm:grid-cols-2 gap-6">
                   {event.speakers.map((speaker, i) => (
                     <div key={i} className="aws-card p-5 flex items-center gap-4">
                       <img src={speaker.image} alt={speaker.name} className="w-16 h-16 rounded-full object-cover border border-black/10" />
                       <div>
-                        <h4 className="font-semibold text-lg">{speaker.name}</h4>
-                        <p className="text-sm text-[#9b5cff] font-medium">{speaker.designation}</p>
+                        <h4 className="font-bold text-lg text-[#18181b]">{speaker.name}</h4>
+                        <p className="text-sm text-[#7C3AED] font-semibold">{speaker.designation}</p>
                       </div>
                     </div>
                   ))}
@@ -124,7 +124,7 @@ export default function EventDetailsPage() {
             {/* RECAP */}
             {expired && event.recap && (
               <div className="border-t border-black/10 pt-10">
-                <h3 className="text-2xl font-semibold tracking-tight mb-5">
+                <h3 className="text-2xl font-bold tracking-tight mb-5">
                   {event.recap.title}
                 </h3>
                 <div className="space-y-4 text-[#52525b] text-base leading-relaxed mb-8">
@@ -158,7 +158,7 @@ export default function EventDetailsPage() {
                   <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Lock className="w-5 h-5 text-gray-400" />
                   </div>
-                  <h3 className="text-[#18181b] text-lg font-semibold mb-1">
+                  <h3 className="text-[#18181b] text-lg font-bold mb-1">
                     Event Completed
                   </h3>
                   <p className="text-[#666666] text-sm">
@@ -171,7 +171,7 @@ export default function EventDetailsPage() {
                   {!isUnlocked && (
                     <div className="mb-6 p-5 bg-[#fcfcfc] border border-black/5 rounded-lg">
                       <div className="flex items-center gap-2 mb-3">
-                        <Lock className="w-4 h-4 text-[#9b5cff]" />
+                        <Lock className="w-4 h-4 text-[#9B5CFF]" />
                         <h4 className="font-semibold text-sm">Access Event Resources</h4>
                       </div>
                       <p className="text-xs text-[#666666] mb-4">
@@ -201,9 +201,9 @@ export default function EventDetailsPage() {
                         <button
                           key={tab}
                           onClick={() => setActiveTab(tab as any)}
-                          className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-medium rounded-md transition-all ${
+                          className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-md transition-all ${
                             activeTab === tab
-                              ? 'bg-white text-[#9b5cff] shadow-sm'
+                              ? 'bg-white text-[#7C3AED] shadow-sm'
                               : 'text-[#666666] hover:text-[#18181b]'
                           }`}
                         >
@@ -261,7 +261,7 @@ export default function EventDetailsPage() {
                     "Submit your details to mark your attendance."
                   ].map((step, idx) => (
                     <div key={idx} className="flex gap-3">
-                      <span className="flex items-center justify-center w-5 h-5 rounded-full bg-[#9b5cff]/10 text-[#9b5cff] font-semibold text-xs shrink-0 mt-0.5">
+                      <span className="flex items-center justify-center w-5 h-5 rounded-full bg-[#9B5CFF]/15 text-[#7C3AED] font-bold text-xs shrink-0 mt-0.5">
                         {idx + 1}
                       </span>
                       <p className="leading-snug">{step}</p>

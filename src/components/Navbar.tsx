@@ -59,16 +59,16 @@ export default function Navbar() {
               Events
             </a>
             <a
-              href="#faculty"
-              className="text-[#666666] hover:text-[#18181b] transition-colors"
-            >
-              Faculty
-            </a>
-            <a
               href="#members"
               className="text-[#666666] hover:text-[#18181b] transition-colors"
             >
               Team
+            </a>
+            <a
+              href="#faculty"
+              className="text-[#666666] hover:text-[#18181b] transition-colors"
+            >
+              Faculty
             </a>
           </div>
 

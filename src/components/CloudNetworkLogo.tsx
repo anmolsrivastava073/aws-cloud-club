@@ -15,7 +15,7 @@ export default function CloudNetworkLogo() {
           duration: 2.5,
           repeat: Infinity
         }}
-        className="w-3 h-3 rounded-full bg-[#9b5cff] shadow-[0_0_14px_rgba(155,92,255,0.28)]"
+        className="w-3 h-3 rounded-full bg-[#9B5CFF] shadow-[0_0_14px_rgba(155,92,255,0.4)]"
       />
 
       {/* ORBIT RINGS */}
@@ -25,7 +25,7 @@ export default function CloudNetworkLogo() {
           cx="50%"
           cy="50%"
           r="10"
-          stroke="rgba(155,92,255,0.18)"
+          stroke="rgba(155,92,255,0.25)"
           strokeWidth="0.8"
           fill="none"
           animate={{

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Calendar, MapPin, ArrowRight, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Event } from '../types/index';
@@ -9,6 +10,7 @@ export default function EventCard({
 }: {
   event: Event;
   index: number;
+  key?: string;
 }) {
 
   const isEventExpired = (eventDate: string) => {
@@ -39,12 +41,12 @@ export default function EventCard({
             bg-white
             border
             border-black/10
-            rounded-xl
-            p-7
+            rounded-2xl
+            p-5 sm:p-6
             flex
             flex-col
             h-full
-            min-h-[280px]
+            min-h-[240px]
             transition-all
             duration-300
             shadow-sm
@@ -57,29 +59,29 @@ export default function EventCard({
         >
           {/* PAST BADGE */}
           {expired && (
-            <span className="text-[10px] uppercase tracking-wider font-semibold px-2.5 py-1 rounded-md bg-red-50 text-red-600 mb-5 w-fit border border-red-100">
+            <span className="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-md bg-red-50 text-red-600 mb-3 w-fit border border-red-100">
               Past Event
             </span>
           )}
 
           {/* DATE */}
-          <div className="flex items-center gap-2 text-[#666666] mb-3 text-xs font-medium uppercase tracking-wider">
+          <div className="flex items-center gap-2 text-[#666666] mb-2 text-xs font-medium uppercase tracking-wider">
             <Calendar className="w-3.5 h-3.5 text-[#9b5cff]" />
             {event.date}
           </div>
 
           {/* TITLE */}
-          <h3 className="text-xl font-semibold mb-3 text-[#18181b] leading-snug tracking-tight group-hover:text-[#9b5cff] transition-colors duration-200">
+          <h3 className="text-xl font-semibold mb-2 text-[#18181b] leading-snug tracking-tight group-hover:text-[#9b5cff] transition-colors duration-200">
             {event.title}
           </h3>
 
           {/* DESCRIPTION */}
-          <p className="text-[#52525b] text-sm mb-6 line-clamp-3 leading-relaxed flex-grow">
+          <p className="text-[#52525b] text-sm mb-4 line-clamp-3 leading-relaxed flex-grow">
             {event.shortDescription}
           </p>
 
           {/* META */}
-          <div className="flex flex-col gap-2.5 text-xs text-[#666666] mb-6 pt-5 border-t border-black/5">
+          <div className="flex flex-col gap-2 text-xs text-[#666666] mb-4 pt-3.5 border-t border-black/5">
             <div className="flex items-center gap-2">
               <MapPin className="w-3.5 h-3.5 text-[#9b5cff]" />
               {event.venue}
