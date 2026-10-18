@@ -124,14 +124,7 @@ export const MEMBERS: Member[] = [
     number: '+91 7982875604',
     image: '/people/aanya.png',
   },
-  {
-    id: '4',
-    name: 'Aditya Raj',
-    position: 'Technical Co-Lead',
-    category: ['Core', 'Technical'], 
-    number: '+91 9511389189',
-    image: '/people/aditya.png',
-  },
+  
   {
     id: '5',
     name: 'Shreyans Chordia',
