@@ -57,10 +57,14 @@ export default function EventCard({
             `}
           `}
         >
-          {/* PAST BADGE */}
-          {expired && (
+          {/* STATUS BADGE */}
+          {expired ? (
             <span className="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-md bg-red-50 text-red-600 mb-3 w-fit border border-red-100">
               Past Event
+            </span>
+          ) : (
+            <span className="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-md bg-green-50 text-green-700 mb-3 w-fit border border-green-200">
+              Currently Available
             </span>
           )}
 
