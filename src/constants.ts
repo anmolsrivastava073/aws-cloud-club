@@ -1,6 +1,5 @@
 import { Event, Member, Faculty } from './types';
 
-// New Faculty Data
 export const FACULTY: Faculty[] = [
   {
     id: 'f1',
