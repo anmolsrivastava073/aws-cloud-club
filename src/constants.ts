@@ -133,7 +133,48 @@ export const EVENTS: Event[] = [
   },
 ];
 
-export const MEMBERS: Member[] = [
+// ---------------------------------------------------------------------------
+// TEAM DATA, grouped by session.
+// The FIRST entry in TEAM_SESSIONS is the default (current) session shown on
+// the landing page. Add a new session at the top of the array each year.
+// ---------------------------------------------------------------------------
+
+export interface TeamSession {
+  id: string;                 // unique key, e.g. '2026-27'
+  label: string;              // text shown on the switcher, e.g. '2026–27'
+  workingTeamLabel: string;   // heading above the non-lead members
+  members: Member[];
+}
+
+const MEMBERS_2026_27: Member[] = [
+  // Tier 1
+  { id: 's26-1', name: 'Tanima Mishra', position: 'Club Captain', category: ['Core'], image: '/people/x.png' },
+  { id: 's26-2', name: 'Reetikesh Chaudhary', position: 'Club Co-Captain', category: ['Core'], image: '/people/x.png' },
+
+  // Leads
+  { id: 's26-3', name: 'Saumya Dogra', position: 'Technical Lead', category: ['Core', 'Technical'], image: '/people/x.png' },
+  { id: 's26-5', name: 'Kasmya Bhatia', position: 'Event Management Lead', category: ['Core', 'Event Management'], image: '/people/x.png' },
+  { id: 's26-7', name: 'Shivansh Yadav', position: 'Graphic Design Lead', category: ['Core', 'GDXSM'], image: '/people/x.png' },
+  { id: 's26-9', name: 'Hrishiraj Sarmah', position: 'Finance Lead', category: ['Core', 'Finance'], image: '/people/x.png' },
+
+  // Co-Leads
+  { id: 's26-4', name: 'Zehel Nehil', position: 'Technical Co-Lead', category: ['Core', 'Technical'], image: '/people/x.png' },
+  { id: 's26-6', name: 'Shreyans Chordia', position: 'Event Management Co-Lead', category: ['Core', 'Event Management'], image: '/people/x.png' },
+  { id: 's26-8', name: 'Adarsh', position: 'Graphic Design Co-Lead', category: ['Core', 'GDXSM'], image: '/people/x.png' },
+
+  // Technical team members
+  { id: 's26-10', name: 'Anmol Srivastava', position: 'Technical Team Member', category: ['Technical'], image: '/people/x.png' },
+  { id: 's26-11', name: 'Shashwat Jindal', position: 'Technical Team Member', category: ['Technical'], image: '/people/x.png' },
+  { id: 's26-12', name: 'Vishwaswarup Rath', position: 'Technical Team Member', category: ['Technical'], image: '/people/x.png' },
+  { id: 's26-13', name: 'Satyam Jha', position: 'Technical Team Member', category: ['Technical'], image: '/people/x.png' },
+
+  // Events team members
+  { id: 's26-14', name: 'Aditya Raj', position: 'Events Team Member', category: ['Event Management'], image: '/people/x.png' },
+  { id: 's26-15', name: 'Lavisha Rohra', position: 'Events Team Member', category: ['Event Management'], image: '/people/x.png' },
+  { id: 's26-16', name: 'Anuj Bhardwaj', position: 'Events Team Member', category: ['Event Management'], image: '/people/x.png' },
+];
+
+const MEMBERS_2025_26: Member[] = [
   {
     id: '1',
     name: 'Aabha Rajpal',
@@ -278,3 +319,62 @@ export const MEMBERS: Member[] = [
     image: '/people/shivansh.png',
   }
 ];
+
+// First entry = default session shown on the landing page.
+export const TEAM_SESSIONS: TeamSession[] = [
+  {
+    id: '2026-27',
+    label: '2026–27',
+    workingTeamLabel: 'Senior Working team',
+    members: MEMBERS_2025_26,   // Aabha / Ayush roster = current team
+  },
+  {
+    id: '2025-26',
+    label: '2025–26',
+    workingTeamLabel: 'Team Members',
+    members: MEMBERS_2026_27,   // Tanima / Reetikesh roster = previous team
+  },
+];
+
+// Kept for backward compatibility with any other page importing MEMBERS:
+// it always points to the current (first) session.
+export const MEMBERS: Member[] = TEAM_SESSIONS[0].members;
+
+// ---------------------------------------------------------------------------
+// LINKEDIN PROFILES, keyed by member name (same person = same link in every
+// session). Paste the full profile URL between the quotes. Members with an
+// empty string simply won't show the LinkedIn button on hover.
+// ---------------------------------------------------------------------------
+export const LINKEDIN_URLS: Record<string, string> = {
+  // 2026-27 (current)
+  'Aabha Rajpal': '',
+  'Ayush Goyal': '',
+  'Aanya Singh Saini': '',
+  'Shreyans Chordia': '',
+  'Lavisha Rohra': '',
+  'Akhil Prakash': '',
+  'Praneel Kapoor': '',
+  'Varun Nevatia': '',
+  'Aditya Pathak': '',
+  'Bhargavi Chaudhary': '',
+  'Anmol Srivastava': 'https://www.linkedin.com/in/anmol-srivastava-46430727a/',
+  'Satyam Jha': '',
+  'Prerna Vaidya': '',
+  'Aarush Modi': '',
+  'Shivang Ravindra Pratap Singh': '',
+  'Lakshita Annapareddy': '',
+  'Adarsh': '',
+  'Shivansh Yadav': '',
+
+  // 2025-26 (previous)
+  'Tanima Mishra': '',
+  'Reetikesh Chaudhary': '',
+  'Saumya Dogra': '',
+  'Zehel Nehil': '',
+  'Kasmya Bhatia': '',
+  'Hrishiraj Sarmah': '',
+  'Shashwat Jindal': '',
+  'Vishwaswarup Rath': '',
+  'Aditya Raj': '',
+  'Anuj Bhardwaj': '',
+};
