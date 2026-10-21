@@ -154,7 +154,7 @@ function MemberCard({
         )}
 
         {isHero ? (
-          <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 z-30">
+          <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 z-30 flex flex-col items-center text-center">
             <h3 className="text-sm sm:text-xl font-bold text-white mb-0.5 drop-shadow-md leading-snug line-clamp-2">
               {member.name}
             </h3>
@@ -163,11 +163,11 @@ function MemberCard({
             </p>
           </div>
         ) : (
-          <div className="absolute bottom-0 left-0 right-0 p-3.5 sm:p-4 z-30 text-center">
-            <h4 className="font-bold text-white text-xs sm:text-sm group-hover:text-[#b784ff] transition-colors leading-snug line-clamp-1 mb-1 drop-shadow-md">
+          <div className="absolute bottom-0 left-0 right-0 p-3.5 sm:p-4 z-30 flex flex-col items-center text-center">
+            <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-[#b784ff] transition-colors mb-0.5 drop-shadow-md leading-snug line-clamp-2">
               {member.name}
             </h4>
-            <p className="text-[11px] sm:text-xs text-[#b784ff] font-medium leading-tight line-clamp-2 drop-shadow-sm">
+            <p className="text-[#b784ff] font-semibold text-[11px] sm:text-xs drop-shadow-sm whitespace-nowrap truncate">
               {member.position}
             </p>
           </div>
@@ -730,16 +730,16 @@ export default function LandingPage() {
                 {/* ✅ FIX: Improved background gradient (from-black/90 via-black/40) for perfect text legibility */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none z-20" />
                 
-                <div className="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end z-30">
+                <div className="absolute bottom-0 left-0 w-full p-6 flex flex-col items-center text-center justify-end z-30">
                   <h3 className="text-2xl font-bold tracking-tight text-white mb-1">
                     {faculty.name}
                   </h3>
-                  <p className="text-[#b784ff] font-medium text-sm mb-2 md:mb-0 md:group-hover:mb-2 transition-all duration-300">
+                  <p className="text-[#b784ff] font-semibold text-sm mb-2 md:mb-0 md:group-hover:mb-2 transition-all duration-300">
                     {faculty.position}
                   </p>
                   
-                  <div className="max-h-40 opacity-100 md:max-h-0 md:opacity-0 overflow-hidden md:group-hover:max-h-40 md:group-hover:opacity-100 transition-all duration-500 ease-in-out">
-                    <p className="text-gray-300 text-xs mb-4 mt-2 font-medium">
+                  <div className="max-h-40 opacity-100 md:max-h-0 md:opacity-0 overflow-hidden md:group-hover:max-h-40 md:group-hover:opacity-100 transition-all duration-500 ease-in-out flex flex-col items-center">
+                    <p className="text-gray-300 text-xs mb-4 mt-2 font-semibold">
                       {faculty.department}
                     </p>
                     
@@ -747,7 +747,7 @@ export default function LandingPage() {
                     {faculty.email && (
                       <a 
                         href={`mailto:${faculty.email}`} 
-                        className="inline-flex w-fit items-center gap-2 text-xs font-medium text-gray-300 hover:text-white transition-colors"
+                        className="inline-flex w-fit items-center gap-2 text-xs font-semibold text-gray-300 hover:text-white transition-colors"
                       >
                         <Mail className="w-4 h-4" />
                         {faculty.email}
