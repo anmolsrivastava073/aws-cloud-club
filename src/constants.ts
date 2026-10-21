@@ -351,7 +351,7 @@ export const LINKEDIN_URLS: Record<string, string> = {
   'Anmol Srivastava': 'https://www.linkedin.com/in/anmol-srivastava-46430727a/',
   'Prerna Vaidya': 'https://www.linkedin.com/in/prerna-vaidya-9239a1377/',
   'Aarush Modi': 'https://www.linkedin.com/in/aarush-modi-4a8b43380/',
-  'Shivang Ravindra Pratap Singh': '',
+  'Shivang Ravindra Pratap Singh': 'https://www.linkedin.com/in/cipher3787-shivangsingh/',
   'Lakshita Annapareddy': '',
   'Adarsh': '',
   'Shivansh Yadav': 'https://www.linkedin.com/in/shivansh-yadav-82130a273/',
