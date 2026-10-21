@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import EventCard from '../components/EventCard';
-import { EVENTS, MEMBERS, FACULTY } from '../constants';
+import { EVENTS, TEAM_SESSIONS, FACULTY, LINKEDIN_URLS } from '../constants';
 import CloudVisual from '../components/CloudVisual';
 import HeroAmbientGlow from '../components/HeroAmbientGlow';
 
@@ -58,11 +58,111 @@ const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
   }
 };
 
+// 👤 Reusable team member card
+type TeamMember = (typeof TEAM_SESSIONS)[number]['members'][number];
+
+function MemberCard({
+  member,
+  variant = 'standard',
+  delay = 0,
+  className = '',
+}: {
+  member: TeamMember;
+  variant?: 'hero' | 'standard';
+  delay?: number;
+  className?: string;
+}) {
+  const isHero = variant === 'hero';
+  const linkedin = LINKEDIN_URLS[member.name];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: isHero ? 24 : 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: isHero ? 0.4 : 0.35, delay }}
+      className={`relative group rounded-2xl overflow-hidden bg-[#18181b] transition-all duration-300 ${
+        isHero ? 'shadow-lg hover:shadow-2xl' : 'shadow-md hover:shadow-xl'
+      } ${className}`}
+    >
+      <div className="aspect-[3/4] relative overflow-hidden bg-[#18181b]">
+        {/* Fallback avatar initials */}
+        <div className={`absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#1e1b2e] to-[#120f1d] text-center ${isHero ? 'p-4' : 'p-3'}`}>
+          <div
+            className={`rounded-full bg-[#9b5cff]/20 border border-[#9b5cff]/40 flex items-center justify-center font-bold text-[#b784ff] mb-2 shadow-inner ${
+              isHero ? 'w-16 h-16 text-xl' : 'w-12 h-12 text-base'
+            }`}
+          >
+            {getInitials(member.name)}
+          </div>
+          <span className="text-xs font-semibold text-white/90 truncate max-w-full px-2">{member.name}</span>
+        </div>
+
+        <img
+          src={member.image}
+          alt={member.name}
+          className={`absolute inset-0 w-full h-full object-cover group-hover:scale-105 z-10 ${
+            isHero ? 'transition-transform duration-700' : 'transition-transform duration-500'
+          }`}
+          onError={handleImageError}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-20" />
+
+        {/* 🔗 LinkedIn button: appears on hover (always visible on touch screens) */}
+        {linkedin && (
+          <>
+          {/* Black shadow over the card behind the button (card hover only) */}
+          <div className="absolute inset-0 z-[25] pointer-events-none bg-gradient-to-b from-black/30 via-black/60 to-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute inset-0 z-40 flex items-center justify-center pointer-events-none">
+            <a
+              href={linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${member.name} on LinkedIn`}
+              title={`${member.name} on LinkedIn`}
+              className="pointer-events-auto inline-flex items-center gap-2 px-4 py-2 rounded-md bg-white/95 text-[#0A66C2] text-xs font-semibold shadow-md opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 focus-visible:opacity-100 focus-visible:scale-100 [@media(hover:none)]:opacity-100 [@media(hover:none)]:scale-100 hover:bg-[#0A66C2] hover:text-white transition-all duration-300"
+            >
+              <Linkedin className="w-4 h-4" />
+              <span>LinkedIn</span>
+            </a>
+          </div>
+          </>
+        )}
+
+        {isHero ? (
+          <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 z-30">
+            <h3 className="text-lg sm:text-xl font-bold text-white mb-0.5 drop-shadow-md">
+              {member.name}
+            </h3>
+            <p className="text-[#b784ff] font-semibold text-xs sm:text-sm drop-shadow-sm whitespace-nowrap truncate">
+              {member.position}
+            </p>
+          </div>
+        ) : (
+          <div className="absolute bottom-0 left-0 right-0 p-3.5 sm:p-4 z-30 text-center">
+            <h4 className="font-bold text-white text-xs sm:text-sm group-hover:text-[#b784ff] transition-colors leading-snug line-clamp-1 mb-1 drop-shadow-md">
+              {member.name}
+            </h4>
+            <p className="text-[11px] sm:text-xs text-[#b784ff] font-medium leading-tight line-clamp-2 drop-shadow-sm">
+              {member.position}
+            </p>
+          </div>
+        )}
+      </div>
+    </motion.div>
+  );
+}
+
 export default function LandingPage() {
 
   const sortedEvents = [...EVENTS].sort((a, b) => {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
+
+  // 📅 Session-wise team: first session in TEAM_SESSIONS is the default (current) one
+  const [activeSessionId, setActiveSessionId] = useState<string>(TEAM_SESSIONS[0].id);
+  const activeSession =
+    TEAM_SESSIONS.find((s) => s.id === activeSessionId) ?? TEAM_SESSIONS[0];
+  const MEMBERS = activeSession.members;
 
   // Segregate Team Members: Captain & Co-Captain (Tier 1), Leads & Co-Leads (Tier 2), SWT (Tier 3)
   const captain = MEMBERS.find(
@@ -494,14 +594,14 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 👥 1. MEMBERS SECTION (HIERARCHY: CAPTAIN & CO-CAPTAIN -> LEADS -> CO-LEADS -> SWT) */}
+      {/* 👥 1. MEMBERS SECTION (SESSION-WISE: CAPTAIN & CO-CAPTAIN -> LEADS -> CO-LEADS -> TEAM) */}
       <section id="members" className="py-28 border-b border-black/10 bg-[#f5f3ef]">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-16 text-center"
+            className="mb-10 text-center"
           >
             <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.05em] leading-none mb-3">
               Our <span className="text-[#9b5cff]">Team</span>
@@ -511,230 +611,141 @@ export default function LandingPage() {
             </p>
           </motion.div>
 
-          {/* ======================================================== */}
-          {/* TIER 1: CAPTAIN & CO-CAPTAIN */}
-          {/* ======================================================== */}
-          <div className="mb-14 sm:mb-16">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-7 max-w-2xl mx-auto">
-              {/* CAPTAIN */}
-              {captain && (
-                <motion.div
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4 }}
-                  className="relative group rounded-2xl overflow-hidden bg-[#18181b] shadow-lg hover:shadow-2xl transition-all duration-300"
-                >
-                  <div className="aspect-[3/4] relative overflow-hidden bg-[#18181b]">
-                    {/* Fallback avatar initials */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#1e1b2e] to-[#120f1d] text-center p-4">
-                      <div className="w-16 h-16 rounded-full bg-[#9b5cff]/20 border border-[#9b5cff]/40 flex items-center justify-center text-xl font-bold text-[#b784ff] mb-2 shadow-inner">
-                        {getInitials(captain.name)}
-                      </div>
-                      <span className="text-xs font-semibold text-white/90">{captain.name}</span>
-                    </div>
-                    <img
-                      src={captain.image}
-                      alt={captain.name}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 z-10"
-                      onError={handleImageError}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-20" />
+          {/* 📅 SESSION SWITCHER */}
+          <div className="flex justify-center mb-14 sm:mb-16">
+            <div
+              role="tablist"
+              aria-label="Select team session"
+              className="inline-flex items-center gap-1 p-1 rounded-full bg-white border border-black/10 shadow-sm"
+            >
+              {TEAM_SESSIONS.map((session, idx) => {
+                const isActive = session.id === activeSession.id;
+                return (
+                  <button
+                    key={session.id}
+                    role="tab"
+                    aria-selected={isActive}
+                    onClick={() => setActiveSessionId(session.id)}
+                    className={`relative px-5 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold transition-colors duration-200 ${
+                      isActive ? 'text-white' : 'text-[#52525b] hover:text-[#18181b]'
+                    }`}
+                  >
+                    {isActive && (
+                      <motion.span
+                        layoutId="team-session-pill"
+                        className="absolute inset-0 rounded-full bg-[#18181b]"
+                        transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                      />
+                    )}
+                    <span className="relative z-10 flex items-center gap-2">
+                      {session.label}
+                      {idx === 0 && (
+                        <span
+                          className={`text-[9px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded-full ${
+                            isActive ? 'bg-[#9b5cff] text-white' : 'bg-purple-50 text-[#7c3aed]'
+                          }`}
+                        >
+                          Current
+                        </span>
+                      )}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
 
-                    {/* Details */}
-                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 z-30">
-                      <h3 className="text-lg sm:text-xl font-bold text-white mb-0.5 drop-shadow-md">
-                        {captain.name}
-                      </h3>
-                      <p className="text-[#b784ff] font-semibold text-xs sm:text-sm drop-shadow-sm">
-                        {captain.position} • AWS SBG MUJ
-                      </p>
-                    </div>
+          {/* Re-animates every time the session changes */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeSession.id}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25 }}
+            >
+              {/* ======================================================== */}
+              {/* TIER 1: CAPTAIN & CO-CAPTAIN */}
+              {/* ======================================================== */}
+              {(captain || coCaptain) && (
+                <div className="mb-14 sm:mb-16">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 max-w-lg mx-auto">
+                    {captain && <MemberCard member={captain} variant="hero" />}
+                    {coCaptain && <MemberCard member={coCaptain} variant="hero" delay={0.1} />}
                   </div>
-                </motion.div>
+                </div>
               )}
 
-              {/* CO-CAPTAIN */}
-              {coCaptain && (
-                <motion.div
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.1 }}
-                  className="relative group rounded-2xl overflow-hidden bg-[#18181b] shadow-lg hover:shadow-2xl transition-all duration-300"
-                >
-                  <div className="aspect-[3/4] relative overflow-hidden bg-[#18181b]">
-                    {/* Fallback avatar initials */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#1e1b2e] to-[#120f1d] text-center p-4">
-                      <div className="w-16 h-16 rounded-full bg-[#9b5cff]/20 border border-[#9b5cff]/40 flex items-center justify-center text-xl font-bold text-[#b784ff] mb-2 shadow-inner">
-                        {getInitials(coCaptain.name)}
-                      </div>
-                      <span className="text-xs font-semibold text-white/90">{coCaptain.name}</span>
-                    </div>
-                    <img
-                      src={coCaptain.image}
-                      alt={coCaptain.name}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 z-10"
-                      onError={handleImageError}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-20" />
-
-                    {/* Details */}
-                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 z-30">
-                      <h3 className="text-lg sm:text-xl font-bold text-white mb-0.5 drop-shadow-md">
-                        {coCaptain.name}
-                      </h3>
-                      <p className="text-[#b784ff] font-semibold text-xs sm:text-sm drop-shadow-sm">
-                        {coCaptain.position} • AWS SBG MUJ
-                      </p>
-                    </div>
+              {/* ======================================================== */}
+              {/* TIER 2: LEADS AND CO LEADS */}
+              {/* ======================================================== */}
+              {(teamLeads.length > 0 || teamCoLeads.length > 0) && (
+                <div className="mb-20">
+                  <div className="text-center mb-10">
+                    <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#111111]">
+                      Leads and Co leads
+                    </h3>
                   </div>
-                </motion.div>
+
+                  {/* Row 1: All Leads (5 in one row on lg) */}
+                  {teamLeads.length > 0 && (
+                    <div className="mb-6">
+                      <div className="flex flex-wrap justify-center gap-4 sm:gap-5 max-w-6xl mx-auto">
+                        {teamLeads.map((member, i) => (
+                          <MemberCard
+                            key={member.id}
+                            member={member}
+                            delay={(i % 5) * 0.07}
+                            className="w-[calc(50%-8px)] sm:w-[calc(33.333%-14px)] lg:w-[calc(20%-16px)] max-w-[215px] shrink-0"
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Row 2: All Co-Leads (centered) */}
+                  {teamCoLeads.length > 0 && (
+                    <div>
+                      <div className="flex flex-wrap justify-center gap-4 sm:gap-5 max-w-6xl mx-auto">
+                        {teamCoLeads.map((member, i) => (
+                          <MemberCard
+                            key={member.id}
+                            member={member}
+                            delay={(i % 5) * 0.07}
+                            className="w-[calc(50%-8px)] sm:w-[calc(33.333%-14px)] lg:w-[calc(20%-16px)] max-w-[215px] shrink-0"
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               )}
-            </div>
-          </div>
 
-          {/* ======================================================== */}
-          {/* TIER 2: LEADS AND CO LEADS */}
-          {/* ======================================================== */}
-          <div className="mb-20">
-            <div className="text-center mb-10">
-              <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#111111]">
-                Leads and Co leads
-              </h3>
-            </div>
-
-            {/* Row 1: All Leads (5 in one row on lg) */}
-            <div className="mb-6">
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5 max-w-6xl mx-auto">
-                {teamLeads.map((member, i) => (
-                  <motion.div
-                    key={member.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: (i % 5) * 0.07 }}
-                    className="relative group rounded-2xl overflow-hidden bg-[#18181b] shadow-md hover:shadow-xl transition-all duration-300"
-                  >
-                    <div className="aspect-[3/4] relative overflow-hidden bg-[#18181b]">
-                      {/* Fallback avatar initials */}
-                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#1e1b2e] to-[#120f1d] text-center p-3">
-                        <div className="w-12 h-12 rounded-full bg-[#9b5cff]/20 border border-[#9b5cff]/40 flex items-center justify-center text-base font-bold text-[#b784ff] mb-2 shadow-inner">
-                          {getInitials(member.name)}
-                        </div>
-                        <span className="text-xs font-semibold text-white/90 truncate max-w-full px-2">{member.name}</span>
-                      </div>
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 z-10"
-                        onError={handleImageError}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-20" />
-                      <div className="absolute bottom-0 left-0 right-0 p-3.5 sm:p-4 z-30 text-center">
-                        <h4 className="font-bold text-white text-xs sm:text-sm group-hover:text-[#b784ff] transition-colors leading-snug line-clamp-1 mb-1 drop-shadow-md">
-                          {member.name}
-                        </h4>
-                        <p className="text-[11px] sm:text-xs text-[#b784ff] font-medium leading-tight line-clamp-2 drop-shadow-sm">
-                          {member.position}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* Row 2: All Co-Leads (3 in one row, centered) */}
-            <div>
-              <div className="flex flex-wrap justify-center gap-4 sm:gap-5 max-w-6xl mx-auto">
-                {teamCoLeads.map((member, i) => (
-                  <motion.div
-                    key={member.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: (i % 5) * 0.07 }}
-                    className="w-[calc(50%-8px)] sm:w-[calc(33.333%-14px)] lg:w-[calc(20%-16px)] max-w-[215px] relative group rounded-2xl overflow-hidden bg-[#18181b] shadow-md hover:shadow-xl transition-all duration-300 shrink-0"
-                  >
-                    <div className="aspect-[3/4] relative overflow-hidden bg-[#18181b]">
-                      {/* Fallback avatar initials */}
-                      <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#1e1b2e] to-[#120f1d] text-center p-3">
-                        <div className="w-12 h-12 rounded-full bg-[#9b5cff]/20 border border-[#9b5cff]/40 flex items-center justify-center text-base font-bold text-[#b784ff] mb-2 shadow-inner">
-                          {getInitials(member.name)}
-                        </div>
-                        <span className="text-xs font-semibold text-white/90 truncate max-w-full px-2">{member.name}</span>
-                      </div>
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 z-10"
-                        onError={handleImageError}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-20" />
-                      <div className="absolute bottom-0 left-0 right-0 p-3.5 sm:p-4 z-30 text-center">
-                        <h4 className="font-bold text-white text-xs sm:text-sm group-hover:text-[#b784ff] transition-colors leading-snug line-clamp-1 mb-1 drop-shadow-md">
-                          {member.name}
-                        </h4>
-                        <p className="text-[11px] sm:text-xs text-[#b784ff] font-medium leading-tight line-clamp-2 drop-shadow-sm">
-                          {member.position}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* ======================================================== */}
-          {/* TIER 3: SENIOR WORKING TEAM */}
-          {/* ======================================================== */}
-          <div>
-            <div className="text-center mb-10">
-              <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#111111]">
-                Senior Working team
-              </h3>
-            </div>
-
-            <div className="flex flex-wrap justify-center gap-4 sm:gap-5 max-w-6xl mx-auto">
-              {swtMembers.map((member, i) => (
-                <motion.div
-                  key={member.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: (i % 5) * 0.07 }}
-                  className="w-[calc(50%-8px)] sm:w-[calc(33.333%-14px)] md:w-[calc(25%-15px)] lg:w-[calc(20%-16px)] max-w-[215px] relative group rounded-2xl overflow-hidden bg-[#18181b] shadow-md hover:shadow-xl transition-all duration-300 shrink-0"
-                >
-                  <div className="aspect-[3/4] relative overflow-hidden bg-[#18181b]">
-                    {/* Fallback avatar initials */}
-                    <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#1e1b2e] to-[#120f1d] text-center p-3">
-                      <div className="w-12 h-12 rounded-full bg-[#9b5cff]/20 border border-[#9b5cff]/40 flex items-center justify-center text-base font-bold text-[#b784ff] mb-2 shadow-inner">
-                        {getInitials(member.name)}
-                      </div>
-                      <span className="text-xs font-semibold text-white/90 truncate max-w-full px-2">{member.name}</span>
-                    </div>
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 z-10"
-                      onError={handleImageError}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-20" />
-                    <div className="absolute bottom-0 left-0 right-0 p-3.5 sm:p-4 z-30 text-center">
-                      <h4 className="font-bold text-white text-xs sm:text-sm group-hover:text-[#b784ff] transition-colors leading-snug line-clamp-1 mb-1 drop-shadow-md">
-                        {member.name}
-                      </h4>
-                      <p className="text-[11px] sm:text-xs text-[#b784ff] font-medium leading-tight line-clamp-2 drop-shadow-sm">
-                        {member.position}
-                      </p>
-                    </div>
+              {/* ======================================================== */}
+              {/* TIER 3: WORKING TEAM (label changes per session) */}
+              {/* ======================================================== */}
+              {swtMembers.length > 0 && (
+                <div>
+                  <div className="text-center mb-10">
+                    <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#111111]">
+                      {activeSession.workingTeamLabel}
+                    </h3>
                   </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+
+                  <div className="flex flex-wrap justify-center gap-4 sm:gap-5 max-w-6xl mx-auto">
+                    {swtMembers.map((member, i) => (
+                      <MemberCard
+                        key={member.id}
+                        member={member}
+                        delay={(i % 5) * 0.07}
+                        className="w-[calc(50%-8px)] sm:w-[calc(33.333%-14px)] md:w-[calc(25%-15px)] lg:w-[calc(20%-16px)] max-w-[215px] shrink-0"
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
 
         </div>
       </section>
@@ -764,7 +775,7 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.15, duration: 0.5 }}
-                className="relative w-full max-w-[380px] h-[480px] rounded-3xl overflow-hidden group shadow-lg shrink-0"
+                className="relative w-full max-w-[310px] h-[400px] rounded-3xl overflow-hidden group shadow-lg shrink-0"
               >
                 <img 
                   src={faculty.image} 
@@ -777,8 +788,8 @@ export default function LandingPage() {
                 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-20" />
                 
-                <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col justify-end">
-                  <h3 className="text-3xl font-bold tracking-tight text-white mb-1">
+                <div className="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end">
+                  <h3 className="text-2xl font-bold tracking-tight text-white mb-1">
                     {faculty.name}
                   </h3>
                   <p className="text-[#b784ff] font-medium text-sm mb-0 group-hover:mb-2 transition-all duration-300">
