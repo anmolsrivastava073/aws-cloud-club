@@ -148,30 +148,31 @@ export interface TeamSession {
 
 const MEMBERS_2026_27: Member[] = [
   // Tier 1
-  { id: 's26-1', name: 'Tanima Mishra', position: 'Club Captain', category: ['Core'], image: '/people/x.png' },
-  { id: 's26-2', name: 'Reetikesh Chaudhary', position: 'Club Co-Captain', category: ['Core'], image: '/people/x.png' },
+  { id: 's26-1', name: 'Tanima Mishra', position: 'Club Captain', category: ['Core'], image: '/people/tanima.png' },
+  { id: 's26-2', name: 'Reetikesh Chaudhary', position: 'Club Co-Captain', category: ['Core'], image: '/people/reetikesh.png' },
 
   // Leads
-  { id: 's26-3', name: 'Saumya Dogra', position: 'Technical Lead', category: ['Core', 'Technical'], image: '/people/x.png' },
-  { id: 's26-5', name: 'Kasmya Bhatia', position: 'Event Management Lead', category: ['Core', 'Event Management'], image: '/people/x.png' },
-  { id: 's26-7', name: 'Shivansh Yadav', position: 'Graphic Design Lead', category: ['Core', 'GDXSM'], image: '/people/x.png' },
-  { id: 's26-9', name: 'Hrishiraj Sarmah', position: 'Finance Lead', category: ['Core', 'Finance'], image: '/people/x.png' },
+  { id: 's26-3', name: 'Saumya Dogra', position: 'Technical Lead', category: ['Core', 'Technical'], image: '/people/saumya.png' },
+  { id: 's26-5', name: 'Kasmya Bhatia', position: 'Event Management Lead', category: ['Core', 'Event Management'], image: '/people/kasmya.png' },
+  { id: 's26-7', name: 'Shivansh Yadav', position: 'Graphic Design Lead', category: ['Core', 'GDXSM'], image: '/people/shivansh.png' },
+  { id: 's26-9', name: 'Hrishiraj Sarmah', position: 'Finance Lead', category: ['Core', 'Finance'], image: '/people/hrishiraj.png' },
 
   // Co-Leads
-  { id: 's26-4', name: 'Zehel Nehil', position: 'Technical Co-Lead', category: ['Core', 'Technical'], image: '/people/x.png' },
+  { id: 's26-4', name: 'Zehel Nehil', position: 'Technical Co-Lead', category: ['Core', 'Technical'], image: '/people/zehel.png' },
   { id: 's26-6', name: 'Shreyans Chordia', position: 'Event Management Co-Lead', category: ['Core', 'Event Management'], image: '/people/shreyans.png' },
-  { id: 's26-8', name: 'Adarsh', position: 'Graphic Design Co-Lead', category: ['Core', 'GDXSM'], image: '/people/x.png' },
+  { id: 's26-8', name: 'Adarsh', position: 'Graphic Design Co-Lead', category: ['Core', 'GDXSM'], image: '/people/adarsh.png' },
 
   // Technical team members
   { id: 's26-10', name: 'Anmol Srivastava', position: 'Technical Team Member', category: ['Technical'], image: '/people/anmol.png' },
-  { id: 's26-11', name: 'Shashwat Jindal', position: 'Technical Team Member', category: ['Technical'], image: '/people/x.png' },
-  { id: 's26-12', name: 'Vishwaswarup Rath', position: 'Technical Team Member', category: ['Technical'], image: '/people/x.png' },
-  { id: 's26-13', name: 'Satyam Jha', position: 'Technical Team Member', category: ['Technical'], image: '/people/satyam.png' },
+  { id: 's26-11', name: 'Shashwat Jindal', position: 'Technical Team Member', category: ['Technical'], image: '/people/shashwat.png' },
+  { id: 's26-12', name: 'Dhruv Mittal', position: 'Technical Team Member', category: ['Technical'], image: '/people/dhruv.png' },
+  { id: 's26-13', name: 'Vishwaswarup Rath', position: 'Technical Team Member', category: ['Technical'], image: '/people/vishwaswarup.png' },
+  { id: 's26-14', name: 'Satyam Jha', position: 'Technical Team Member', category: ['Technical'], image: '/people/satyam.png' },
 
   // Events team members
   { id: 's26-14', name: 'Aditya Raj', position: 'Events Team Member', category: ['Event Management'], image: '/people/aditya.png' },
   { id: 's26-15', name: 'Lavisha Rohra', position: 'Events Team Member', category: ['Event Management'], image: '/people/lavisha.png' },
-  { id: 's26-16', name: 'Anuj Bhardwaj', position: 'Events Team Member', category: ['Event Management'], image: '/people/x.png' },
+  { id: 's26-16', name: 'Anuj Bhardwaj', position: 'Events Team Member', category: ['Event Management'], image: '/people/anuj.png' },
 ];
 
 const MEMBERS_2025_26: Member[] = [
