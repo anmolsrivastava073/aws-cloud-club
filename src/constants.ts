@@ -256,6 +256,13 @@ const MEMBERS_2025_26: Member[] = [
   },
   {
     id: '13',
+    name: 'Satyam Jha',
+    position: 'Technical SWT Member',
+    category: ['Technical'],
+    image: '/people/satyam.png',
+  },
+  {
+    id: '14',
     name: 'Prerna Vaidya',
     position: 'Event Management SWT Member',
     category: ['Event Management'],
@@ -263,7 +270,7 @@ const MEMBERS_2025_26: Member[] = [
     image: '/people/prerna.png',
   },
   {
-    id: '14',
+    id: '15',
     name: 'Aarush Modi',
     position: 'Event Management SWT Member',
     category: ['Event Management'],
@@ -271,7 +278,7 @@ const MEMBERS_2025_26: Member[] = [
     image: '/people/aarush.png',
   },
   {
-    id: '15',
+    id: '16',
     name: 'Shivang Ravindra Pratap Singh',
     position: 'Event Management SWT Member',
     category: ['Event Management'],
@@ -279,7 +286,7 @@ const MEMBERS_2025_26: Member[] = [
     image: '/people/shivang.png',
   },
   {
-    id: '16',
+    id: '17',
     name: 'Lakshita Annapareddy',
     position: 'GDXSM SWT Member',
     category: ['GDXSM'],
@@ -287,7 +294,7 @@ const MEMBERS_2025_26: Member[] = [
     image: '/people/lakshita.png',
   },
   {
-    id: '17',
+    id: '18',
     name: 'Adarsh',
     position: 'GDXSM SWT Member',
     category: ['GDXSM'],
@@ -295,20 +302,13 @@ const MEMBERS_2025_26: Member[] = [
     image: '/people/adarsh.png',
   },
   {
-    id: '18',
+    id: '19',
     name: 'Shivansh Yadav',
     position: 'GDXSM SWT Member',
     category: ['GDXSM'],
     number: '+91 8825701627',
     image: '/people/shivansh.png',
   },
-  {
-    id: '19',
-    name: 'Satyam Jha',
-    position: 'Technical SWT Member',
-    category: ['Technical'],
-    image: '/people/satyam.png',
-  }
 ];
 
 // First entry = default session shown on the landing page.
