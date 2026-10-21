@@ -157,8 +157,6 @@ const MEMBERS_2026_27: Member[] = [
   // Events team members
   { id: 's26-14', name: 'Aditya Raj', position: 'Events Team Member', category: ['Event Management'], image: '/people/aditya.png' },
   { id: 's26-15', name: 'Lavisha Rohra', position: 'Events Team Member', category: ['Event Management'], image: '/people/lavisha.png' },
-  { id: 's26-16', name: 'Anuj Bhardwaj', position: 'Events Team Member', category: ['Event Management'], image: '/people/anuj.png' },
-];
 
 const MEMBERS_2025_26: Member[] = [
   {
@@ -338,7 +336,7 @@ export const LINKEDIN_URLS: Record<string, string> = {
   'Prerna Vaidya': 'https://www.linkedin.com/in/prerna-vaidya-9239a1377/',
   'Aarush Modi': 'https://www.linkedin.com/in/aarush-modi-4a8b43380/',
   'Shivang Ravindra Pratap Singh': 'https://www.linkedin.com/in/cipher3787-shivangsingh/',
-  'Lakshita Annapareddy': '',
+  'Lakshita Annapareddy': 'https://www.linkedin.com/in/lakshita-annapareddy-385a9341a/',
   'Shivansh Yadav': 'https://www.linkedin.com/in/shivansh-yadav-82130a273/',
 
   // 2025-26 (previous)
