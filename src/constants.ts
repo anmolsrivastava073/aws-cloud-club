@@ -159,18 +159,18 @@ const MEMBERS_2026_27: Member[] = [
 
   // Co-Leads
   { id: 's26-4', name: 'Zehel Nehil', position: 'Technical Co-Lead', category: ['Core', 'Technical'], image: '/people/x.png' },
-  { id: 's26-6', name: 'Shreyans Chordia', position: 'Event Management Co-Lead', category: ['Core', 'Event Management'], image: '/people/x.png' },
+  { id: 's26-6', name: 'Shreyans Chordia', position: 'Event Management Co-Lead', category: ['Core', 'Event Management'], image: '/people/shreyans.png' },
   { id: 's26-8', name: 'Adarsh', position: 'Graphic Design Co-Lead', category: ['Core', 'GDXSM'], image: '/people/x.png' },
 
   // Technical team members
-  { id: 's26-10', name: 'Anmol Srivastava', position: 'Technical Team Member', category: ['Technical'], image: '/people/x.png' },
+  { id: 's26-10', name: 'Anmol Srivastava', position: 'Technical Team Member', category: ['Technical'], image: '/people/anmol.png' },
   { id: 's26-11', name: 'Shashwat Jindal', position: 'Technical Team Member', category: ['Technical'], image: '/people/x.png' },
   { id: 's26-12', name: 'Vishwaswarup Rath', position: 'Technical Team Member', category: ['Technical'], image: '/people/x.png' },
-  { id: 's26-13', name: 'Satyam Jha', position: 'Technical Team Member', category: ['Technical'], image: '/people/x.png' },
+  { id: 's26-13', name: 'Satyam Jha', position: 'Technical Team Member', category: ['Technical'], image: '/people/satyam.png' },
 
   // Events team members
-  { id: 's26-14', name: 'Aditya Raj', position: 'Events Team Member', category: ['Event Management'], image: '/people/x.png' },
-  { id: 's26-15', name: 'Lavisha Rohra', position: 'Events Team Member', category: ['Event Management'], image: '/people/x.png' },
+  { id: 's26-14', name: 'Aditya Raj', position: 'Events Team Member', category: ['Event Management'], image: '/people/aditya.png' },
+  { id: 's26-15', name: 'Lavisha Rohra', position: 'Events Team Member', category: ['Event Management'], image: '/people/lavisha.png' },
   { id: 's26-16', name: 'Anuj Bhardwaj', position: 'Events Team Member', category: ['Event Management'], image: '/people/x.png' },
 ];
 
