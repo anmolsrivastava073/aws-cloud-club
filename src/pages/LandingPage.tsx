@@ -334,71 +334,93 @@ export default function LandingPage() {
 
       {/* ABOUT */}
       <section id="about" className="py-16 sm:py-28 border-b border-black/10">
-        <div className="max-w-6xl mx-auto px-4 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          
-          {/* LEFT: TEXT */}
+        <div className="max-w-6xl mx-auto px-4 grid lg:grid-cols-2 gap-16 items-center">
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="flex flex-col justify-center"
           >
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.05em] leading-[1.05] mb-8">
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.05em] leading-[1] mb-8">
               About
               <br />
               <span className="text-[#9b5cff]">
-                AWS Student Builder Group
+                AWS Student Builder Group MUJ
               </span>
             </h2>
-            
-            <div className="space-y-6 text-[#5f5f5f] text-sm md:text-base leading-relaxed max-w-lg">
-              <p>
-                AWS Student Builder Group at Manipal University Jaipur is a premier student-driven community dedicated to bridging the gap between academic theory and real-world cloud engineering. Our programming revolves entirely around practical execution. We guide members through the complete lifecycle of cloud development, starting from engineering robust backend architectures to deploying highly scalable applications. Instead of relying solely on presentations, we host interactive workshops right on campus. During these sessions, students open their laptops to configure real AWS environments, write deployment scripts, and troubleshoot live infrastructure alongside experienced peers.              </p>
-              <p>
-                Beyond the technical skills, the club serves as a collaborative hub for innovation and professional networking. Members frequently team up for intense hackathons, participate in study jams for AWS certifications, and collaborate on ambitious projects. We also regularly invite industry professionals, AWS Developer Advocates, and alumni to share their insights. This direct industry exposure ensures our students develop the exact builder mindset required to excel in the modern tech landscape.</p>
+            <p className="text-[#5f5f5f] text-sm md:text-base mb-5 leading-relaxed">
+              AWS Student Builder Group MUJ is a student-driven initiative built
+              to bridge the gap between theoretical knowledge and real-world cloud
+              applications. The club provides a platform where students can actively
+              explore AWS technologies, understand how modern systems are built,
+              and gain hands-on experience.
+            </p>
+            <p className="text-[#5f5f5f] text-sm md:text-base mb-5 leading-relaxed">
+              We focus on practical learning, from building backend systems to
+              deploying scalable applications. Our sessions are designed to ensure
+              that members not only understand concepts but also apply them in
+              meaningful ways.
+            </p>
+            <p className="text-[#5f5f5f] text-sm md:text-base mb-10 leading-relaxed">
+              Members can expect workshops, collaborative projects, guest sessions,
+              and opportunities to work with tools used in the industry. The club
+              emphasizes consistency, curiosity, and building real skills over
+              passive learning.
+            </p>
+            {/* FEATURES */}
+            <div className="space-y-6">
+              <div className="flex gap-4 items-start">
+                <div className="bg-[#9b5cff]/10 p-2 rounded-md">
+                  <Code className="text-[#9b5cff] w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="font-medium text-sm mb-1">Hands-on Projects</h4>
+                  <p className="text-xs text-[#666666]">Build and deploy real applications using AWS</p>
+                </div>
+              </div>
+              <div className="flex gap-4 items-start">
+                <div className="bg-[#9b5cff]/10 p-2 rounded-md">
+                  <Users className="text-[#9b5cff] w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="font-medium text-sm mb-1">Strong Community</h4>
+                  <p className="text-xs text-[#666666]">Learn and collaborate with like-minded students</p>
+                </div>
+              </div>
+              <div className="flex gap-4 items-start">
+                <div className="bg-[#9b5cff]/10 p-2 rounded-md">
+                  <Zap className="text-[#9b5cff] w-5 h-5" />
+                </div>
+                <div>
+                  <h4 className="font-medium text-sm mb-1">Industry Exposure</h4>
+                  <p className="text-xs text-[#666666]">Interact with experts and understand real-world workflows</p>
+                </div>
+              </div>
             </div>
           </motion.div>
-
-          {/* RIGHT: VISUAL & FEATURES */}
           <motion.div 
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="flex flex-col gap-6"
+            className="space-y-6"
           >
-            {/* Cloud Visual Container */}
-            <div className="rounded-2xl border border-black/10 overflow-hidden bg-white shadow-sm">
+            <div className="rounded-md border border-black/10 overflow-hidden bg-white shadow-sm">
               <CloudVisual />
             </div>
-
-            {/* Features Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="bg-white border border-black/10 p-5 rounded-2xl shadow-sm flex flex-col items-start hover:border-[#9b5cff]/40 transition-colors">
-                <div className="bg-[#9b5cff]/10 w-9 h-9 rounded-xl flex items-center justify-center mb-3">
-                  <Code className="text-[#9b5cff] w-4 h-4" />
-                </div>
-                <h4 className="font-bold text-sm text-[#18181b] mb-1.5">Hands-on</h4>
-                <p className="text-xs text-[#666666] leading-relaxed">Build & deploy real apps using AWS.</p>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="aspect-[4/3] overflow-hidden rounded-md border border-black/10 bg-white shadow-sm">
+                <img
+                  src="/images/about1.jpeg"
+                  className="w-full h-full object-cover hover:scale-105 transition duration-500"
+                />
               </div>
-
-              <div className="bg-white border border-black/10 p-5 rounded-2xl shadow-sm flex flex-col items-start hover:border-[#9b5cff]/40 transition-colors">
-                <div className="bg-[#9b5cff]/10 w-9 h-9 rounded-xl flex items-center justify-center mb-3">
-                  <Users className="text-[#9b5cff] w-4 h-4" />
-                </div>
-                <h4 className="font-bold text-sm text-[#18181b] mb-1.5">Community</h4>
-                <p className="text-xs text-[#666666] leading-relaxed">Collaborate with driven peers.</p>
-              </div>
-
-              <div className="bg-white border border-black/10 p-5 rounded-2xl shadow-sm flex flex-col items-start hover:border-[#9b5cff]/40 transition-colors">
-                <div className="bg-[#9b5cff]/10 w-9 h-9 rounded-xl flex items-center justify-center mb-3">
-                  <Zap className="text-[#9b5cff] w-4 h-4" />
-                </div>
-                <h4 className="font-bold text-sm text-[#18181b] mb-1.5">Exposure</h4>
-                <p className="text-xs text-[#666666] leading-relaxed">Learn directly from experts.</p>
+              <div className="aspect-[4/3] overflow-hidden rounded-md border border-black/10 bg-white shadow-sm">
+                <img
+                  src="/images/about2.jpeg"
+                  className="w-full h-full object-cover hover:scale-105 transition duration-500"
+                />
               </div>
             </div>
           </motion.div>
-          
         </div>
       </section>
 
@@ -470,10 +492,11 @@ export default function LandingPage() {
                 </div>
                 <a
                   href="#events"
-                  className="w-full py-3.5 px-4 rounded-xl bg-[#111111] hover:bg-[#9b5cff] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-300 shadow-md hover:shadow-[0_8px_30px_rgba(155,92,255,0.3)] hover:-translate-y-0.5 active:scale-[0.98] group"
+                  className="group relative overflow-hidden w-full py-3.5 px-4 rounded-xl bg-[#111111] text-white font-bold text-xs sm:text-sm shadow-md transition-all duration-300 hover:shadow-[0_8px_30px_rgba(155,92,255,0.3)] hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center gap-2.5"
                 >
-                  <span>View Upcoming Events</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/15 to-transparent -skew-x-25 -translate-x-full group-hover:translate-x-[300%] transition-transform duration-1000 ease-in-out" />
+                  <span className="relative z-10">View Upcoming Events</span>
+                  <ArrowRight className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 text-[#b784ff]" />
                 </a>
                 <div className="mt-2.5 text-center text-[11px] text-[#71717a] font-medium">
                   All workshops &amp; events are free to attend
@@ -707,7 +730,6 @@ export default function LandingPage() {
             </p>
           </motion.div>
           
-          {/* ✅ FIX: Changed max-w-4xl to max-w-6xl and added flex-wrap to prevent overlapping components */}
           <div className="flex flex-col items-center md:flex-row flex-wrap justify-center gap-8 md:gap-12 px-4 max-w-6xl mx-auto">
             {FACULTY.map((faculty, index) => (
               <motion.div 
@@ -727,7 +749,6 @@ export default function LandingPage() {
                   }}
                 />
                 
-                {/* ✅ FIX: Improved background gradient (from-black/90 via-black/40) for perfect text legibility */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none z-20" />
                 
                 <div className="absolute bottom-0 left-0 w-full p-6 flex flex-col items-center text-center justify-end z-30">
@@ -911,13 +932,13 @@ export default function LandingPage() {
               </div>
             </div>
             <div className="flex items-center gap-3 w-full md:w-auto shrink-0">
-              {/* ✅ FIX: Replaced custom undefined aws-button-primary with detailed Tailwind classes */}
               <a
                 href="#events"
-                className="w-full md:w-auto px-7 py-3.5 rounded-xl bg-[#111111] hover:bg-[#9b5cff] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-300 shadow-md hover:shadow-[0_8px_30px_rgba(155,92,255,0.3)] hover:-translate-y-0.5 active:scale-[0.98] group"
+                className="group relative overflow-hidden w-full md:w-auto px-7 py-3.5 rounded-xl bg-[#111111] text-white font-bold text-xs sm:text-sm shadow-md transition-all duration-300 hover:shadow-[0_8px_30px_rgba(155,92,255,0.3)] hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center gap-2.5"
               >
-                <span>View Upcoming Workshops</span>
-                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/15 to-transparent -skew-x-25 -translate-x-full group-hover:translate-x-[300%] transition-transform duration-1000 ease-in-out" />
+                <span className="relative z-10">View Upcoming Workshops</span>
+                <ArrowRight className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 text-[#b784ff]" />
               </a>
             </div>
           </motion.div>
