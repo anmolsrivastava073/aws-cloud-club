@@ -310,6 +310,13 @@ const MEMBERS_2025_26: Member[] = [
     category: ['GDXSM'],
     number: '+91 8825701627',
     image: '/people/shivansh.png',
+  },
+  {
+    id: '19',
+    name: 'Satyam Jha',
+    position: 'Technical SWT Member',
+    category: ['Technical'],
+    image: '/people/satyam.png',
   }
 ];
 
