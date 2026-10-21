@@ -249,11 +249,10 @@ const MEMBERS_2025_26: Member[] = [
   },
   {
     id: '13',
-    name: 'Aarush Modi',
-    position: 'Event Management SWT Member',
-    category: ['Event Management'],
-    number: '+91 6396717971',
-    image: '/people/aarush.png',
+    name: 'Satyam Jha',
+    position: 'Technical SWT Member',
+    category: ['Technical'],
+    image: '/people/satyam.png',
   },
   {
     id: '14',
@@ -265,10 +264,11 @@ const MEMBERS_2025_26: Member[] = [
   },
   {
     id: '15',
-    name: 'Satyam Jha',
-    position: 'Technical SWT Member',
-    category: ['Technical'],
-    image: '/people/satyam.png',
+    name: 'Aarush Modi',
+    position: 'Event Management SWT Member',
+    category: ['Event Management'],
+    number: '+91 6396717971',
+    image: '/people/aarush.png',
   },
   {
     id: '16',
