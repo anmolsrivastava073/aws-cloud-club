@@ -406,20 +406,6 @@ export default function LandingPage() {
             <div className="rounded-md border border-black/10 overflow-hidden bg-white shadow-sm">
               <CloudVisual />
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="aspect-[4/3] overflow-hidden rounded-md border border-black/10 bg-white shadow-sm">
-                <img
-                  src="/images/about1.jpeg"
-                  className="w-full h-full object-cover hover:scale-105 transition duration-500"
-                />
-              </div>
-              <div className="aspect-[4/3] overflow-hidden rounded-md border border-black/10 bg-white shadow-sm">
-                <img
-                  src="/images/about2.jpeg"
-                  className="w-full h-full object-cover hover:scale-105 transition duration-500"
-                />
-              </div>
-            </div>
           </motion.div>
         </div>
       </section>
