@@ -72,11 +72,10 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* RIGHT - MUJ LOGO */}
           <img
             src="/images/mujawslogo.png"
             alt="MUJ Logo"
-            className="h-7 w-auto opacity-70 hover:opacity-100 transition duration-300"
+            className="h-7 w-auto"
           />
         </div>
       </div>
