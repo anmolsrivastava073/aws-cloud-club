@@ -294,14 +294,6 @@ const MEMBERS_2025_26: Member[] = [
     image: '/people/lakshita.png',
   },
   {
-    id: '18',
-    name: 'Adarsh',
-    position: 'GDXSM SWT Member',
-    category: ['GDXSM'],
-    number: '+91 7763912105',
-    image: '/people/adarsh.png',
-  },
-  {
     id: '19',
     name: 'Shivansh Yadav',
     position: 'GDXSM SWT Member',
@@ -353,7 +345,6 @@ export const LINKEDIN_URLS: Record<string, string> = {
   'Aarush Modi': 'https://www.linkedin.com/in/aarush-modi-4a8b43380/',
   'Shivang Ravindra Pratap Singh': 'https://www.linkedin.com/in/cipher3787-shivangsingh/',
   'Lakshita Annapareddy': '',
-  'Adarsh': '',
   'Shivansh Yadav': 'https://www.linkedin.com/in/shivansh-yadav-82130a273/',
 
   // 2025-26 (previous)
