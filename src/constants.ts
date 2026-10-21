@@ -367,6 +367,7 @@ export const LINKEDIN_URLS: Record<string, string> = {
   'Hrishiraj Sarmah': 'https://www.linkedin.com/in/hrishirajds/',
   'Shashwat Jindal': 'https://www.linkedin.com/in/shashwat-jindal-b6879a314/',
   'Vishwaswarup Rath': 'https://www.linkedin.com/in/vishwaswarup-rath/',
+  'Dhruv Mittal':'https://www.linkedin.com/in/dhruv-21-17-25-n/',
   'Aditya Raj': 'https://www.linkedin.com/in/aditya-raj-b52584364/',
   'Anuj Bhardwaj': 'https://www.linkedin.com/in/anujbhardwaj2006/',
 };
