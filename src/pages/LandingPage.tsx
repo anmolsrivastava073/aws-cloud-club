@@ -74,7 +74,6 @@ function MemberCard({
 }) {
   const isHero = variant === 'hero';
   const linkedin = LINKEDIN_URLS[member.name];
-
   // Tap-to-reveal for touch screens (desktop still reveals on hover)
   const [showLink, setShowLink] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -124,7 +123,7 @@ function MemberCard({
           onError={handleImageError}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-20" />
-
+        
         {/* 🔗 LinkedIn button: appears on hover (always visible on touch screens) */}
         {linkedin && (
           <>
@@ -141,7 +140,7 @@ function MemberCard({
               rel="noopener noreferrer"
               aria-label={`${member.name} on LinkedIn`}
               title={`${member.name} on LinkedIn`}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-md bg-white/95 text-[#0A66C2] text-xs font-semibold shadow-md focus-visible:opacity-100 focus-visible:scale-100 hover:bg-[#0A66C2] hover:text-white transition-all duration-300 ${
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-md bg-white/95 text-[#0A66C2] text-xs font-semibold shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 hover:bg-[#0A66C2] hover:text-white transition-all duration-300 ${
                 showLink
                   ? 'opacity-100 scale-100 pointer-events-auto'
                   : 'opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto'
@@ -179,15 +178,16 @@ function MemberCard({
 }
 
 export default function LandingPage() {
-
   const sortedEvents = [...EVENTS].sort((a, b) => {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
 
   // 📅 Session-wise team: first session in TEAM_SESSIONS is the default (current) one
   const [activeSessionId, setActiveSessionId] = useState<string>(TEAM_SESSIONS[0].id);
+  
   const activeSession =
     TEAM_SESSIONS.find((s) => s.id === activeSessionId) ?? TEAM_SESSIONS[0];
+  
   const MEMBERS = activeSession.members;
 
   // Segregate Team Members: Captain & Co-Captain (Tier 1), Leads & Co-Leads (Tier 2), SWT (Tier 3)
@@ -228,10 +228,8 @@ export default function LandingPage() {
       <section 
         className="relative pt-20 sm:pt-24 md:pt-28 px-4 sm:px-8 pb-16 sm:pb-24 border-b border-black/10 overflow-hidden flex flex-col items-center justify-start min-h-[calc(100vh-2rem)]"
       >
-        {/* 🌌 SOOTHING ETHEREAL AURORA & HARMONIC CLOUD WAVES (ZERO DOTS) */}
         <HeroAmbientGlow />
-
-        {/* CENTER STAGE HERO CONTENT */}
+        
         <div className="max-w-7xl mx-auto text-center relative z-10 w-full flex flex-col items-center justify-start">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -239,15 +237,12 @@ export default function LandingPage() {
             transition={{ duration: 0.8 }}
             className="w-full flex flex-col items-center justify-center"
           >
-            {/* ☁️ AWS CLOUD LOGO & SMILE (1:1 EXACT PRELOADER SIZE & PROPORTIONS with gentle levitation) */}
             <motion.div 
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
               className="relative w-52 h-36 sm:w-64 sm:h-44 md:w-80 md:h-56 lg:w-96 lg:h-64 mb-6 sm:mb-8 mx-auto flex items-center justify-center overflow-visible origin-center group cursor-pointer"
             >
-              {/* Subtle Ambient Radial Pulse behind logo */}
               <div className="absolute inset-0 bg-[#9b5cff]/8 rounded-full blur-2xl pointer-events-none group-hover:bg-[#9b5cff]/15 transition-all duration-500" />
-
               <svg
                 viewBox="0 0 640 500"
                 className="w-full h-full overflow-visible transition-transform duration-300 group-hover:scale-[1.02]"
@@ -263,7 +258,7 @@ export default function LandingPage() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-                {/* Amazon Smile with subtle glowing hover */}
+                {/* Amazon Smile */}
                 <path
                   d="M118 73.348c-4.432.063-9.664 1.052-13.621 3.832-1.223.883-1.012 2.062.336 1.894 4.508-.547 14.44-1.726 16.21.547 1.77 2.23-1.976 11.62-3.663 15.79-.504 1.26.59 1.769 1.726.8 7.41-6.231 9.348-19.242 7.832-21.137-.757-.925-4.388-1.79-8.82-1.726zM1.63 75.859c-.927.116-1.347 1.236-.368 2.121 16.508 14.902 38.359 23.872 62.613 23.872 17.305 0 37.43-5.43 51.281-15.66 2.273-1.688.297-4.254-2.02-3.204-15.534 6.57-32.421 9.77-47.788 9.77-22.778 0-44.8-6.273-62.653-16.633-.39-.231-.755-.304-1.064-.266z"
                   transform="translate(200, 160) scale(1.75)"
@@ -272,8 +267,7 @@ export default function LandingPage() {
                 />
               </svg>
             </motion.div>
-
-            {/* 🔤 MAIN TITLE (1:1 EXACT PRELOADER SIZE & NATURAL WORD COHESION) */}
+            
             <div className="relative overflow-visible w-full flex items-center justify-center">
               <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight flex flex-wrap items-center justify-center gap-x-3 gap-y-1 sm:gap-x-4 md:gap-x-5">
                 {['AWS', 'STUDENT', 'BUILDER', 'GROUP'].map((word, wIdx) => (
@@ -290,8 +284,7 @@ export default function LandingPage() {
                 ))}
               </h1>
             </div>
-
-            {/* 🏛️ SUBTITLE (1:1 EXACT PRELOADER SIZE & NATURAL COHESION) */}
+            
             <div className="relative mt-3 sm:mt-5 overflow-visible w-full flex items-center justify-center">
               <h2 className="text-[11px] sm:text-sm md:text-base lg:text-lg font-semibold tracking-[0.15em] sm:tracking-[0.25em] flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 sm:gap-x-3.5 md:gap-x-4.5 uppercase">
                 {['MANIPAL', 'UNIVERSITY', 'JAIPUR'].map((word, wIdx) => (
@@ -308,35 +301,29 @@ export default function LandingPage() {
                 ))}
               </h2>
             </div>
-
-            {/* Hairline Pedestal Accent: 1:1 EXACT Preloader Match */}
+            
             <div className="relative mt-4 sm:mt-6 flex items-center justify-center w-full mb-6 sm:mb-8">
               <div className="w-48 sm:w-80 h-[1.5px] bg-gradient-to-r from-transparent via-[#9b5cff]/40 to-transparent" />
             </div>
             
-            {/* Mission Description Paragraph */}
             <p className="text-[#5f5f5f] text-sm md:text-base max-w-2xl mx-auto mb-9 leading-relaxed">
               A student-led community at Manipal University Jaipur focused on learning,
               building, and growing with cloud technologies through real-world exposure
               and collaboration.
             </p>
-
-            {/* 🎯 INTERACTIVE CTA ACTION BUTTONS with Shimmer & Arrow Slide */}
+            
             <div className="flex flex-col sm:flex-row justify-center gap-4 relative z-20">
               <a
                 href="#events"
-                className="group relative overflow-hidden px-7 py-3.5 rounded-xl bg-[#111111] text-white font-bold text-sm shadow-md transition-all duration-300 hover:shadow-[0_8px_30px_rgba(155,92,255,0.3)] hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2.5"
+                className="group relative overflow-hidden px-7 py-3.5 rounded-xl bg-[#111111] text-white font-bold text-sm shadow-md transition-all duration-300 hover:shadow-[0_8px_30px_rgba(155,92,255,0.3)] hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center gap-2.5"
               >
-                {/* Sweeping Specular Light Sweep */}
                 <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/15 to-transparent -skew-x-25 -translate-x-full group-hover:translate-x-[300%] transition-transform duration-1000 ease-in-out" />
-                
                 <span>Explore Events</span>
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 text-[#b784ff]" />
               </a>
-
               <a
                 href="#about"
-                className="px-7 py-3.5 rounded-xl bg-white/80 hover:bg-white text-[#111111] font-semibold text-sm border border-black/10 hover:border-[#9b5cff]/50 shadow-sm transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center backdrop-blur-sm"
+                className="px-7 py-3.5 rounded-xl bg-white/80 hover:bg-white text-[#111111] font-semibold text-sm border border-black/10 hover:border-[#9b5cff]/50 shadow-sm transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center backdrop-blur-sm"
               >
                 Learn More
               </a>
@@ -360,7 +347,6 @@ export default function LandingPage() {
                 AWS Student Builder Group MUJ
               </span>
             </h2>
-
             <p className="text-[#5f5f5f] text-sm md:text-base mb-5 leading-relaxed">
               AWS Student Builder Group MUJ is a student-driven initiative built
               to bridge the gap between theoretical knowledge and real-world cloud
@@ -368,21 +354,18 @@ export default function LandingPage() {
               explore AWS technologies, understand how modern systems are built,
               and gain hands-on experience.
             </p>
-
             <p className="text-[#5f5f5f] text-sm md:text-base mb-5 leading-relaxed">
               We focus on practical learning, from building backend systems to
               deploying scalable applications. Our sessions are designed to ensure
               that members not only understand concepts but also apply them in
               meaningful ways.
             </p>
-
             <p className="text-[#5f5f5f] text-sm md:text-base mb-10 leading-relaxed">
               Members can expect workshops, collaborative projects, guest sessions,
               and opportunities to work with tools used in the industry. The club
               emphasizes consistency, curiosity, and building real skills over
               passive learning.
             </p>
-
             {/* FEATURES */}
             <div className="space-y-6">
               <div className="flex gap-4 items-start">
@@ -390,57 +373,39 @@ export default function LandingPage() {
                   <Code className="text-[#9b5cff] w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-sm mb-1">
-                    Hands-on Projects
-                  </h4>
-                  <p className="text-xs text-[#666666]">
-                    Build and deploy real applications using AWS
-                  </p>
+                  <h4 className="font-medium text-sm mb-1">Hands-on Projects</h4>
+                  <p className="text-xs text-[#666666]">Build and deploy real applications using AWS</p>
                 </div>
               </div>
-
               <div className="flex gap-4 items-start">
                 <div className="bg-[#9b5cff]/10 p-2 rounded-md">
                   <Users className="text-[#9b5cff] w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-sm mb-1">
-                    Strong Community
-                  </h4>
-                  <p className="text-xs text-[#666666]">
-                    Learn and collaborate with like-minded students
-                  </p>
+                  <h4 className="font-medium text-sm mb-1">Strong Community</h4>
+                  <p className="text-xs text-[#666666]">Learn and collaborate with like-minded students</p>
                 </div>
               </div>
-
               <div className="flex gap-4 items-start">
                 <div className="bg-[#9b5cff]/10 p-2 rounded-md">
                   <Zap className="text-[#9b5cff] w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="font-medium text-sm mb-1">
-                    Industry Exposure
-                  </h4>
-                  <p className="text-xs text-[#666666]">
-                    Interact with experts and understand real-world workflows
-                  </p>
+                  <h4 className="font-medium text-sm mb-1">Industry Exposure</h4>
+                  <p className="text-xs text-[#666666]">Interact with experts and understand real-world workflows</p>
                 </div>
               </div>
             </div>
           </motion.div>
-
           <motion.div 
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="space-y-6"
           >
-            {/* CLOUD VISUAL */}
             <div className="rounded-md border border-black/10 overflow-hidden bg-white shadow-sm">
               <CloudVisual />
             </div>
-
-            {/* IMAGE GRID */}
             <div className="grid grid-cols-2 gap-4">
               <div className="aspect-[4/3] overflow-hidden rounded-md border border-black/10 bg-white shadow-sm">
                 <img
@@ -448,7 +413,6 @@ export default function LandingPage() {
                   className="w-full h-full object-cover hover:scale-105 transition duration-500"
                 />
               </div>
-
               <div className="aspect-[4/3] overflow-hidden rounded-md border border-black/10 bg-white shadow-sm">
                 <img
                   src="/images/about2.jpeg"
@@ -460,9 +424,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 🚀 HOW WE LEARN & BUILD (MERGED SECTION) */}
+      {/* 🚀 HOW WE LEARN & BUILD */}
       <section id="what-we-do" className="py-14 sm:py-16 border-b border-black/10 bg-white">
-        {/* Anchor for backward compatibility */}
         <div id="perks" className="sr-only" />
         <div className="max-w-6xl mx-auto px-4">
           <motion.div 
@@ -478,15 +441,13 @@ export default function LandingPage() {
               From interactive campus workshops and hackathons to direct sessions with invited AWS professionals.
             </p>
           </motion.div>
-
-          {/* Unified Composition: Student Member Pass (Left) + 4 Pillars (Right) */}
+          
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch">
             {/* Left: The Official MUJ Student Member Pass */}
             <div className="lg:col-span-5 bg-gradient-to-br from-[#faf8f5] via-white to-purple-50/40 rounded-2xl border border-black/10 p-6 sm:p-7 flex flex-col justify-between shadow-xs relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#9b5cff]/10 rounded-full blur-2xl pointer-events-none" />
               
               <div>
-                {/* Pass Header */}
                 <div className="flex items-center gap-3 pb-4 mb-5 border-b border-black/10">
                   <img src="/newlogo.jpg" alt="AWS SBG MUJ" className="w-8 h-8 rounded-lg object-contain border border-black/10" />
                   <div>
@@ -498,16 +459,12 @@ export default function LandingPage() {
                     </div>
                   </div>
                 </div>
-
-                {/* Pass Title */}
                 <h3 className="text-2xl font-bold text-[#18181b] tracking-tight mb-2">
                   Student Member Pass
                 </h3>
                 <p className="text-xs text-[#52525b] leading-relaxed mb-6">
                   Open to all enrolled students at Manipal University Jaipur across all years and branches.
                 </p>
-
-                {/* What's Unlocked */}
                 <div className="space-y-3 mb-6">
                   <div className="flex items-start gap-2.5 text-xs text-[#18181b]">
                     <CheckCircle2 className="w-4 h-4 text-[#9b5cff] shrink-0 mt-0.5" />
@@ -527,18 +484,15 @@ export default function LandingPage() {
                   </div>
                 </div>
               </div>
-
-              {/* Pass Footer & Action */}
-              <div className="pt-4 border-t border-black/10">
-                {/* ₹0 written just above View Upcoming Events */}
+              
+              <div className="pt-4 border-t border-black/10 z-10">
                 <div className="mb-3 flex items-baseline justify-between">
                   <span className="text-xs font-semibold text-[#71717a]">Membership Fee</span>
                   <span className="text-2xl sm:text-3xl font-extrabold text-[#18181b]">₹0</span>
                 </div>
-
                 <a
                   href="#events"
-                  className="w-full py-3 px-4 rounded-xl bg-[#18181b] hover:bg-[#9b5cff] text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-200 shadow-sm group"
+                  className="w-full py-3.5 px-4 rounded-xl bg-[#111111] hover:bg-[#9b5cff] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-300 shadow-md hover:shadow-[0_8px_30px_rgba(155,92,255,0.3)] hover:-translate-y-0.5 active:scale-[0.98] group"
                 >
                   <span>View Upcoming Events</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -548,8 +502,8 @@ export default function LandingPage() {
                 </div>
               </div>
             </div>
-
-            {/* Right: 4 Core Club Pillars (2x2 Grid) */}
+            
+            {/* Right: 4 Core Club Pillars */}
             <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {CLUB_PILLARS.map((pillar, idx) => {
                 const IconComponent = pillar.icon;
@@ -578,7 +532,6 @@ export default function LandingPage() {
                         {pillar.description}
                       </p>
                     </div>
-
                     <div className="pt-3 border-t border-black/5 text-[11px] font-medium text-[#7c3aed]">
                       {pillar.highlight}
                     </div>
@@ -607,7 +560,6 @@ export default function LandingPage() {
               </p>
             </motion.div>
           </div>
-
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {sortedEvents.map((event, index) => (
               <EventCard
@@ -620,7 +572,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 👥 1. MEMBERS SECTION (SESSION-WISE: CAPTAIN & CO-CAPTAIN -> LEADS -> CO-LEADS -> TEAM) */}
+      {/* 👥 1. MEMBERS SECTION */}
       <section id="members" className="py-16 sm:py-28 border-b border-black/10 bg-[#f5f3ef]">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div 
@@ -636,8 +588,7 @@ export default function LandingPage() {
               Meet the passionate builders and student leaders driving the AWS Student Builder Group MUJ.
             </p>
           </motion.div>
-
-          {/* 📅 SESSION SWITCHER */}
+          
           <div className="flex justify-center mb-14 sm:mb-16">
             <div
               role="tablist"
@@ -680,8 +631,7 @@ export default function LandingPage() {
               })}
             </div>
           </div>
-
-          {/* Re-animates every time the session changes */}
+          
           <AnimatePresence mode="wait">
             <motion.div
               key={activeSession.id}
@@ -690,9 +640,7 @@ export default function LandingPage() {
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.25 }}
             >
-              {/* ======================================================== */}
-              {/* TIER 1: CAPTAIN & CO-CAPTAIN */}
-              {/* ======================================================== */}
+              {/* TIER 1 */}
               {(captain || coCaptain) && (
                 <div className="mb-14 sm:mb-16">
                   <div className="grid grid-cols-2 gap-3 sm:gap-6 max-w-lg mx-auto">
@@ -701,10 +649,7 @@ export default function LandingPage() {
                   </div>
                 </div>
               )}
-
-              {/* ======================================================== */}
-              {/* TIER 2: LEADS AND CO LEADS */}
-              {/* ======================================================== */}
+              {/* TIER 2 */}
               {(teamLeads.length > 0 || teamCoLeads.length > 0) && (
                 <div className="mb-20">
                   <div className="text-center mb-10">
@@ -712,8 +657,6 @@ export default function LandingPage() {
                       Leads and Co leads
                     </h3>
                   </div>
-
-                  {/* Row 1: All Leads (5 in one row on lg) */}
                   {teamLeads.length > 0 && (
                     <div className="mb-6">
                       <div className="flex flex-wrap justify-center gap-4 sm:gap-5 max-w-6xl mx-auto">
@@ -728,8 +671,6 @@ export default function LandingPage() {
                       </div>
                     </div>
                   )}
-
-                  {/* Row 2: All Co-Leads (centered) */}
                   {teamCoLeads.length > 0 && (
                     <div>
                       <div className="flex flex-wrap justify-center gap-4 sm:gap-5 max-w-6xl mx-auto">
@@ -746,10 +687,7 @@ export default function LandingPage() {
                   )}
                 </div>
               )}
-
-              {/* ======================================================== */}
-              {/* TIER 3: WORKING TEAM (label changes per session) */}
-              {/* ======================================================== */}
+              {/* TIER 3 */}
               {swtMembers.length > 0 && (
                 <div>
                   <div className="text-center mb-10">
@@ -757,7 +695,6 @@ export default function LandingPage() {
                       {activeSession.workingTeamLabel}
                     </h3>
                   </div>
-
                   <div className="flex flex-wrap justify-center gap-4 sm:gap-5 max-w-6xl mx-auto">
                     {swtMembers.map((member, i) => (
                       <MemberCard
@@ -772,11 +709,10 @@ export default function LandingPage() {
               )}
             </motion.div>
           </AnimatePresence>
-
         </div>
       </section>
 
-      {/* 🎓 2. FACULTY COORDINATOR SECTION (MOVED BELOW TEAM AS REQUESTED) */}
+      {/* 🎓 2. FACULTY COORDINATOR SECTION */}
       <section id="faculty" className="py-16 sm:py-28 border-b border-black/10 bg-white overflow-hidden">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div 
@@ -793,7 +729,8 @@ export default function LandingPage() {
             </p>
           </motion.div>
           
-          <div className="flex flex-col items-center md:flex-row justify-center gap-8 md:gap-12 px-4 max-w-4xl mx-auto">
+          {/* ✅ FIX: Changed max-w-4xl to max-w-6xl and added flex-wrap to prevent overlapping components */}
+          <div className="flex flex-col items-center md:flex-row flex-wrap justify-center gap-8 md:gap-12 px-4 max-w-6xl mx-auto">
             {FACULTY.map((faculty, index) => (
               <motion.div 
                 key={faculty.id}
@@ -807,14 +744,15 @@ export default function LandingPage() {
                   src={faculty.image} 
                   alt={faculty.name}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  onError={(e: any) => {
+                  onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
                     e.currentTarget.src = '/newlogo.jpg';
                   }}
                 />
                 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-20" />
+                {/* ✅ FIX: Improved background gradient (from-black/90 via-black/40) for perfect text legibility */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none z-20" />
                 
-                <div className="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end">
+                <div className="absolute bottom-0 left-0 w-full p-6 flex flex-col justify-end z-30">
                   <h3 className="text-2xl font-bold tracking-tight text-white mb-1">
                     {faculty.name}
                   </h3>
@@ -823,12 +761,11 @@ export default function LandingPage() {
                   </p>
                   
                   <div className="max-h-40 opacity-100 md:max-h-0 md:opacity-0 overflow-hidden md:group-hover:max-h-40 md:group-hover:opacity-100 transition-all duration-500 ease-in-out">
-                    <p className="text-gray-300 text-xs mb-4 mt-2">
+                    <p className="text-gray-300 text-xs mb-4 mt-2 font-medium">
                       {faculty.department}
                     </p>
                     
                     <div className="h-0.5 w-16 bg-[#9b5cff] mb-4" />
-
                     {faculty.email && (
                       <a 
                         href={`mailto:${faculty.email}`} 
@@ -846,9 +783,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 🚀 COMMUNITY HUB & CONNECT SECTION (THEME-ALIGNED, ELEVATED, ZERO AI-SLOP) */}
+      {/* 🚀 COMMUNITY HUB & CONNECT SECTION */}
       <section className="py-16 sm:py-24 border-t border-black/10 bg-[#f5f3ef] text-[#18181b] relative overflow-hidden aws-grid-bg">
-        {/* Ambient Subtle Purple Gradients */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <motion.div
             animate={{ scale: [1, 1.15, 1], opacity: [0.15, 0.3, 0.15], x: [0, 20, 0] }}
@@ -856,10 +792,8 @@ export default function LandingPage() {
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[380px] bg-[#9B5CFF]/15 blur-[130px] rounded-full"
           />
         </div>
-
         <div className="max-w-5xl mx-auto px-4 relative z-10 text-center">
           
-          {/* Section Headline */}
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -872,7 +806,6 @@ export default function LandingPage() {
               with Us?
             </span>
           </motion.h2>
-
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -882,10 +815,8 @@ export default function LandingPage() {
           >
             Connect with student builders, domain leads, and faculty coordinators at Manipal University Jaipur. Follow our journey, network with leaders, and reserve your seat for upcoming hands-on labs.
           </motion.p>
-
-          {/* 3 Real Community Channels: Instagram, LinkedIn & Meetup */}
+          
           <div className="grid md:grid-cols-3 gap-6 mb-10 text-left">
-            {/* 1. Instagram */}
             <motion.a
               href="https://www.instagram.com/awssbg_muj/"
               target="_blank"
@@ -911,14 +842,11 @@ export default function LandingPage() {
                   Event galleries, speaker reveals, workshop teasers, and real-time stories from Manipal University Jaipur.
                 </p>
               </div>
-
               <div className="mt-6 pt-4 border-t border-black/5 flex items-center justify-between text-xs font-bold text-[#18181b] group-hover:text-[#7C3AED] transition-colors">
                 <span>Follow on Instagram</span>
                 <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-200" />
               </div>
             </motion.a>
-
-            {/* 2. LinkedIn */}
             <motion.a
               href="https://www.linkedin.com/company/aws-cloud-club-muj/posts/"
               target="_blank"
@@ -933,7 +861,6 @@ export default function LandingPage() {
                 <div className="w-12 h-12 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-[#7C3AED] group-hover:scale-110 group-hover:bg-[#0A66C2] group-hover:text-white transition-all duration-300 shadow-xs mb-4">
                   <Linkedin className="w-6 h-6" />
                 </div>
-
                 <div className="text-xs font-mono text-[#0A66C2] font-semibold mb-1">
                   AWS Cloud Club MUJ
                 </div>
@@ -944,14 +871,11 @@ export default function LandingPage() {
                   Session recaps, professional networking, certification cohorts, and career referrals across the cloud ecosystem.
                 </p>
               </div>
-
               <div className="mt-6 pt-4 border-t border-black/5 flex items-center justify-between text-xs font-bold text-[#18181b] group-hover:text-[#7C3AED] transition-colors">
                 <span>Connect on LinkedIn</span>
                 <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-200" />
               </div>
             </motion.a>
-
-            {/* 3. Meetup */}
             <motion.a
               href="https://www.meetup.com/aws-cloud-club-at-manipal-university-jaipur/"
               target="_blank"
@@ -966,7 +890,6 @@ export default function LandingPage() {
                 <div className="w-12 h-12 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-[#7C3AED] group-hover:scale-110 group-hover:bg-[#ED1C40] group-hover:text-white transition-all duration-300 shadow-xs mb-4">
                   <ExternalLink className="w-6 h-6" />
                 </div>
-
                 <div className="text-xs font-mono text-[#ED1C40] font-semibold mb-1">
                   Official Chapter
                 </div>
@@ -977,7 +900,6 @@ export default function LandingPage() {
                   The primary registration gateway for all hands-on cloud labs, lab seats, and guest speaker sessions.
                 </p>
               </div>
-
               <div className="mt-6 pt-4 border-t border-black/5 flex items-center justify-between text-xs font-bold text-[#18181b] group-hover:text-[#7C3AED] transition-colors">
                 <span>RSVP on Meetup</span>
                 <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-200" />
@@ -985,7 +907,6 @@ export default function LandingPage() {
             </motion.a>
           </div>
 
-          {/* Authentic Campus Partnership Banner */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1011,21 +932,19 @@ export default function LandingPage() {
                 </p>
               </div>
             </div>
-
             <div className="flex items-center gap-3 w-full md:w-auto shrink-0">
+              {/* ✅ FIX: Replaced custom undefined aws-button-primary with detailed Tailwind classes */}
               <a
                 href="#events"
-                className="aws-button-primary w-full md:w-auto text-xs font-bold px-6 py-3 inline-flex items-center justify-center gap-2"
+                className="w-full md:w-auto px-7 py-3.5 rounded-xl bg-[#111111] hover:bg-[#9b5cff] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all duration-300 shadow-md hover:shadow-[0_8px_30px_rgba(155,92,255,0.3)] hover:-translate-y-0.5 active:scale-[0.98] group"
               >
                 <span>View Upcoming Workshops</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
               </a>
             </div>
           </motion.div>
-
         </div>
       </section>
-
     </div>
   );
 }
