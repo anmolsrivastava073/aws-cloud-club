@@ -157,6 +157,7 @@ const MEMBERS_2026_27: Member[] = [
   // Events team members
   { id: 's26-14', name: 'Aditya Raj', position: 'Events Team Member', category: ['Event Management'], image: '/people/aditya.png' },
   { id: 's26-15', name: 'Lavisha Rohra', position: 'Events Team Member', category: ['Event Management'], image: '/people/lavisha.png' },
+];
 
 const MEMBERS_2025_26: Member[] = [
   {
