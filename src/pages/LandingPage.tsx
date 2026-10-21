@@ -353,14 +353,11 @@ export default function LandingPage() {
             
             <div className="space-y-6 text-[#5f5f5f] text-sm md:text-base leading-relaxed max-w-lg">
               <p>
-                AWS Student Builder Group at Manipal University Jaipur is a premier student-driven community dedicated to bridging the gap between academic theory and real-world cloud engineering. We provide an immersive platform where passionate students can actively explore Amazon Web Services and understand exactly how modern distributed systems are architected. Our community is built on the core belief that the absolute best way to master cloud computing is by actually building within it.
-              </p>
+                AWS Student Builder Group at Manipal University Jaipur is a premier student-driven community dedicated to bridging the gap between academic theory and real-world cloud engineering.              </p>
               <p>
-                Our programming revolves entirely around practical execution. We guide members through the complete lifecycle of cloud development, starting from engineering robust backend architectures to deploying highly scalable applications. Instead of relying solely on presentations, we host interactive workshops right on campus. During these sessions, students open their laptops to configure real AWS environments, write deployment scripts, and troubleshoot live infrastructure alongside experienced peers.
-              </p>
+                Our programming revolves entirely around practical execution. We guide members through the complete lifecycle of cloud development, starting from engineering robust backend architectures to deploying highly scalable applications. Instead of relying solely on presentations, we host interactive workshops right on campus. During these sessions, students open their laptops to configure real AWS environments, write deployment scripts, and troubleshoot live infrastructure alongside experienced peers.              </p>
               <p>
-                Beyond the technical skills, the club serves as a collaborative hub for innovation and professional networking. Members frequently team up for intense hackathons, participate in study jams for AWS certifications, and collaborate on ambitious projects. We also regularly invite industry professionals, AWS Developer Advocates, and alumni to share their insights. This direct industry exposure ensures our students develop the exact builder mindset required to excel in the modern tech landscape.
-              </p>
+                Beyond the technical skills, the club serves as a collaborative hub for innovation and professional networking. Members frequently team up for intense hackathons, participate in study jams for AWS certifications, and collaborate on ambitious projects. We also regularly invite industry professionals, AWS Developer Advocates, and alumni to share their insights. This direct industry exposure ensures our students develop the exact builder mindset required to excel in the modern tech landscape.</p>
             </div>
           </motion.div>
 
