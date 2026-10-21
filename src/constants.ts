@@ -8,14 +8,6 @@ export const FACULTY: Faculty[] = [
     department: 'Department of Computer Science Engineering',
     email: 'vaishali.chauhan@jaipur.manipal.edu',
     image: '/people/vaishali.png', 
-  },
-  {
-    id: 'f2',
-    name: 'Dr. Divya Thakur',
-    position: 'Assistant Professor',
-    department: 'Department of Computer Science Engineering',
-    email: 'divya.thakur@jaipur.manipal.edu',
-    image: '/people/divya.png',
   }
 ];
 
