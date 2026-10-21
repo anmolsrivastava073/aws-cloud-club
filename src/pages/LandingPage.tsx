@@ -728,8 +728,8 @@ export default function LandingPage() {
                     e.currentTarget.src = '/newlogo.jpg';
                   }}
                 />
-                
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none z-20" />
+              
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-20" />
                 
                 <div className="absolute bottom-0 left-0 w-full p-6 flex flex-col items-center text-center justify-end z-30">
                   <h3 className="text-2xl font-bold tracking-tight text-white mb-1">
