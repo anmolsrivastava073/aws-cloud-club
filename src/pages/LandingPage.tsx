@@ -334,93 +334,76 @@ export default function LandingPage() {
 
       {/* ABOUT */}
       <section id="about" className="py-16 sm:py-28 border-b border-black/10">
-        <div className="max-w-6xl mx-auto px-4 grid lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-6xl mx-auto px-4 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          
+          {/* LEFT: TEXT */}
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            className="flex flex-col justify-center"
           >
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.05em] leading-[1] mb-8">
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.05em] leading-[1.05] mb-8">
               About
               <br />
               <span className="text-[#9b5cff]">
-                AWS Student Builder Group MUJ
+                AWS Student Builder Group
               </span>
             </h2>
-            <p className="text-[#5f5f5f] text-sm md:text-base mb-5 leading-relaxed">
-              AWS Student Builder Group MUJ is a student-driven initiative built
-              to bridge the gap between theoretical knowledge and real-world cloud
-              applications. The club provides a platform where students can actively
-              explore AWS technologies, understand how modern systems are built,
-              and gain hands-on experience.
-            </p>
-            <p className="text-[#5f5f5f] text-sm md:text-base mb-5 leading-relaxed">
-              We focus on practical learning, from building backend systems to
-              deploying scalable applications. Our sessions are designed to ensure
-              that members not only understand concepts but also apply them in
-              meaningful ways.
-            </p>
-            <p className="text-[#5f5f5f] text-sm md:text-base mb-10 leading-relaxed">
-              Members can expect workshops, collaborative projects, guest sessions,
-              and opportunities to work with tools used in the industry. The club
-              emphasizes consistency, curiosity, and building real skills over
-              passive learning.
-            </p>
-            {/* FEATURES */}
-            <div className="space-y-6">
-              <div className="flex gap-4 items-start">
-                <div className="bg-[#9b5cff]/10 p-2 rounded-md">
-                  <Code className="text-[#9b5cff] w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-medium text-sm mb-1">Hands-on Projects</h4>
-                  <p className="text-xs text-[#666666]">Build and deploy real applications using AWS</p>
-                </div>
-              </div>
-              <div className="flex gap-4 items-start">
-                <div className="bg-[#9b5cff]/10 p-2 rounded-md">
-                  <Users className="text-[#9b5cff] w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-medium text-sm mb-1">Strong Community</h4>
-                  <p className="text-xs text-[#666666]">Learn and collaborate with like-minded students</p>
-                </div>
-              </div>
-              <div className="flex gap-4 items-start">
-                <div className="bg-[#9b5cff]/10 p-2 rounded-md">
-                  <Zap className="text-[#9b5cff] w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-medium text-sm mb-1">Industry Exposure</h4>
-                  <p className="text-xs text-[#666666]">Interact with experts and understand real-world workflows</p>
-                </div>
-              </div>
+            
+            <div className="space-y-6 text-[#5f5f5f] text-sm md:text-base leading-relaxed max-w-lg">
+              <p>
+                AWS Student Builder Group at Manipal University Jaipur is a premier student-driven community dedicated to bridging the gap between academic theory and real-world cloud engineering. We provide an immersive platform where passionate students can actively explore Amazon Web Services and understand exactly how modern distributed systems are architected. Our community is built on the core belief that the absolute best way to master cloud computing is by actually building within it.
+              </p>
+              <p>
+                Our programming revolves entirely around practical execution. We guide members through the complete lifecycle of cloud development, starting from engineering robust backend architectures to deploying highly scalable applications. Instead of relying solely on presentations, we host interactive workshops right on campus. During these sessions, students open their laptops to configure real AWS environments, write deployment scripts, and troubleshoot live infrastructure alongside experienced peers.
+              </p>
+              <p>
+                Beyond the technical skills, the club serves as a collaborative hub for innovation and professional networking. Members frequently team up for intense hackathons, participate in study jams for AWS certifications, and collaborate on ambitious projects. We also regularly invite industry professionals, AWS Developer Advocates, and alumni to share their insights. This direct industry exposure ensures our students develop the exact builder mindset required to excel in the modern tech landscape.
+              </p>
             </div>
           </motion.div>
+
+          {/* RIGHT: VISUAL & FEATURES */}
           <motion.div 
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="space-y-6"
+            className="flex flex-col gap-6"
           >
-            <div className="rounded-md border border-black/10 overflow-hidden bg-white shadow-sm">
+            {/* Cloud Visual Container */}
+            <div className="rounded-2xl border border-black/10 overflow-hidden bg-white shadow-sm">
               <CloudVisual />
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="aspect-[4/3] overflow-hidden rounded-md border border-black/10 bg-white shadow-sm">
-                <img
-                  src="/images/about1.jpeg"
-                  className="w-full h-full object-cover hover:scale-105 transition duration-500"
-                />
+
+            {/* Features Row */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="bg-white border border-black/10 p-5 rounded-2xl shadow-sm flex flex-col items-start hover:border-[#9b5cff]/40 transition-colors">
+                <div className="bg-[#9b5cff]/10 w-9 h-9 rounded-xl flex items-center justify-center mb-3">
+                  <Code className="text-[#9b5cff] w-4 h-4" />
+                </div>
+                <h4 className="font-bold text-sm text-[#18181b] mb-1.5">Hands-on</h4>
+                <p className="text-xs text-[#666666] leading-relaxed">Build & deploy real apps using AWS.</p>
               </div>
-              <div className="aspect-[4/3] overflow-hidden rounded-md border border-black/10 bg-white shadow-sm">
-                <img
-                  src="/images/about2.jpeg"
-                  className="w-full h-full object-cover hover:scale-105 transition duration-500"
-                />
+
+              <div className="bg-white border border-black/10 p-5 rounded-2xl shadow-sm flex flex-col items-start hover:border-[#9b5cff]/40 transition-colors">
+                <div className="bg-[#9b5cff]/10 w-9 h-9 rounded-xl flex items-center justify-center mb-3">
+                  <Users className="text-[#9b5cff] w-4 h-4" />
+                </div>
+                <h4 className="font-bold text-sm text-[#18181b] mb-1.5">Community</h4>
+                <p className="text-xs text-[#666666] leading-relaxed">Collaborate with driven peers.</p>
+              </div>
+
+              <div className="bg-white border border-black/10 p-5 rounded-2xl shadow-sm flex flex-col items-start hover:border-[#9b5cff]/40 transition-colors">
+                <div className="bg-[#9b5cff]/10 w-9 h-9 rounded-xl flex items-center justify-center mb-3">
+                  <Zap className="text-[#9b5cff] w-4 h-4" />
+                </div>
+                <h4 className="font-bold text-sm text-[#18181b] mb-1.5">Exposure</h4>
+                <p className="text-xs text-[#666666] leading-relaxed">Learn directly from experts.</p>
               </div>
             </div>
           </motion.div>
+          
         </div>
       </section>
 
