@@ -11,13 +11,7 @@ export const FACULTY: Faculty[] = [
   }
 ];
 
-// Club Stats Data
-export const CLUB_STATS = [
-  { label: 'Active Members', value: '250+' },
-  { label: 'Events Hosted', value: '15+' },
-  { label: 'Cloud Certifications', value: '50+' },
-  { label: 'Projects Built', value: '30+' },
-];
+
 
 export const EVENTS: Event[] = [
   {
