@@ -75,8 +75,26 @@ function MemberCard({
   const isHero = variant === 'hero';
   const linkedin = LINKEDIN_URLS[member.name];
 
+  // Tap-to-reveal for touch screens (desktop still reveals on hover)
+  const [showLink, setShowLink] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!showLink) return;
+    const handleOutside = (e: Event) => {
+      if (cardRef.current && !cardRef.current.contains(e.target as Node)) {
+        setShowLink(false);
+      }
+    };
+    document.addEventListener('pointerdown', handleOutside);
+    return () => document.removeEventListener('pointerdown', handleOutside);
+  }, [showLink]);
+
   return (
     <motion.div
+      ref={cardRef}
+      onClick={() => linkedin && setShowLink((v) => !v)}
+      onMouseLeave={() => setShowLink(false)}
       initial={{ opacity: 0, y: isHero ? 24 : 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: isHero ? 0.4 : 0.35, delay }}
@@ -111,7 +129,11 @@ function MemberCard({
         {linkedin && (
           <>
           {/* Black shadow over the card behind the button (card hover only) */}
-          <div className="absolute inset-0 z-[25] pointer-events-none bg-gradient-to-b from-black/30 via-black/60 to-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div
+            className={`absolute inset-0 z-[25] pointer-events-none bg-gradient-to-b from-black/30 via-black/60 to-black/30 transition-opacity duration-300 ${
+              showLink ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+            }`}
+          />
           <div className="absolute inset-0 z-40 flex items-center justify-center pointer-events-none">
             <a
               href={linkedin}
@@ -119,7 +141,11 @@ function MemberCard({
               rel="noopener noreferrer"
               aria-label={`${member.name} on LinkedIn`}
               title={`${member.name} on LinkedIn`}
-              className="pointer-events-auto inline-flex items-center gap-2 px-4 py-2 rounded-md bg-white/95 text-[#0A66C2] text-xs font-semibold shadow-md opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 focus-visible:opacity-100 focus-visible:scale-100 [@media(hover:none)]:opacity-100 [@media(hover:none)]:scale-100 hover:bg-[#0A66C2] hover:text-white transition-all duration-300"
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-md bg-white/95 text-[#0A66C2] text-xs font-semibold shadow-md focus-visible:opacity-100 focus-visible:scale-100 hover:bg-[#0A66C2] hover:text-white transition-all duration-300 ${
+                showLink
+                  ? 'opacity-100 scale-100 pointer-events-auto'
+                  : 'opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto'
+              }`}
             >
               <Linkedin className="w-4 h-4" />
               <span>LinkedIn</span>
@@ -130,10 +156,10 @@ function MemberCard({
 
         {isHero ? (
           <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 z-30">
-            <h3 className="text-lg sm:text-xl font-bold text-white mb-0.5 drop-shadow-md">
+            <h3 className="text-sm sm:text-xl font-bold text-white mb-0.5 drop-shadow-md leading-snug line-clamp-2">
               {member.name}
             </h3>
-            <p className="text-[#b784ff] font-semibold text-xs sm:text-sm drop-shadow-sm whitespace-nowrap truncate">
+            <p className="text-[#b784ff] font-semibold text-[11px] sm:text-sm drop-shadow-sm whitespace-nowrap truncate">
               {member.position}
             </p>
           </div>
@@ -249,7 +275,7 @@ export default function LandingPage() {
 
             {/* 🔤 MAIN TITLE (1:1 EXACT PRELOADER SIZE & NATURAL WORD COHESION) */}
             <div className="relative overflow-visible w-full flex items-center justify-center">
-              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight flex flex-nowrap whitespace-nowrap items-center justify-center gap-x-3 sm:gap-x-4 md:gap-x-5">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight flex flex-wrap items-center justify-center gap-x-3 gap-y-1 sm:gap-x-4 md:gap-x-5">
                 {['AWS', 'STUDENT', 'BUILDER', 'GROUP'].map((word, wIdx) => (
                   <span key={wIdx} className="inline-flex items-center flex-nowrap whitespace-nowrap transition-transform duration-200 hover:-translate-y-0.5">
                     {word.split('').map((char, cIdx) => (
@@ -267,7 +293,7 @@ export default function LandingPage() {
 
             {/* 🏛️ SUBTITLE (1:1 EXACT PRELOADER SIZE & NATURAL COHESION) */}
             <div className="relative mt-3 sm:mt-5 overflow-visible w-full flex items-center justify-center">
-              <h2 className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold tracking-[0.2em] sm:tracking-[0.25em] flex flex-nowrap whitespace-nowrap items-center justify-center gap-x-2.5 sm:gap-x-3.5 md:gap-x-4.5 uppercase">
+              <h2 className="text-[11px] sm:text-sm md:text-base lg:text-lg font-semibold tracking-[0.15em] sm:tracking-[0.25em] flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 sm:gap-x-3.5 md:gap-x-4.5 uppercase">
                 {['MANIPAL', 'UNIVERSITY', 'JAIPUR'].map((word, wIdx) => (
                   <span key={wIdx} className="inline-flex items-center flex-nowrap whitespace-nowrap">
                     {word.split('').map((char, cIdx) => (
@@ -320,7 +346,7 @@ export default function LandingPage() {
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="py-28 border-b border-black/10">
+      <section id="about" className="py-16 sm:py-28 border-b border-black/10">
         <div className="max-w-6xl mx-auto px-4 grid lg:grid-cols-2 gap-16 items-center">
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
@@ -595,7 +621,7 @@ export default function LandingPage() {
       </section>
 
       {/* 👥 1. MEMBERS SECTION (SESSION-WISE: CAPTAIN & CO-CAPTAIN -> LEADS -> CO-LEADS -> TEAM) */}
-      <section id="members" className="py-28 border-b border-black/10 bg-[#f5f3ef]">
+      <section id="members" className="py-16 sm:py-28 border-b border-black/10 bg-[#f5f3ef]">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -669,7 +695,7 @@ export default function LandingPage() {
               {/* ======================================================== */}
               {(captain || coCaptain) && (
                 <div className="mb-14 sm:mb-16">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 max-w-lg mx-auto">
+                  <div className="grid grid-cols-2 gap-3 sm:gap-6 max-w-lg mx-auto">
                     {captain && <MemberCard member={captain} variant="hero" />}
                     {coCaptain && <MemberCard member={coCaptain} variant="hero" delay={0.1} />}
                   </div>
@@ -751,7 +777,7 @@ export default function LandingPage() {
       </section>
 
       {/* 🎓 2. FACULTY COORDINATOR SECTION (MOVED BELOW TEAM AS REQUESTED) */}
-      <section id="faculty" className="py-28 border-b border-black/10 bg-white overflow-hidden">
+      <section id="faculty" className="py-16 sm:py-28 border-b border-black/10 bg-white overflow-hidden">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
