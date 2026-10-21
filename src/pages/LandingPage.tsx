@@ -223,7 +223,7 @@ export default function LandingPage() {
   );
 
   return (
-    <div className="bg-[#f5f3ef] text-black aws-grid-bg">
+    <div className="bg-[#f5f3ef] text-black aws-grid-bg overflow-x-hidden">
       {/* HERO SECTION */}
       <section 
         className="relative pt-20 sm:pt-24 md:pt-28 px-4 sm:px-8 pb-16 sm:pb-24 border-b border-black/10 overflow-hidden flex flex-col items-center justify-start min-h-[calc(100vh-2rem)]"
@@ -793,7 +793,7 @@ export default function LandingPage() {
             </p>
           </motion.div>
           
-          <div className="flex flex-col md:flex-row justify-center gap-8 md:gap-12 px-4 max-w-4xl mx-auto">
+          <div className="flex flex-col items-center md:flex-row justify-center gap-8 md:gap-12 px-4 max-w-4xl mx-auto">
             {FACULTY.map((faculty, index) => (
               <motion.div 
                 key={faculty.id}
@@ -818,11 +818,11 @@ export default function LandingPage() {
                   <h3 className="text-2xl font-bold tracking-tight text-white mb-1">
                     {faculty.name}
                   </h3>
-                  <p className="text-[#b784ff] font-medium text-sm mb-0 group-hover:mb-2 transition-all duration-300">
+                  <p className="text-[#b784ff] font-medium text-sm mb-2 md:mb-0 md:group-hover:mb-2 transition-all duration-300">
                     {faculty.position}
                   </p>
                   
-                  <div className="max-h-0 opacity-0 overflow-hidden group-hover:max-h-40 group-hover:opacity-100 transition-all duration-500 ease-in-out">
+                  <div className="max-h-40 opacity-100 md:max-h-0 md:opacity-0 overflow-hidden md:group-hover:max-h-40 md:group-hover:opacity-100 transition-all duration-500 ease-in-out">
                     <p className="text-gray-300 text-xs mb-4 mt-2">
                       {faculty.department}
                     </p>
@@ -847,7 +847,7 @@ export default function LandingPage() {
       </section>
 
       {/* 🚀 COMMUNITY HUB & CONNECT SECTION (THEME-ALIGNED, ELEVATED, ZERO AI-SLOP) */}
-      <section className="py-24 border-t border-black/10 bg-[#f5f3ef] text-[#18181b] relative overflow-hidden aws-grid-bg">
+      <section className="py-16 sm:py-24 border-t border-black/10 bg-[#f5f3ef] text-[#18181b] relative overflow-hidden aws-grid-bg">
         {/* Ambient Subtle Purple Gradients */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <motion.div
