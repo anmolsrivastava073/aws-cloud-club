@@ -11,25 +11,32 @@ export const FACULTY: Faculty[] = [
   }
 ];
 
-
-
 export const EVENTS: Event[] = [
   {
     id: '3',
-    title: 'Cloud Deployment Event(Test)',
+    title: 'Cloud Quest - Exploring Cloud Technologies',
     date: 'October 26, 2026',
-    time: '12:00 PM - 2:30 PM',
-    venue: 'LHC 103',
-    shortDescription: 'test description 1',
-    fullDescription: 'test description 2',
-    meetupLink: '',
+    time: '12:30 PM - 2:30 PM',
+    venue: 'Hybrid Mode (LHC, MUJ & MS Teams)',
+    shortDescription: 'Join the AWS Student Builder Group at Manipal University Jaipur for CLOUD QUEST: Exploring Cloud Technologies. Led by former AWS Senior Solutions Architect Mr. Chetan Agrawal, this hybrid session offers a deep dive into real-world cloud applications, essential industry skills, and placement insights. Open to students of all academic years!',
+    fullDescription: `The AWS Student Builder Group at Manipal University Jaipur proudly presents CLOUD QUEST: Exploring Cloud Technologies, an interactive hybrid session designed to bridge the gap between foundational concepts and industry expectations in the cloud computing space.
+
+Whether you are just starting your tech journey or looking to sharpen your placement strategy, this event provides direct access to expert knowledge. We are thrilled to host Mr. Chetan Agrawal—an AWS Educator, Cloud Consultant, and former Senior Solutions Architect at AWS—who will share his extensive industry experience and roadmap for success.
+
+What You Will Take Away:
+• Real-World Cloud Applications: Understand how global businesses actually leverage cloud technologies to scale and innovate.
+• Career & Placement Insights: Get actionable advice on navigating the current job market and positioning yourself for top tech roles.
+• Industry-Relevant Skills: Identify the specific cloud skills, tools, and learning paths that employers are looking for right now.
+• Interactive Q&A: Bring your questions for a direct, open discussion with a seasoned AWS veteran.
+`,
+    meetupLink: 'https://www.meetup.com/aws-sbg-at-manipal-university-jaipur/events/317086295/rsvp/',
     registrationOpen: true,
     speakers: [
       {
-        name: 'Mr. X',
-        designation: 'AWS Community Builder',
-        image: '/images/icon.jpeg',
-        bio: 'Delivered an insightful session on AWS fundamentals.',
+        name: 'Mr. Chetan Agrawal',
+        designation: 'AWS Educator | Cloud Consultant | Former Senior Solutions Architect, AWS',
+        image: '/images/chetanagrawal.jpg',
+        bio: 'Former Senior Solutions Architect at AWS sharing extensive industry experience and a roadmap for success in cloud technologies.',
       },
     ],
     recap: {
