@@ -12,7 +12,6 @@ export default function EventCard({
   index: number;
   key?: string;
 }) {
-
   const isEventExpired = (eventDate: string) => {
     const today = new Date();
     const eventD = new Date(eventDate);
@@ -36,70 +35,81 @@ export default function EventCard({
         transition={{ delay: index * 0.1, duration: 0.3 }}
         className="h-full"
       >
-        <div
-          className={`
-            bg-white
-            border
-            border-black/10
-            rounded-2xl
-            p-5 sm:p-6
-            flex
-            flex-col
-            h-full
-            min-h-[240px]
-            transition-all
-            duration-300
-            shadow-sm
-
-            ${!expired && `
-              group-hover:border-[#9b5cff]/40
-              group-hover:shadow-[0_12px_40px_rgba(155,92,255,0.1)]
-            `}
-          `}
-        >
-          {/* STATUS BADGE */}
-          {expired ? (
-            <span className="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-md bg-red-50 text-red-600 mb-3 w-fit border border-red-100">
-              Past Event
-            </span>
-          ) : (
-            <span className="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-md bg-green-50 text-green-700 mb-3 w-fit border border-green-200">
-              Currently Available
-            </span>
-          )}
-
-          {/* DATE */}
-          <div className="flex items-center gap-2 text-[#666666] mb-2 text-xs font-medium uppercase tracking-wider">
-            <Calendar className="w-3.5 h-3.5 text-[#9b5cff]" />
-            {event.date}
+        {/* CARD CONTAINER - 0% Rounded Corners (Sharp Rectangle) */}
+        <div className="flex flex-col h-full bg-white rounded-none border border-gray-200 overflow-hidden shadow-sm group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-300">
+          
+          {/* 1. VISUAL SECTION - object-cover completely fills the container, removing all blurred edges */}
+          <div className="relative w-full h-56 flex-shrink-0 bg-gray-100 overflow-hidden border-b border-gray-200">
+            <img
+              src={event.banner || '/images/default-banner.jpg'}
+              alt={event.title}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
           </div>
 
-          {/* TITLE */}
-          <h3 className="text-xl font-semibold mb-2 text-[#18181b] leading-snug tracking-tight group-hover:text-[#9b5cff] transition-colors duration-200">
-            {event.title}
-          </h3>
-
-          {/* DESCRIPTION */}
-          <p className="text-[#52525b] text-sm mb-4 line-clamp-3 leading-relaxed flex-grow">
-            {event.shortDescription}
-          </p>
-
-          {/* META */}
-          <div className="flex flex-col gap-2 text-xs text-[#666666] mb-4 pt-3.5 border-t border-black/5">
-            <div className="flex items-center gap-2">
-              <MapPin className="w-3.5 h-3.5 text-[#9b5cff]" />
-              {event.venue}
+          {/* 2. TEXT SECTION */}
+          <div className="flex flex-col flex-grow p-5 sm:p-6">
+            
+            {/* Top Row: Status & Date */}
+            <div className="flex items-center justify-between mb-3">
+              {expired ? (
+                <span className="text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-none bg-gray-100 text-gray-500">
+                  Past Event
+                </span>
+              ) : (
+                <span className="text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-none bg-green-50 text-green-700 flex items-center gap-1.5">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
+                  </span>
+                  Upcoming
+                </span>
+              )}
+              
+              <div className="flex items-center gap-1.5 text-gray-500 text-xs font-semibold uppercase tracking-wider">
+                <Calendar className="w-3.5 h-3.5 text-[#9b5cff]" />
+                {event.date}
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <Clock className="w-3.5 h-3.5 text-[#9b5cff]" />
-              {event.time}
-            </div>
-          </div>
 
-          {/* CTA */}
-          <div className="mt-auto flex items-center gap-2 text-[#9b5cff] text-sm font-semibold tracking-tight">
-            {expired ? "View Recap" : "View Details"}
-            <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1.5" />
+            {/* TITLE */}
+            <h3 className="text-xl font-bold text-gray-900 truncate mb-2 group-hover:text-[#9b5cff] transition-colors duration-200">
+              {event.title}
+            </h3>
+
+            {/* DESCRIPTION */}
+            <div className="h-[40px] mb-4">
+              <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed">
+                {event.shortDescription}
+              </p>
+            </div>
+
+            {/* META INFO (Venue & Time) */}
+            <div className="flex flex-col gap-2 text-xs text-gray-500 mb-5">
+              <div className="flex items-center gap-2">
+                <MapPin className="w-3.5 h-3.5 text-[#9b5cff]" />
+                <span className="truncate font-medium">{event.venue}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="w-3.5 h-3.5 text-[#9b5cff]" />
+                <span className="font-medium">{event.time}</span>
+              </div>
+            </div>
+
+            {/* CTA BUTTON */}
+            <div className="mt-auto w-full pt-4 border-t border-gray-100">
+              <div className={`
+                flex items-center justify-between w-full text-sm font-bold transition-colors duration-300
+                ${expired 
+                  ? 'text-gray-500 group-hover:text-gray-900' 
+                  : 'text-[#9b5cff] group-hover:text-[#8040df]'
+                }
+              `}>
+                <span>{expired ? "View Recap & Photos" : "Register Now"}</span>
+                <ArrowRight className={`w-4 h-4 transition-transform duration-300 ${!expired && 'group-hover:translate-x-1'}`} />
+              </div>
+            </div>
+
           </div>
         </div>
       </motion.div>
