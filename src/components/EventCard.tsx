@@ -35,8 +35,12 @@ export default function EventCard({
         transition={{ delay: index * 0.1, duration: 0.3 }}
         className="h-full"
       >
-        {/* CARD CONTAINER - 0% Rounded Corners */}
-        <div className="flex flex-col h-full bg-white rounded-none border border-gray-200 overflow-hidden shadow-sm group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-300">
+        {/* CARD CONTAINER - 30% faded if expired, but CTA stays fully visible */}
+        <div className={`
+          flex flex-col h-full bg-white rounded-none border border-gray-200 overflow-hidden shadow-sm 
+          transition-all duration-300 group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)]
+          ${expired ? 'opacity-75 group-hover:opacity-100' : 'opacity-100'}
+        `}>
           
           {/* 1. VISUAL SECTION */}
           <div className="relative w-full h-56 flex-shrink-0 bg-gray-100 overflow-hidden border-b border-gray-200">
@@ -50,21 +54,9 @@ export default function EventCard({
           {/* 2. TEXT SECTION */}
           <div className="flex flex-col flex-grow p-5 sm:p-6">
             
-            {/* Top Row: Upcoming Tag & Date */}
-            <div className="flex items-center justify-between mb-3">
-              {!expired ? (
-                <span className="text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-none bg-green-50 text-green-700 flex items-center gap-1.5">
-                  <span className="relative flex h-1.5 w-1.5">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
-                  </span>
-                  Upcoming
-                </span>
-              ) : (
-                <span /> /* Spacer to keep the date aligned to the right when Upcoming is absent */
-              )}
-              
-              <div className="flex items-center gap-1.5 text-gray-500 text-xs font-semibold uppercase tracking-wider ml-auto">
+            {/* Top Row: Date aligned to the right */}
+            <div className="flex items-center justify-end mb-3">
+              <div className="flex items-center gap-1.5 text-gray-500 text-xs font-semibold uppercase tracking-wider">
                 <Calendar className="w-3.5 h-3.5 text-[#9b5cff]" />
                 {event.date}
               </div>
@@ -94,17 +86,17 @@ export default function EventCard({
               </div>
             </div>
 
-            {/* CTA BUTTON */}
-            <div className="mt-auto w-full pt-4 border-t border-gray-100">
+            {/* CTA BUTTON - Fully opaque and prominent regardless of card fade */}
+            <div className="mt-auto w-full pt-4 border-t border-gray-100 opacity-100">
               <div className={`
                 flex items-center justify-between w-full text-sm font-bold transition-colors duration-300
                 ${expired 
-                  ? 'text-gray-500 group-hover:text-gray-900' 
+                  ? 'text-gray-900 group-hover:text-[#9b5cff]' 
                   : 'text-[#9b5cff] group-hover:text-[#8040df]'
                 }
               `}>
                 <span>{expired ? "View Recap & Photos" : "Register Now"}</span>
-                <ArrowRight className={`w-4 h-4 transition-transform duration-300 ${!expired && 'group-hover:translate-x-1'}`} />
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </div>
             </div>
 
