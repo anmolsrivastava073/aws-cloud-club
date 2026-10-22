@@ -38,7 +38,7 @@ export default function EventCard({
         {/* CARD CONTAINER - 0% Rounded Corners */}
         <div className="flex flex-col h-full bg-white rounded-none border border-gray-200 overflow-hidden shadow-sm group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-300">
           
-          {/* 1. VISUAL SECTION - object-fill stretches the image to fit completely without cutting/cropping */}
+          {/* 1. VISUAL SECTION */}
           <div className="relative w-full h-56 flex-shrink-0 bg-gray-100 overflow-hidden border-b border-gray-200">
             <img
               src={event.banner || '/images/default-banner.jpg'}
@@ -50,13 +50,9 @@ export default function EventCard({
           {/* 2. TEXT SECTION */}
           <div className="flex flex-col flex-grow p-5 sm:p-6">
             
-            {/* Top Row: Status & Date */}
+            {/* Top Row: Upcoming Tag & Date */}
             <div className="flex items-center justify-between mb-3">
-              {expired ? (
-                <span className="text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-none bg-gray-100 text-gray-500">
-                  Past Event
-                </span>
-              ) : (
+              {!expired ? (
                 <span className="text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded-none bg-green-50 text-green-700 flex items-center gap-1.5">
                   <span className="relative flex h-1.5 w-1.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -64,9 +60,11 @@ export default function EventCard({
                   </span>
                   Upcoming
                 </span>
+              ) : (
+                <span /> /* Spacer to keep the date aligned to the right when Upcoming is absent */
               )}
               
-              <div className="flex items-center gap-1.5 text-gray-500 text-xs font-semibold uppercase tracking-wider">
+              <div className="flex items-center gap-1.5 text-gray-500 text-xs font-semibold uppercase tracking-wider ml-auto">
                 <Calendar className="w-3.5 h-3.5 text-[#9b5cff]" />
                 {event.date}
               </div>
