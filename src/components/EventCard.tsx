@@ -35,15 +35,15 @@ export default function EventCard({
         transition={{ delay: index * 0.1, duration: 0.3 }}
         className="h-full"
       >
-        {/* CARD CONTAINER - 0% Rounded Corners (Sharp Rectangle) */}
+        {/* CARD CONTAINER - 0% Rounded Corners */}
         <div className="flex flex-col h-full bg-white rounded-none border border-gray-200 overflow-hidden shadow-sm group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-300">
           
-          {/* 1. VISUAL SECTION - object-cover completely fills the container, removing all blurred edges */}
+          {/* 1. VISUAL SECTION - object-fill stretches the image to fit completely without cutting/cropping */}
           <div className="relative w-full h-56 flex-shrink-0 bg-gray-100 overflow-hidden border-b border-gray-200">
             <img
               src={event.banner || '/images/default-banner.jpg'}
               alt={event.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className="w-full h-full object-fill transition-transform duration-500 group-hover:scale-105"
             />
           </div>
 
