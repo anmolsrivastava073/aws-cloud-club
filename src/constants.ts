@@ -18,7 +18,6 @@ export const EVENTS: Event[] = [
     date: 'October 26, 2026',
     time: '12:30 PM - 2:30 PM',
     venue: 'Hybrid Mode (LHC, MUJ & MS Teams)',
-    banner: '/images/cloudquest.jpg',
     shortDescription: 'Join the AWS Student Builder Group at Manipal University Jaipur for CLOUD QUEST: Exploring Cloud Technologies. Led by former AWS Senior Solutions Architect Mr. Chetan Agrawal, this hybrid session offers a deep dive into real-world cloud applications, essential industry skills, and placement insights. Open to students of all academic years!',
     fullDescription: `The AWS Student Builder Group at Manipal University Jaipur proudly presents CLOUD QUEST: Exploring Cloud Technologies, an interactive hybrid session designed to bridge the gap between foundational concepts and industry expectations in the cloud computing space.
 
@@ -59,7 +58,6 @@ What You Will Take Away:
     date: 'April 1, 2026',
     time: '10:30 AM - 12:30 PM',
     venue: 'LHC 103',
-    banner: '/images/localhost.jpg',
     shortDescription: 'A hands-on AWS Student Builder Group workshop where participants build a backend application using Python and Flask while understanding real-world development workflows.',
     fullDescription: 'The "Localhost to Cloud Host: Build & Deploy" workshop is a hands-on session organized by the AWS Student Builder Group at Manipal University Jaipur. The workshop aims to provide participants with a practical understanding of how backend applications are developed and structured using modern technologies. During the session, participants will build a backend application using Python and Flask, gaining insight into how applications are designed, managed, and prepared for deployment. The focus is on understanding the development workflow and the key components involved in taking an application beyond the local environment. This workshop is conducted in a hybrid mode, allowing participants to join both offline and online, ensuring accessibility to a wider audience. The session will be led by Shubham Londhe, who will guide participants through the process with a focus on clarity and practical learning.',
     meetupLink: 'https://www.meetup.com/aws-cloud-club-at-manipal-university-jaipur/events/313966432/',
@@ -92,7 +90,6 @@ What You Will Take Away:
     date: 'March 12, 2026',
     time: '10:30 AM - 12:30 PM',
     venue: 'LHC 103',
-    banner: '/images/inauguration.jpg',
     shortDescription: 'We are excited to share that the AWS Student Builder Group at Manipal University Jaipur has been officially launched...',
     fullDescription: 'The AWS Student Builder Group MUJ was officially launched with an inspiring inaugural event, marking the beginning of a dynamic cloud-focused student community at Manipal University Jaipur. The event brought together enthusiastic students eager to explore cloud computing, AWS technologies, and future career opportunities in this domain. The session was graced by esteemed speakers Mr. Pawan Sharma and Mr. Somil Jain, who shared valuable insights into the world of cloud, industry trends, and practical career guidance. Their experiences and perspectives provided students with a clear understanding of real-world applications of AWS and the growing importance of cloud technologies. The event set a strong foundation for innovation, collaboration, and learning, encouraging students to actively engage, build projects, and grow within the AWS ecosystem.',
     meetupLink: '',
@@ -127,211 +124,70 @@ What You Will Take Away:
   },
 ];
 
-// ---------------------------------------------------------------------------
-// TEAM DATA, grouped by session.
-// The FIRST entry in TEAM_SESSIONS is the default (current) session shown on
-// the landing page. Add a new session at the top of the array each year.
-// ---------------------------------------------------------------------------
-
 export interface TeamSession {
-  id: string;                 // unique key, e.g. '2026-27'
-  label: string;              // text shown on the switcher, e.g. '2026–27'
-  workingTeamLabel: string;   // heading above the non-lead members
+  id: string;                 
+  label: string;              
+  workingTeamLabel: string;   
   members: Member[];
 }
 
 const MEMBERS_2026_27: Member[] = [
-  // Tier 1
   { id: 's26-1', name: 'Tanima Mishra', position: 'Club Captain', category: ['Core'], image: '/people/tanima.png' },
   { id: 's26-2', name: 'Reetikesh Chaudhary', position: 'Club Co-Captain', category: ['Core'], image: '/people/reetikesh.png' },
-
-  // Leads
   { id: 's26-3', name: 'Saumya Dogra', position: 'Technical Lead', category: ['Core', 'Technical'], image: '/people/saumya.png' },
   { id: 's26-5', name: 'Kasmya Bhatia', position: 'Event Management Lead', category: ['Core', 'Event Management'], image: '/people/kasmya.png' },
   { id: 's26-7', name: 'Shivansh Yadav', position: 'Graphic Design Lead', category: ['Core', 'GDXSM'], image: '/people/shivansh.png' },
   { id: 's26-9', name: 'Hrishiraj Sarmah', position: 'Finance Lead', category: ['Core', 'Finance'], image: '/people/hrishiraj.png' },
-
-  // Co-Leads
   { id: 's26-4', name: 'Zehel Nehil', position: 'Technical Co-Lead', category: ['Core', 'Technical'], image: '/people/zehel.png' },
   { id: 's26-6', name: 'Shreyans Chordia', position: 'Event Management Co-Lead', category: ['Core', 'Event Management'], image: '/people/shreyans.png' },
   { id: 's26-8', name: 'Adarsh', position: 'Graphic Design Co-Lead', category: ['Core', 'GDXSM'], image: '/people/adarsh.png' },
-
-  // Technical team members
   { id: 's26-10', name: 'Anmol Srivastava', position: 'Technical Team Member', category: ['Technical'], image: '/people/anmol.png' },
   { id: 's26-11', name: 'Shashwat Jindal', position: 'Technical Team Member', category: ['Technical'], image: '/people/shashwat.png' },
   { id: 's26-12', name: 'Dhruv Mittal', position: 'Technical Team Member', category: ['Technical'], image: '/people/dhruv.png' },
   { id: 's26-13', name: 'Vishwaswarup Rath', position: 'Technical Team Member', category: ['Technical'], image: '/people/vishwaswarup.png' },
   { id: 's26-14', name: 'Satyam Jha', position: 'Technical Team Member', category: ['Technical'], image: '/people/satyam.png' },
-
-  // Events team members
   { id: 's26-14', name: 'Aditya Raj', position: 'Events Team Member', category: ['Event Management'], image: '/people/aditya.png' },
   { id: 's26-15', name: 'Lavisha Rohra', position: 'Events Team Member', category: ['Event Management'], image: '/people/lavisha.png' },
 ];
 
 const MEMBERS_2025_26: Member[] = [
-  {
-    id: '1',
-    name: 'Aabha Rajpal',
-    position: 'Club Captain',
-    category: ['Core'],
-    image: '/people/aabha.png',
-  },
-  {
-    id: '2',
-    name: 'Ayush Goyal',
-    position: 'Club Co-Captain',
-    category: ['Core'],
-    image: '/people/ayush.png',
-  },
-  {
-    id: '3',
-    name: 'Aanya Singh Saini',
-    position: 'Technical Lead',
-    category: ['Core', 'Technical'],
-    number: '+91 7982875604',
-    image: '/people/aanya.png',
-  },
-  
-  {
-    id: '5',
-    name: 'Shreyans Chordia',
-    position: 'Event Management Lead',
-    category: ['Core', 'Event Management'],
-    number: '+91 6268088544',
-    image: '/people/shreyans.png',
-  },
-  {
-    id: '6',
-    name: 'Lavisha Rohra',
-    position: 'Event Management Co-Lead',
-    category: ['Core', 'Event Management'],
-    number: '+91 8595800533',
-    image: '/people/lavisha.png',
-  },
-  {
-    id: '7',
-    name: 'Akhil Prakash',
-    position: 'Social Media Lead',
-    category: ['Core', 'GDXSM'], 
-    number: '+91 7858818551',
-    image: '/people/akhil.png',
-  },
-  {
-    id: '8',
-    name: 'Praneel Kapoor',
-    position: 'Graphic Design Lead',
-    category: ['Core', 'GDXSM'], 
-    number: '+91 8726233333',
-    image: '/people/praneel.png',
-  },
-  {
-    id: '9',
-    name: 'Varun Nevatia',
-    position: 'Finance Lead',
-    category: ['Core', 'Finance'], 
-    number: '+91 7987091622',
-    image: '/people/varun.png',
-  },
-  {
-    id: '10',
-    name: 'Aditya Pathak',
-    position: 'Finance Co-Lead',
-    category: ['Core', 'Finance'], 
-    number: '+91 9902994004',
-    image: '/people/adityapathak.png',
-  },
-  {
-    id: '11',
-    name: 'Anmol Srivastava',
-    position: 'Technical SWT Member',
-    category: ['Technical'],
-    number: '+91 8429631456',
-    image: '/people/anmol.png',
-  },
-  {
-    id: '12',
-    name: 'Bhargavi Chaudhary',
-    position: 'Technical SWT Member',
-    category: ['Technical'],
-    number: '+91 9756007078',
-    image: '/people/bhargavi.png',
-  },
-  {
-    id: '13',
-    name: 'Satyam Jha',
-    position: 'Technical SWT Member',
-    category: ['Technical'],
-    image: '/people/satyam.png',
-  },
-  {
-    id: '14',
-    name: 'Prerna Vaidya',
-    position: 'Event Management SWT Member',
-    category: ['Event Management'],
-    number: '+91 8487061509',
-    image: '/people/prerna.png',
-  },
-  {
-    id: '15',
-    name: 'Aarush Modi',
-    position: 'Event Management SWT Member',
-    category: ['Event Management'],
-    number: '+91 6396717971',
-    image: '/people/aarush.png',
-  },
-  {
-    id: '16',
-    name: 'Shivang Ravindra Pratap Singh',
-    position: 'Event Management SWT Member',
-    category: ['Event Management'],
-    number: '+91 7021769024',
-    image: '/people/shivang.png',
-  },
-  {
-    id: '17',
-    name: 'Lakshita Annapareddy',
-    position: 'GDXSM SWT Member',
-    category: ['GDXSM'],
-    number: '+91 7815859797',
-    image: '/people/lakshita.png',
-  },
-  {
-    id: '19',
-    name: 'Shivansh Yadav',
-    position: 'GDXSM SWT Member',
-    category: ['GDXSM'],
-    number: '+91 8825701627',
-    image: '/people/shivansh.png',
-  },
+  { id: '1', name: 'Aabha Rajpal', position: 'Club Captain', category: ['Core'], image: '/people/aabha.png' },
+  { id: '2', name: 'Ayush Goyal', position: 'Club Co-Captain', category: ['Core'], image: '/people/ayush.png' },
+  { id: '3', name: 'Aanya Singh Saini', position: 'Technical Lead', category: ['Core', 'Technical'], number: '+91 7982875604', image: '/people/aanya.png' },
+  { id: '5', name: 'Shreyans Chordia', position: 'Event Management Lead', category: ['Core', 'Event Management'], number: '+91 6268088544', image: '/people/shreyans.png' },
+  { id: '6', name: 'Lavisha Rohra', position: 'Event Management Co-Lead', category: ['Core', 'Event Management'], number: '+91 8595800533', image: '/people/lavisha.png' },
+  { id: '7', name: 'Akhil Prakash', position: 'Social Media Lead', category: ['Core', 'GDXSM'], number: '+91 7858818551', image: '/people/akhil.png' },
+  { id: '8', name: 'Praneel Kapoor', position: 'Graphic Design Lead', category: ['Core', 'GDXSM'], number: '+91 8726233333', image: '/people/praneel.png' },
+  { id: '9', name: 'Varun Nevatia', position: 'Finance Lead', category: ['Core', 'Finance'], number: '+91 7987091622', image: '/people/varun.png' },
+  { id: '10', name: 'Aditya Pathak', position: 'Finance Co-Lead', category: ['Core', 'Finance'], number: '+91 9902994004', image: '/people/adityapathak.png' },
+  { id: '11', name: 'Anmol Srivastava', position: 'Technical SWT Member', category: ['Technical'], number: '+91 8429631456', image: '/people/anmol.png' },
+  { id: '12', name: 'Bhargavi Chaudhary', position: 'Technical SWT Member', category: ['Technical'], number: '+91 9756007078', image: '/people/bhargavi.png' },
+  { id: '13', name: 'Satyam Jha', position: 'Technical SWT Member', category: ['Technical'], image: '/people/satyam.png' },
+  { id: '14', name: 'Prerna Vaidya', position: 'Event Management SWT Member', category: ['Event Management'], number: '+91 8487061509', image: '/people/prerna.png' },
+  { id: '15', name: 'Aarush Modi', position: 'Event Management SWT Member', category: ['Event Management'], number: '+91 6396717971', image: '/people/aarush.png' },
+  { id: '16', name: 'Shivang Ravindra Pratap Singh', position: 'Event Management SWT Member', category: ['Event Management'], number: '+91 7021769024', image: '/people/shivang.png' },
+  { id: '17', name: 'Lakshita Annapareddy', position: 'GDXSM SWT Member', category: ['GDXSM'], number: '+91 7815859797', image: '/people/lakshita.png' },
+  { id: '19', name: 'Shivansh Yadav', position: 'GDXSM SWT Member', category: ['GDXSM'], number: '+91 8825701627', image: '/people/shivansh.png' },
 ];
 
-// First entry = default session shown on the landing page.
 export const TEAM_SESSIONS: TeamSession[] = [
   {
     id: '2026-27',
     label: '2026–27',
     workingTeamLabel: 'Senior Working team',
-    members: MEMBERS_2025_26,   // Aabha / Ayush roster = current team
+    members: MEMBERS_2025_26,   
   },
   {
     id: '2025-26',
     label: '2025–26',
     workingTeamLabel: 'Team Members',
-    members: MEMBERS_2026_27,   // Tanima / Reetikesh roster = previous team
+    members: MEMBERS_2026_27,   
   },
 ];
 
-// Kept for backward compatibility with any other page importing MEMBERS:
-// it always points to the current (first) session.
 export const MEMBERS: Member[] = TEAM_SESSIONS[0].members;
 
-// ---------------------------------------------------------------------------
-// LINKEDIN PROFILES, keyed by member name (same person = same link in every
-// session). Paste the full profile URL between the quotes. Members with an
-// empty string simply won't show the LinkedIn button on hover.
-// ---------------------------------------------------------------------------
 export const LINKEDIN_URLS: Record<string, string> = {
-  // 2026-27 (current)
   'Aabha Rajpal': 'https://www.linkedin.com/in/aabha-rajpal-630b41300/',
   'Ayush Goyal': 'https://www.linkedin.com/in/ayush-goyal-1875a832a/',
   'Aanya Singh Saini': 'https://www.linkedin.com/in/aanya-singh-b00352275/',
@@ -348,8 +204,6 @@ export const LINKEDIN_URLS: Record<string, string> = {
   'Shivang Ravindra Pratap Singh': 'https://www.linkedin.com/in/cipher3787-shivangsingh/',
   'Lakshita Annapareddy': 'https://www.linkedin.com/in/lakshita-annapareddy-385a9341a/',
   'Shivansh Yadav': 'https://www.linkedin.com/in/shivansh-yadav-82130a273/',
-
-  // 2025-26 (previous)
   'Tanima Mishra': 'https://www.linkedin.com/in/tanima-mishra/',
   'Reetikesh Chaudhary': 'https://www.linkedin.com/in/reetikesh-choudhury/',
   'Saumya Dogra': 'https://www.linkedin.com/in/saumya-dogra-029023236/',
