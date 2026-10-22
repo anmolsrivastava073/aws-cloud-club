@@ -10,6 +10,7 @@ export interface Event {
   title: string;
   date: string;
   time: string;
+  banner?: string;
   venue: string;
   shortDescription: string;
   fullDescription: string;
