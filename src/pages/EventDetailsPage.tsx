@@ -155,19 +155,16 @@ export default function EventDetailsPage() {
               ) : (
                 <div className="space-y-4">
                   <h3 className="text-base font-semibold mb-1 tracking-tight">
-                    Join This Event
+                    Register for Event
                   </h3>
                   <p className="text-xs text-[#666666] mb-4">
-                    Secure your spot by registering directly on our official Meetup page.
+                    Secure your spot directly below without leaving the page.
                   </p>
-                  <a
-                    href={event.meetupLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="aws-button-primary w-full flex justify-center text-sm py-3"
-                  >
-                    Register on Meetup
-                  </a>
+                  <iframe
+                    src={event.meetupLink}
+                    title="Meetup Registration"
+                    className="w-full h-[460px] rounded-lg border border-black/10 bg-[#f9f9f9]"
+                  />
                 </div>
               )}
             </div>
