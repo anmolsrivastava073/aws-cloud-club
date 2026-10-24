@@ -64,7 +64,7 @@ export default function EventDetailsPage() {
               {event.title}
             </h1>
 
-            {/* META LABELS (Fully responsive grid on mobile) */}
+            {/* META LABELS */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-[#666666] text-sm p-4 sm:p-5 bg-white rounded-2xl border border-black/10 shadow-sm">
               <div className="flex items-center gap-3 font-medium">
                 <div className="p-2 bg-[#9B5CFF]/10 rounded-lg shrink-0"><Calendar className="w-4 h-4 text-[#9B5CFF]" /></div>
@@ -133,7 +133,7 @@ export default function EventDetailsPage() {
             )}
           </motion.div>
 
-          {/* RIGHT SIDEBAR (Highlighted Registration CTA) */}
+          {/* RIGHT SIDEBAR */}
           <motion.div 
             initial={{ opacity: 0, x: 20 }} 
             animate={{ opacity: 1, x: 0 }} 
@@ -141,7 +141,6 @@ export default function EventDetailsPage() {
           >
             <div className="bg-white border-2 border-[#9B5CFF]/30 rounded-2xl p-6 sm:p-7 lg:sticky lg:top-24 shadow-[0_12px_40px_rgba(155,92,255,0.08)] relative overflow-hidden">
               
-              {/* Subtle background glow accent */}
               <div className="absolute -top-12 -right-12 w-32 h-32 bg-[#9B5CFF]/10 rounded-full blur-2xl pointer-events-none" />
 
               {expired ? (
