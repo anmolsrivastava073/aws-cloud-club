@@ -74,7 +74,6 @@ function MemberCard({
 }) {
   const isHero = variant === 'hero';
   const linkedin = LINKEDIN_URLS[member.name];
-  // Tap-to-reveal for touch screens (desktop still reveals on hover)
   const [showLink, setShowLink] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -106,7 +105,7 @@ function MemberCard({
         <div className={`absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#1e1b2e] to-[#120f1d] text-center ${isHero ? 'p-4' : 'p-3'}`}>
           <div
             className={`rounded-full bg-[#9b5cff]/20 border border-[#9b5cff]/40 flex items-center justify-center font-bold text-[#b784ff] mb-2 shadow-inner ${
-              isHero ? 'w-16 h-16 text-xl' : 'w-12 h-12 text-base'
+              isHero ? 'w-14 h-14 sm:w-16 sm:h-16 text-lg sm:text-xl' : 'w-10 h-10 sm:w-12 sm:h-12 text-sm sm:text-base'
             }`}
           >
             {getInitials(member.name)}
@@ -124,10 +123,9 @@ function MemberCard({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-20" />
         
-        {/* 🔗 LinkedIn button: appears on hover (always visible on touch screens) */}
+        {/* 🔗 LinkedIn button */}
         {linkedin && (
           <>
-          {/* Black shadow over the card behind the button (card hover only) */}
           <div
             className={`absolute inset-0 z-[25] pointer-events-none bg-gradient-to-b from-black/30 via-black/60 to-black/30 transition-opacity duration-300 ${
               showLink ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
@@ -140,13 +138,13 @@ function MemberCard({
               rel="noopener noreferrer"
               aria-label={`${member.name} on LinkedIn`}
               title={`${member.name} on LinkedIn`}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-md bg-white/95 text-[#0A66C2] text-xs font-semibold shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 hover:bg-[#0A66C2] hover:text-white transition-all duration-300 ${
+              className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-md bg-white/95 text-[#0A66C2] text-[10px] sm:text-xs font-semibold shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 hover:bg-[#0A66C2] hover:text-white transition-all duration-300 ${
                 showLink
                   ? 'opacity-100 scale-100 pointer-events-auto'
                   : 'opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto'
               }`}
             >
-              <Linkedin className="w-4 h-4" />
+              <Linkedin className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               <span>LinkedIn</span>
             </a>
           </div>
@@ -154,20 +152,20 @@ function MemberCard({
         )}
 
         {isHero ? (
-          <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 z-30 flex flex-col items-center text-center">
+          <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-5 z-30 flex flex-col items-center text-center">
             <h3 className="text-sm sm:text-xl font-bold text-white mb-0.5 drop-shadow-md leading-snug line-clamp-2">
               {member.name}
             </h3>
-            <p className="text-[#b784ff] font-semibold text-[11px] sm:text-sm drop-shadow-sm whitespace-nowrap truncate">
+            <p className="text-[#b784ff] font-semibold text-[10px] sm:text-sm drop-shadow-sm whitespace-nowrap truncate">
               {member.position}
             </p>
           </div>
         ) : (
-          <div className="absolute bottom-0 left-0 right-0 p-3.5 sm:p-4 z-30 flex flex-col items-center text-center">
-            <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-[#b784ff] transition-colors mb-0.5 drop-shadow-md leading-snug line-clamp-2">
+          <div className="absolute bottom-0 left-0 right-0 p-2.5 sm:p-4 z-30 flex flex-col items-center text-center">
+            <h4 className="text-[11px] sm:text-sm font-bold text-white group-hover:text-[#b784ff] transition-colors mb-0.5 drop-shadow-md leading-snug line-clamp-2">
               {member.name}
             </h4>
-            <p className="text-[#b784ff] font-semibold text-[11px] sm:text-xs drop-shadow-sm whitespace-nowrap truncate">
+            <p className="text-[#b784ff] font-semibold text-[9px] sm:text-xs drop-shadow-sm whitespace-nowrap truncate">
               {member.position}
             </p>
           </div>
@@ -182,7 +180,6 @@ export default function LandingPage() {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
 
-  // 📅 Session-wise team: first session in TEAM_SESSIONS is the default (current) one
   const [activeSessionId, setActiveSessionId] = useState<string>(TEAM_SESSIONS[0].id);
   
   const activeSession =
@@ -190,7 +187,6 @@ export default function LandingPage() {
   
   const MEMBERS = activeSession.members;
 
-  // Segregate Team Members: Captain & Co-Captain (Tier 1), Leads & Co-Leads (Tier 2), SWT (Tier 3)
   const captain = MEMBERS.find(
     (m) =>
       m.position?.toLowerCase().includes('captain') &&
@@ -224,13 +220,13 @@ export default function LandingPage() {
 
   return (
     <div className="bg-[#f5f3ef] text-black aws-grid-bg overflow-x-hidden">
-      {/* HERO SECTION */}
+      {/* HERO SECTION - Optimized for full 100dvh mobile coverage */}
       <section 
-        className="relative pt-20 sm:pt-24 md:pt-28 px-4 sm:px-8 pb-16 sm:pb-24 border-b border-black/10 overflow-hidden flex flex-col items-center justify-start min-h-[calc(100vh-2rem)]"
+        className="relative px-4 sm:px-8 border-b border-black/10 overflow-hidden flex flex-col items-center justify-center min-h-[100dvh] py-12 sm:py-24"
       >
         <HeroAmbientGlow />
         
-        <div className="max-w-7xl mx-auto text-center relative z-10 w-full flex flex-col items-center justify-start">
+        <div className="max-w-7xl mx-auto text-center relative z-10 w-full flex flex-col items-center justify-center mt-[-5%] sm:mt-0">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -240,9 +236,9 @@ export default function LandingPage() {
             <motion.div 
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
-              className="relative w-52 h-36 sm:w-64 sm:h-44 md:w-80 md:h-56 lg:w-96 lg:h-64 mb-6 sm:mb-8 mx-auto flex items-center justify-center overflow-visible origin-center group cursor-pointer"
+              className="relative w-40 h-28 sm:w-64 sm:h-44 md:w-80 md:h-56 lg:w-96 lg:h-64 mb-4 sm:mb-8 mx-auto flex items-center justify-center overflow-visible origin-center group cursor-pointer"
             >
-              <div className="absolute inset-0 bg-[#9b5cff]/8 rounded-full blur-2xl pointer-events-none group-hover:bg-[#9b5cff]/15 transition-all duration-500" />
+              <div className="absolute inset-0 bg-[#9b5cff]/8 rounded-full blur-xl sm:blur-2xl pointer-events-none group-hover:bg-[#9b5cff]/15 transition-all duration-500" />
               <svg
                 viewBox="0 0 640 500"
                 className="w-full h-full overflow-visible transition-transform duration-300 group-hover:scale-[1.02]"
@@ -268,8 +264,8 @@ export default function LandingPage() {
               </svg>
             </motion.div>
             
-            <div className="relative overflow-visible w-full flex items-center justify-center">
-              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight flex flex-wrap items-center justify-center gap-x-3 gap-y-1 sm:gap-x-4 md:gap-x-5">
+            <div className="relative overflow-visible w-full flex items-center justify-center px-2">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight flex flex-wrap items-center justify-center gap-x-2 gap-y-1 sm:gap-x-4 md:gap-x-5">
                 {['AWS', 'STUDENT', 'BUILDER', 'GROUP'].map((word, wIdx) => (
                   <span key={wIdx} className="inline-flex items-center flex-nowrap whitespace-nowrap transition-transform duration-200 hover:-translate-y-0.5">
                     {word.split('').map((char, cIdx) => (
@@ -285,8 +281,8 @@ export default function LandingPage() {
               </h1>
             </div>
             
-            <div className="relative mt-3 sm:mt-5 overflow-visible w-full flex items-center justify-center">
-              <h2 className="text-[11px] sm:text-sm md:text-base lg:text-lg font-semibold tracking-[0.15em] sm:tracking-[0.25em] flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 sm:gap-x-3.5 md:gap-x-4.5 uppercase">
+            <div className="relative mt-2 sm:mt-5 overflow-visible w-full flex items-center justify-center px-4">
+              <h2 className="text-[10px] sm:text-sm md:text-base lg:text-lg font-semibold tracking-[0.15em] sm:tracking-[0.25em] flex flex-wrap items-center justify-center gap-x-2 gap-y-1 sm:gap-x-3.5 md:gap-x-4.5 uppercase text-center">
                 {['MANIPAL', 'UNIVERSITY', 'JAIPUR'].map((word, wIdx) => (
                   <span key={wIdx} className="inline-flex items-center flex-nowrap whitespace-nowrap">
                     {word.split('').map((char, cIdx) => (
@@ -302,20 +298,20 @@ export default function LandingPage() {
               </h2>
             </div>
             
-            <div className="relative mt-4 sm:mt-6 flex items-center justify-center w-full mb-6 sm:mb-8">
-              <div className="w-48 sm:w-80 h-[1.5px] bg-gradient-to-r from-transparent via-[#9b5cff]/40 to-transparent" />
+            <div className="relative mt-4 sm:mt-6 flex items-center justify-center w-full mb-5 sm:mb-8">
+              <div className="w-32 sm:w-80 h-[1.5px] bg-gradient-to-r from-transparent via-[#9b5cff]/40 to-transparent" />
             </div>
             
-            <p className="text-[#5f5f5f] text-sm md:text-base max-w-2xl mx-auto mb-9 leading-relaxed">
+            <p className="text-[#5f5f5f] text-xs sm:text-sm md:text-base max-w-2xl mx-auto mb-7 sm:mb-9 leading-relaxed px-2">
               A student-led community at Manipal University Jaipur focused on learning,
               building, and growing with cloud technologies through real-world exposure
               and collaboration.
             </p>
             
-            <div className="flex flex-col sm:flex-row justify-center gap-4 relative z-20">
+            <div className="flex flex-col sm:flex-row w-full sm:w-auto justify-center gap-3 sm:gap-4 relative z-20 px-4 sm:px-0">
               <a
                 href="#events"
-                className="group relative overflow-hidden px-7 py-3.5 rounded-xl bg-[#111111] text-white font-bold text-sm shadow-md transition-all duration-300 hover:shadow-[0_8px_30px_rgba(155,92,255,0.3)] hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center gap-2.5"
+                className="group relative overflow-hidden w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#111111] text-white font-bold text-sm shadow-md transition-all duration-300 hover:shadow-[0_8px_30px_rgba(155,92,255,0.3)] hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center gap-2.5"
               >
                 <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/15 to-transparent -skew-x-25 -translate-x-full group-hover:translate-x-[300%] transition-transform duration-1000 ease-in-out" />
                 <span>Explore Events</span>
@@ -323,7 +319,7 @@ export default function LandingPage() {
               </a>
               <a
                 href="#about"
-                className="px-7 py-3.5 rounded-xl bg-white/80 hover:bg-white text-[#111111] font-semibold text-sm border border-black/10 hover:border-[#9b5cff]/50 shadow-sm transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center backdrop-blur-sm"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-white/80 hover:bg-white text-[#111111] font-semibold text-sm border border-black/10 hover:border-[#9b5cff]/50 shadow-sm transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center backdrop-blur-sm"
               >
                 Learn More
               </a>
@@ -333,25 +329,25 @@ export default function LandingPage() {
       </section>
 
       {/* ABOUT */}
-      <section id="about" className="py-16 sm:py-28 border-b border-black/10">
-        <div className="max-w-6xl mx-auto px-4 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <section id="about" className="py-12 sm:py-28 border-b border-black/10">
+        <div className="max-w-6xl mx-auto px-4 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           
           {/* LEFT: TEXT */}
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="flex flex-col justify-center"
+            className="flex flex-col justify-center text-center lg:text-left"
           >
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.05em] leading-[1.05] mb-8">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.05em] leading-[1.05] mb-6 sm:mb-8">
               About
-              <br />
-              <span className="text-[#9b5cff]">
+              <br className="hidden lg:block" />
+              <span className="text-[#9b5cff] lg:block ml-2 lg:ml-0">
                 AWS Student Builder Group
               </span>
             </h2>
             
-            <div className="space-y-6 text-[#5f5f5f] text-sm md:text-base leading-relaxed max-w-lg">
+            <div className="space-y-5 sm:space-y-6 text-[#5f5f5f] text-sm md:text-base leading-relaxed max-w-lg mx-auto lg:mx-0">
               <p>
                 AWS Student Builder Group at Manipal University Jaipur is a premier student-driven community dedicated to bridging the gap between academic theory and real-world cloud engineering. Our programming revolves entirely around practical execution. We guide members through the complete lifecycle of cloud development, starting from engineering robust backend architectures to deploying highly scalable applications. Instead of relying solely on presentations, we host interactive workshops right on campus. During these sessions, students open their laptops to configure real AWS environments, write deployment scripts, and troubleshoot live infrastructure alongside experienced peers.
               </p>
@@ -366,7 +362,7 @@ export default function LandingPage() {
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="flex flex-col gap-6"
+            className="flex flex-col gap-5 sm:gap-6"
           >
             {/* Cloud Visual Container */}
             <div className="rounded-2xl border border-black/10 overflow-hidden bg-white shadow-sm">
@@ -374,29 +370,29 @@ export default function LandingPage() {
             </div>
 
             {/* Features Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="bg-white border border-black/10 p-5 rounded-2xl shadow-sm flex flex-col items-start hover:border-[#9b5cff]/40 transition-colors">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+              <div className="bg-white border border-black/10 p-4 sm:p-5 rounded-2xl shadow-sm flex flex-col items-center sm:items-start text-center sm:text-left hover:border-[#9b5cff]/40 transition-colors">
                 <div className="bg-[#9b5cff]/10 w-9 h-9 rounded-xl flex items-center justify-center mb-3">
                   <Code className="text-[#9b5cff] w-4 h-4" />
                 </div>
                 <h4 className="font-bold text-sm text-[#18181b] mb-1.5">Hands-on</h4>
-                <p className="text-xs text-[#666666] leading-relaxed">Build & deploy real apps using AWS.</p>
+                <p className="text-[11px] sm:text-xs text-[#666666] leading-relaxed">Build & deploy real apps using AWS.</p>
               </div>
 
-              <div className="bg-white border border-black/10 p-5 rounded-2xl shadow-sm flex flex-col items-start hover:border-[#9b5cff]/40 transition-colors">
+              <div className="bg-white border border-black/10 p-4 sm:p-5 rounded-2xl shadow-sm flex flex-col items-center sm:items-start text-center sm:text-left hover:border-[#9b5cff]/40 transition-colors">
                 <div className="bg-[#9b5cff]/10 w-9 h-9 rounded-xl flex items-center justify-center mb-3">
                   <Users className="text-[#9b5cff] w-4 h-4" />
                 </div>
                 <h4 className="font-bold text-sm text-[#18181b] mb-1.5">Community</h4>
-                <p className="text-xs text-[#666666] leading-relaxed">Collaborate with driven peers.</p>
+                <p className="text-[11px] sm:text-xs text-[#666666] leading-relaxed">Collaborate with driven peers.</p>
               </div>
 
-              <div className="bg-white border border-black/10 p-5 rounded-2xl shadow-sm flex flex-col items-start hover:border-[#9b5cff]/40 transition-colors">
+              <div className="bg-white border border-black/10 p-4 sm:p-5 rounded-2xl shadow-sm flex flex-col items-center sm:items-start text-center sm:text-left hover:border-[#9b5cff]/40 transition-colors">
                 <div className="bg-[#9b5cff]/10 w-9 h-9 rounded-xl flex items-center justify-center mb-3">
                   <Zap className="text-[#9b5cff] w-4 h-4" />
                 </div>
                 <h4 className="font-bold text-sm text-[#18181b] mb-1.5">Exposure</h4>
-                <p className="text-xs text-[#666666] leading-relaxed">Learn directly from experts.</p>
+                <p className="text-[11px] sm:text-xs text-[#666666] leading-relaxed">Learn directly from experts.</p>
               </div>
             </div>
           </motion.div>
@@ -405,7 +401,7 @@ export default function LandingPage() {
       </section>
 
       {/* 🚀 HOW WE LEARN & BUILD */}
-      <section id="what-we-do" className="py-14 sm:py-16 border-b border-black/10 bg-white">
+      <section id="what-we-do" className="py-12 sm:py-16 border-b border-black/10 bg-white">
         <div id="perks" className="sr-only" />
         <div className="max-w-6xl mx-auto px-4">
           <motion.div 
@@ -414,17 +410,17 @@ export default function LandingPage() {
             viewport={{ once: true }}
             className="text-center mb-8 sm:mb-10"
           >
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.05em] leading-none mb-3">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.05em] leading-tight sm:leading-none mb-3">
               How We <span className="text-[#9b5cff]">Learn &amp; Build</span>
             </h2>
-            <p className="text-[#5f5f5f] text-sm md:text-base max-w-2xl mx-auto">
+            <p className="text-[#5f5f5f] text-xs sm:text-sm md:text-base max-w-2xl mx-auto">
               From interactive campus workshops and hackathons to direct sessions with invited AWS professionals.
             </p>
           </motion.div>
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch">
             {/* Left: The Official MUJ Student Member Pass */}
-            <div className="lg:col-span-5 bg-gradient-to-br from-[#faf8f5] via-white to-purple-50/40 rounded-2xl border border-black/10 p-6 sm:p-7 flex flex-col justify-between shadow-xs relative overflow-hidden">
+            <div className="lg:col-span-5 bg-gradient-to-br from-[#faf8f5] via-white to-purple-50/40 rounded-2xl border border-black/10 p-5 sm:p-7 flex flex-col justify-between shadow-xs relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#9b5cff]/10 rounded-full blur-2xl pointer-events-none" />
               
               <div>
@@ -439,26 +435,26 @@ export default function LandingPage() {
                     </div>
                   </div>
                 </div>
-                <h3 className="text-2xl font-bold text-[#18181b] tracking-tight mb-2">
+                <h3 className="text-xl sm:text-2xl font-bold text-[#18181b] tracking-tight mb-2">
                   Student Member Pass
                 </h3>
-                <p className="text-xs text-[#52525b] leading-relaxed mb-6">
+                <p className="text-[11px] sm:text-xs text-[#52525b] leading-relaxed mb-6">
                   Open to all enrolled students at Manipal University Jaipur across all years and branches.
                 </p>
                 <div className="space-y-3 mb-6">
-                  <div className="flex items-start gap-2.5 text-xs text-[#18181b]">
+                  <div className="flex items-start gap-2.5 text-[11px] sm:text-xs text-[#18181b]">
                     <CheckCircle2 className="w-4 h-4 text-[#9b5cff] shrink-0 mt-0.5" />
                     <span className="font-medium">Interactive hands-on workshops in campus LHC halls</span>
                   </div>
-                  <div className="flex items-start gap-2.5 text-xs text-[#18181b]">
+                  <div className="flex items-start gap-2.5 text-[11px] sm:text-xs text-[#18181b]">
                     <CheckCircle2 className="w-4 h-4 text-[#9b5cff] shrink-0 mt-0.5" />
                     <span className="font-medium">Sessions &amp; live demos by invited AWS professionals</span>
                   </div>
-                  <div className="flex items-start gap-2.5 text-xs text-[#18181b]">
+                  <div className="flex items-start gap-2.5 text-[11px] sm:text-xs text-[#18181b]">
                     <CheckCircle2 className="w-4 h-4 text-[#9b5cff] shrink-0 mt-0.5" />
                     <span className="font-medium">Campus hackathons and collaborative project building</span>
                   </div>
-                  <div className="flex items-start gap-2.5 text-xs text-[#18181b]">
+                  <div className="flex items-start gap-2.5 text-[11px] sm:text-xs text-[#18181b]">
                     <CheckCircle2 className="w-4 h-4 text-[#9b5cff] shrink-0 mt-0.5" />
                     <span className="font-medium">Direct 1-on-1 Q&amp;A and networking with speakers and mentors</span>
                   </div>
@@ -467,7 +463,7 @@ export default function LandingPage() {
               
               <div className="pt-4 border-t border-black/10 z-10">
                 <div className="mb-3 flex items-baseline justify-between">
-                  <span className="text-xs font-semibold text-[#71717a]">Membership Fee</span>
+                  <span className="text-[11px] sm:text-xs font-semibold text-[#71717a]">Membership Fee</span>
                   <span className="text-2xl sm:text-3xl font-extrabold text-[#18181b]">₹0</span>
                 </div>
                 <a
@@ -478,7 +474,7 @@ export default function LandingPage() {
                   <span className="relative z-10">View Upcoming Events</span>
                   <ArrowRight className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 text-[#b784ff]" />
                 </a>
-                <div className="mt-2.5 text-center text-[11px] text-[#71717a] font-medium">
+                <div className="mt-2.5 text-center text-[10px] sm:text-[11px] text-[#71717a] font-medium">
                   All workshops &amp; events are free to attend
                 </div>
               </div>
@@ -495,25 +491,25 @@ export default function LandingPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: idx * 0.08 }}
-                    className="bg-[#fcfbf9] rounded-2xl border border-black/10 p-5 flex flex-col justify-between transition-all duration-300 hover:border-[#9b5cff]/50 hover:shadow-md hover:-translate-y-1 group"
+                    className="bg-[#fcfbf9] rounded-2xl border border-black/10 p-4 sm:p-5 flex flex-col justify-between transition-all duration-300 hover:border-[#9b5cff]/50 hover:shadow-md hover:-translate-y-1 group"
                   >
                     <div>
                       <div className="flex items-center justify-between mb-3">
-                        <div className="w-9 h-9 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-[#9b5cff] group-hover:scale-105 group-hover:bg-[#9b5cff] group-hover:text-white transition-all duration-200">
-                          <IconComponent className="w-4 h-4" />
+                        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-[#9b5cff] group-hover:scale-105 group-hover:bg-[#9b5cff] group-hover:text-white transition-all duration-200">
+                          <IconComponent className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                         </div>
-                        <span className="text-xs font-mono font-bold text-[#71717a]">
+                        <span className="text-[11px] sm:text-xs font-mono font-bold text-[#71717a]">
                           {pillar.step}
                         </span>
                       </div>
-                      <h4 className="text-base font-bold text-[#18181b] mb-1.5 group-hover:text-[#9b5cff] transition-colors">
+                      <h4 className="text-sm sm:text-base font-bold text-[#18181b] mb-1.5 group-hover:text-[#9b5cff] transition-colors">
                         {pillar.title}
                       </h4>
-                      <p className="text-xs text-[#52525b] leading-relaxed mb-4">
+                      <p className="text-[11px] sm:text-xs text-[#52525b] leading-relaxed mb-4">
                         {pillar.description}
                       </p>
                     </div>
-                    <div className="pt-3 border-t border-black/5 text-[11px] font-medium text-[#7c3aed]">
+                    <div className="pt-3 border-t border-black/5 text-[10px] sm:text-[11px] font-medium text-[#7c3aed]">
                       {pillar.highlight}
                     </div>
                   </motion.div>
@@ -525,23 +521,23 @@ export default function LandingPage() {
       </section>
 
       {/* EVENTS */}
-      <section id="events" className="py-14 sm:py-16 border-b border-black/10">
+      <section id="events" className="py-12 sm:py-16 border-b border-black/10">
         <div className="max-w-6xl mx-auto px-4">
-          <div className="mb-7 flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="mb-6 sm:mb-7 flex flex-col md:flex-row md:items-end justify-between gap-3 sm:gap-4 text-center sm:text-left">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.05em] leading-none mb-2">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.05em] leading-none mb-2">
                 Events
               </h2>
-              <p className="text-[#5f5f5f] text-sm md:text-base">
+              <p className="text-[#5f5f5f] text-xs sm:text-sm md:text-base">
                 Explore our workshops, sessions, and past events.
               </p>
             </motion.div>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {sortedEvents.map((event, index) => (
               <EventCard
                 key={event.id}
@@ -554,27 +550,27 @@ export default function LandingPage() {
       </section>
 
       {/* 👥 1. MEMBERS SECTION */}
-      <section id="members" className="py-16 sm:py-28 border-b border-black/10 bg-[#f5f3ef]">
+      <section id="members" className="py-14 sm:py-28 border-b border-black/10 bg-[#f5f3ef]">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-10 text-center"
+            className="mb-8 sm:mb-10 text-center"
           >
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.05em] leading-none mb-3">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.05em] leading-none mb-2 sm:mb-3">
               Our <span className="text-[#9b5cff]">Team</span>
             </h2>
-            <p className="text-[#5f5f5f] text-sm md:text-base max-w-2xl mx-auto">
+            <p className="text-[#5f5f5f] text-xs sm:text-sm md:text-base max-w-2xl mx-auto">
               Meet the passionate builders and student leaders driving the AWS Student Builder Group MUJ.
             </p>
           </motion.div>
           
-          <div className="flex justify-center mb-14 sm:mb-16">
+          <div className="flex justify-center mb-10 sm:mb-16 overflow-x-auto pb-4 sm:pb-0 px-2">
             <div
               role="tablist"
               aria-label="Select team session"
-              className="inline-flex items-center gap-1 p-1 rounded-full bg-white border border-black/10 shadow-sm"
+              className="inline-flex items-center gap-1 p-1 rounded-full bg-white border border-black/10 shadow-sm whitespace-nowrap"
             >
               {TEAM_SESSIONS.map((session, idx) => {
                 const isActive = session.id === activeSession.id;
@@ -584,7 +580,7 @@ export default function LandingPage() {
                     role="tab"
                     aria-selected={isActive}
                     onClick={() => setActiveSessionId(session.id)}
-                    className={`relative px-5 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-semibold transition-colors duration-200 ${
+                    className={`relative px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-sm font-semibold transition-colors duration-200 ${
                       isActive ? 'text-white' : 'text-[#52525b] hover:text-[#18181b]'
                     }`}
                   >
@@ -595,11 +591,11 @@ export default function LandingPage() {
                         transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                       />
                     )}
-                    <span className="relative z-10 flex items-center gap-2">
+                    <span className="relative z-10 flex items-center gap-1.5 sm:gap-2">
                       {session.label}
                       {idx === 0 && (
                         <span
-                          className={`text-[9px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded-full ${
+                          className={`text-[8px] sm:text-[9px] uppercase tracking-wider font-bold px-1.5 py-0.5 rounded-full ${
                             isActive ? 'bg-[#9b5cff] text-white' : 'bg-purple-50 text-[#7c3aed]'
                           }`}
                         >
@@ -623,7 +619,7 @@ export default function LandingPage() {
             >
               {/* TIER 1 */}
               {(captain || coCaptain) && (
-                <div className="mb-14 sm:mb-16">
+                <div className="mb-10 sm:mb-16">
                   <div className="grid grid-cols-2 gap-3 sm:gap-6 max-w-lg mx-auto">
                     {captain && <MemberCard member={captain} variant="hero" />}
                     {coCaptain && <MemberCard member={coCaptain} variant="hero" delay={0.1} />}
@@ -632,21 +628,21 @@ export default function LandingPage() {
               )}
               {/* TIER 2 */}
               {(teamLeads.length > 0 || teamCoLeads.length > 0) && (
-                <div className="mb-20">
-                  <div className="text-center mb-10">
-                    <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#111111]">
+                <div className="mb-14 sm:mb-20">
+                  <div className="text-center mb-8 sm:mb-10">
+                    <h3 className="text-xl sm:text-3xl font-bold tracking-tight text-[#111111]">
                       Leads and Co leads
                     </h3>
                   </div>
                   {teamLeads.length > 0 && (
-                    <div className="mb-6">
-                      <div className="flex flex-wrap justify-center gap-4 sm:gap-5 max-w-6xl mx-auto">
+                    <div className="mb-5 sm:mb-6">
+                      <div className="flex flex-wrap justify-center gap-3 sm:gap-5 max-w-6xl mx-auto">
                         {teamLeads.map((member, i) => (
                           <MemberCard
                             key={member.id}
                             member={member}
                             delay={(i % 5) * 0.07}
-                            className="w-[calc(50%-8px)] sm:w-[calc(33.333%-14px)] lg:w-[calc(20%-16px)] max-w-[215px] shrink-0"
+                            className="w-[calc(50%-6px)] sm:w-[calc(33.333%-14px)] lg:w-[calc(20%-16px)] max-w-[215px] shrink-0"
                           />
                         ))}
                       </div>
@@ -654,13 +650,13 @@ export default function LandingPage() {
                   )}
                   {teamCoLeads.length > 0 && (
                     <div>
-                      <div className="flex flex-wrap justify-center gap-4 sm:gap-5 max-w-6xl mx-auto">
+                      <div className="flex flex-wrap justify-center gap-3 sm:gap-5 max-w-6xl mx-auto">
                         {teamCoLeads.map((member, i) => (
                           <MemberCard
                             key={member.id}
                             member={member}
                             delay={(i % 5) * 0.07}
-                            className="w-[calc(50%-8px)] sm:w-[calc(33.333%-14px)] lg:w-[calc(20%-16px)] max-w-[215px] shrink-0"
+                            className="w-[calc(50%-6px)] sm:w-[calc(33.333%-14px)] lg:w-[calc(20%-16px)] max-w-[215px] shrink-0"
                           />
                         ))}
                       </div>
@@ -671,18 +667,18 @@ export default function LandingPage() {
               {/* TIER 3 */}
               {swtMembers.length > 0 && (
                 <div>
-                  <div className="text-center mb-10">
-                    <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#111111]">
+                  <div className="text-center mb-8 sm:mb-10">
+                    <h3 className="text-xl sm:text-3xl font-bold tracking-tight text-[#111111]">
                       {activeSession.workingTeamLabel}
                     </h3>
                   </div>
-                  <div className="flex flex-wrap justify-center gap-4 sm:gap-5 max-w-6xl mx-auto">
+                  <div className="flex flex-wrap justify-center gap-3 sm:gap-5 max-w-6xl mx-auto">
                     {swtMembers.map((member, i) => (
                       <MemberCard
                         key={member.id}
                         member={member}
                         delay={(i % 5) * 0.07}
-                        className="w-[calc(50%-8px)] sm:w-[calc(33.333%-14px)] md:w-[calc(25%-15px)] lg:w-[calc(20%-16px)] max-w-[215px] shrink-0"
+                        className="w-[calc(50%-6px)] sm:w-[calc(33.333%-14px)] md:w-[calc(25%-15px)] lg:w-[calc(20%-16px)] max-w-[215px] shrink-0"
                       />
                     ))}
                   </div>
@@ -694,23 +690,23 @@ export default function LandingPage() {
       </section>
 
       {/* 🎓 2. FACULTY COORDINATOR SECTION */}
-      <section id="faculty" className="py-16 sm:py-28 border-b border-black/10 bg-white overflow-hidden">
+      <section id="faculty" className="py-14 sm:py-28 border-b border-black/10 bg-white overflow-hidden">
         <div className="max-w-6xl mx-auto px-4">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mb-14 text-center"
+            className="mb-10 sm:mb-14 text-center"
           >
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.05em] leading-none mb-3">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-[-0.05em] leading-none mb-3">
               Faculty <span className="text-[#9b5cff]">Coordinators</span>
             </h2>
-            <p className="text-[#5f5f5f] text-sm md:text-base max-w-2xl mx-auto">
+            <p className="text-[#5f5f5f] text-xs sm:text-sm md:text-base max-w-2xl mx-auto">
               Our esteemed faculty mentors who guide the chapter initiatives and support academic integration at Manipal University Jaipur.
             </p>
           </motion.div>
           
-          <div className="flex flex-col items-center md:flex-row flex-wrap justify-center gap-8 md:gap-12 px-4 max-w-6xl mx-auto">
+          <div className="flex flex-col items-center md:flex-row flex-wrap justify-center gap-6 md:gap-12 px-2 sm:px-4 max-w-6xl mx-auto">
             {FACULTY.map((faculty, index) => (
               <motion.div 
                 key={faculty.id}
@@ -718,7 +714,7 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.15, duration: 0.5 }}
-                className="relative w-full max-w-[310px] h-[400px] rounded-3xl overflow-hidden group shadow-lg shrink-0"
+                className="relative w-full max-w-[280px] sm:max-w-[310px] h-[360px] sm:h-[400px] rounded-3xl overflow-hidden group shadow-lg shrink-0"
               >
                 <img 
                   src={faculty.image} 
@@ -731,26 +727,26 @@ export default function LandingPage() {
               
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-20" />
                 
-                <div className="absolute bottom-0 left-0 w-full p-6 flex flex-col items-center text-center justify-end z-30">
-                  <h3 className="text-2xl font-bold tracking-tight text-white mb-1">
+                <div className="absolute bottom-0 left-0 w-full p-5 sm:p-6 flex flex-col items-center text-center justify-end z-30">
+                  <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white mb-1">
                     {faculty.name}
                   </h3>
-                  <p className="text-[#b784ff] font-semibold text-sm mb-2 md:mb-0 md:group-hover:mb-2 transition-all duration-300">
+                  <p className="text-[#b784ff] font-semibold text-xs sm:text-sm mb-2 md:mb-0 md:group-hover:mb-2 transition-all duration-300">
                     {faculty.position}
                   </p>
                   
                   <div className="max-h-40 opacity-100 md:max-h-0 md:opacity-0 overflow-hidden md:group-hover:max-h-40 md:group-hover:opacity-100 transition-all duration-500 ease-in-out flex flex-col items-center">
-                    <p className="text-gray-300 text-xs mb-4 mt-2 font-semibold">
+                    <p className="text-gray-300 text-[11px] sm:text-xs mb-3 sm:mb-4 mt-1 sm:mt-2 font-semibold">
                       {faculty.department}
                     </p>
                     
-                    <div className="h-0.5 w-16 bg-[#9b5cff] mb-4" />
+                    <div className="h-0.5 w-12 sm:w-16 bg-[#9b5cff] mb-3 sm:mb-4" />
                     {faculty.email && (
                       <a 
                         href={`mailto:${faculty.email}`} 
-                        className="inline-flex w-fit items-center gap-2 text-xs font-semibold text-gray-300 hover:text-white transition-colors"
+                        className="inline-flex w-fit items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-semibold text-gray-300 hover:text-white transition-colors"
                       >
-                        <Mail className="w-4 h-4" />
+                        <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                         {faculty.email}
                       </a>
                     )}
@@ -763,12 +759,12 @@ export default function LandingPage() {
       </section>
 
       {/* 🚀 COMMUNITY HUB & CONNECT SECTION */}
-      <section className="py-16 sm:py-24 border-t border-black/10 bg-[#f5f3ef] text-[#18181b] relative overflow-hidden aws-grid-bg">
+      <section className="py-14 sm:py-24 border-t border-black/10 bg-[#f5f3ef] text-[#18181b] relative overflow-hidden aws-grid-bg">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <motion.div
             animate={{ scale: [1, 1.15, 1], opacity: [0.15, 0.3, 0.15], x: [0, 20, 0] }}
             transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[380px] bg-[#9B5CFF]/15 blur-[130px] rounded-full"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[650px] h-[250px] sm:h-[380px] bg-[#9B5CFF]/15 blur-[100px] sm:blur-[130px] rounded-full"
           />
         </div>
         <div className="max-w-5xl mx-auto px-4 relative z-10 text-center">
@@ -778,7 +774,7 @@ export default function LandingPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-[-0.05em] leading-[1.05] text-[#18181b] mb-4"
+            className="text-3xl sm:text-5xl md:text-6xl font-bold tracking-[-0.05em] leading-[1.05] text-[#18181b] mb-4"
           >
             Ready to Build <br className="hidden sm:inline" />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#9B5CFF] via-[#C084FC] to-[#7C3AED]">
@@ -790,12 +786,12 @@ export default function LandingPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-[#52525b] text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-12 font-medium"
+            className="text-[#52525b] text-sm sm:text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-10 sm:mb-12 font-medium"
           >
             Connect with student builders, domain leads, and faculty coordinators at Manipal University Jaipur. Follow our journey, network with leaders, and reserve your seat for upcoming hands-on labs.
           </motion.p>
           
-          <div className="grid md:grid-cols-3 gap-6 mb-10 text-left">
+          <div className="grid md:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10 text-left">
             <motion.a
               href="https://www.instagram.com/awssbg_muj/"
               target="_blank"
@@ -804,26 +800,26 @@ export default function LandingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="bg-white rounded-2xl border border-black/10 p-6 sm:p-7 shadow-xs hover:border-[#9B5CFF]/50 hover:shadow-[0_16px_36px_rgba(155,92,255,0.08)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
+              className="bg-white rounded-2xl border border-black/10 p-5 sm:p-7 shadow-xs hover:border-[#9B5CFF]/50 hover:shadow-[0_16px_36px_rgba(155,92,255,0.08)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
             >
               <div>
-                <div className="w-12 h-12 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-[#7C3AED] group-hover:scale-110 group-hover:bg-[#9B5CFF] group-hover:text-white transition-all duration-300 shadow-xs mb-4">
-                  <Instagram className="w-6 h-6" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-[#7C3AED] group-hover:scale-110 group-hover:bg-[#9B5CFF] group-hover:text-white transition-all duration-300 shadow-xs mb-4">
+                  <Instagram className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 
-                <div className="text-xs font-mono text-[#7C3AED] font-semibold mb-1">
+                <div className="text-[11px] sm:text-xs font-mono text-[#7C3AED] font-semibold mb-1">
                   @awssbg_muj
                 </div>
-                <h3 className="text-xl font-bold tracking-tight text-[#18181b] group-hover:text-[#7C3AED] transition-colors mb-2">
+                <h3 className="text-lg sm:text-xl font-bold tracking-tight text-[#18181b] group-hover:text-[#7C3AED] transition-colors mb-2">
                   Instagram
                 </h3>
-                <p className="text-xs sm:text-[13px] text-[#52525b] leading-relaxed">
+                <p className="text-[11px] sm:text-[13px] text-[#52525b] leading-relaxed">
                   Event galleries, speaker reveals, workshop teasers, and real-time stories from Manipal University Jaipur.
                 </p>
               </div>
-              <div className="mt-6 pt-4 border-t border-black/5 flex items-center justify-between text-xs font-bold text-[#18181b] group-hover:text-[#7C3AED] transition-colors">
+              <div className="mt-5 sm:mt-6 pt-4 border-t border-black/5 flex items-center justify-between text-[11px] sm:text-xs font-bold text-[#18181b] group-hover:text-[#7C3AED] transition-colors">
                 <span>Follow on Instagram</span>
-                <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-200" />
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transform group-hover:translate-x-1.5 transition-transform duration-200" />
               </div>
             </motion.a>
             <motion.a
@@ -834,25 +830,25 @@ export default function LandingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="bg-white rounded-2xl border border-black/10 p-6 sm:p-7 shadow-xs hover:border-[#9B5CFF]/50 hover:shadow-[0_16px_36px_rgba(155,92,255,0.08)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
+              className="bg-white rounded-2xl border border-black/10 p-5 sm:p-7 shadow-xs hover:border-[#9B5CFF]/50 hover:shadow-[0_16px_36px_rgba(155,92,255,0.08)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
             >
               <div>
-                <div className="w-12 h-12 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-[#7C3AED] group-hover:scale-110 group-hover:bg-[#0A66C2] group-hover:text-white transition-all duration-300 shadow-xs mb-4">
-                  <Linkedin className="w-6 h-6" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-[#7C3AED] group-hover:scale-110 group-hover:bg-[#0A66C2] group-hover:text-white transition-all duration-300 shadow-xs mb-4">
+                  <Linkedin className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-                <div className="text-xs font-mono text-[#0A66C2] font-semibold mb-1">
+                <div className="text-[11px] sm:text-xs font-mono text-[#0A66C2] font-semibold mb-1">
                   AWS Cloud Club MUJ
                 </div>
-                <h3 className="text-xl font-bold tracking-tight text-[#18181b] group-hover:text-[#7C3AED] transition-colors mb-2">
+                <h3 className="text-lg sm:text-xl font-bold tracking-tight text-[#18181b] group-hover:text-[#7C3AED] transition-colors mb-2">
                   LinkedIn
                 </h3>
-                <p className="text-xs sm:text-[13px] text-[#52525b] leading-relaxed">
+                <p className="text-[11px] sm:text-[13px] text-[#52525b] leading-relaxed">
                   Session recaps, professional networking, certification cohorts, and career referrals across the cloud ecosystem.
                 </p>
               </div>
-              <div className="mt-6 pt-4 border-t border-black/5 flex items-center justify-between text-xs font-bold text-[#18181b] group-hover:text-[#7C3AED] transition-colors">
+              <div className="mt-5 sm:mt-6 pt-4 border-t border-black/5 flex items-center justify-between text-[11px] sm:text-xs font-bold text-[#18181b] group-hover:text-[#7C3AED] transition-colors">
                 <span>Connect on LinkedIn</span>
-                <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-200" />
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transform group-hover:translate-x-1.5 transition-transform duration-200" />
               </div>
             </motion.a>
             <motion.a
@@ -863,25 +859,25 @@ export default function LandingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="bg-white rounded-2xl border border-black/10 p-6 sm:p-7 shadow-xs hover:border-[#9B5CFF]/50 hover:shadow-[0_16px_36px_rgba(155,92,255,0.08)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
+              className="bg-white rounded-2xl border border-black/10 p-5 sm:p-7 shadow-xs hover:border-[#9B5CFF]/50 hover:shadow-[0_16px_36px_rgba(155,92,255,0.08)] hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
             >
               <div>
-                <div className="w-12 h-12 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-[#7C3AED] group-hover:scale-110 group-hover:bg-[#ED1C40] group-hover:text-white transition-all duration-300 shadow-xs mb-4">
-                  <ExternalLink className="w-6 h-6" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-purple-50 border border-purple-100 flex items-center justify-center text-[#7C3AED] group-hover:scale-110 group-hover:bg-[#ED1C40] group-hover:text-white transition-all duration-300 shadow-xs mb-4">
+                  <ExternalLink className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
-                <div className="text-xs font-mono text-[#ED1C40] font-semibold mb-1">
+                <div className="text-[11px] sm:text-xs font-mono text-[#ED1C40] font-semibold mb-1">
                   Official Chapter
                 </div>
-                <h3 className="text-xl font-bold tracking-tight text-[#18181b] group-hover:text-[#7C3AED] transition-colors mb-2">
+                <h3 className="text-lg sm:text-xl font-bold tracking-tight text-[#18181b] group-hover:text-[#7C3AED] transition-colors mb-2">
                   Meetup
                 </h3>
-                <p className="text-xs sm:text-[13px] text-[#52525b] leading-relaxed">
+                <p className="text-[11px] sm:text-[13px] text-[#52525b] leading-relaxed">
                   The primary registration gateway for all hands-on cloud labs, lab seats, and guest speaker sessions.
                 </p>
               </div>
-              <div className="mt-6 pt-4 border-t border-black/5 flex items-center justify-between text-xs font-bold text-[#18181b] group-hover:text-[#7C3AED] transition-colors">
+              <div className="mt-5 sm:mt-6 pt-4 border-t border-black/5 flex items-center justify-between text-[11px] sm:text-xs font-bold text-[#18181b] group-hover:text-[#7C3AED] transition-colors">
                 <span>RSVP on Meetup</span>
-                <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1.5 transition-transform duration-200" />
+                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transform group-hover:translate-x-1.5 transition-transform duration-200" />
               </div>
             </motion.a>
           </div>
@@ -891,34 +887,34 @@ export default function LandingPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.35 }}
-            className="p-5 sm:p-6 rounded-2xl bg-white border border-black/10 shadow-xs flex flex-col md:flex-row items-center justify-between gap-5 text-left"
+            className="p-4 sm:p-6 rounded-2xl bg-white border border-black/10 shadow-xs flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-5 text-center sm:text-left"
           >
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto">
               <img
                 src="/newlogo.jpg"
                 alt="AWS Student Builder Group Logo"
-                className="w-12 h-12 rounded-xl object-contain border border-black/10 shadow-xs shrink-0"
+                className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl object-contain border border-black/10 shadow-xs shrink-0"
                 onError={(e) => {
                   (e.currentTarget as HTMLImageElement).src = '/images/mujawslogo.png';
                 }}
               />
               <div>
-                <h4 className="text-sm font-bold text-[#18181b] mb-0.5">
+                <h4 className="text-xs sm:text-sm font-bold text-[#18181b] mb-0.5">
                   AWS Student Builder Group MUJ
                 </h4>
-                <p className="text-xs text-[#52525b]">
+                <p className="text-[10px] sm:text-xs text-[#52525b]">
                   Department of Computer Science &amp; Engineering • Manipal University Jaipur
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-3 w-full md:w-auto shrink-0">
+            <div className="flex items-center gap-3 w-full md:w-auto shrink-0 mt-2 md:mt-0">
               <a
                 href="#events"
-                className="group relative overflow-hidden w-full md:w-auto px-7 py-3.5 rounded-xl bg-[#111111] text-white font-bold text-xs sm:text-sm shadow-md transition-all duration-300 hover:shadow-[0_8px_30px_rgba(155,92,255,0.3)] hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center gap-2.5"
+                className="group relative overflow-hidden w-full md:w-auto px-5 sm:px-7 py-3 sm:py-3.5 rounded-xl bg-[#111111] text-white font-bold text-[11px] sm:text-sm shadow-md transition-all duration-300 hover:shadow-[0_8px_30px_rgba(155,92,255,0.3)] hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center gap-2 sm:gap-2.5"
               >
                 <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/15 to-transparent -skew-x-25 -translate-x-full group-hover:translate-x-[300%] transition-transform duration-1000 ease-in-out" />
                 <span className="relative z-10">View Upcoming Workshops</span>
-                <ArrowRight className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 text-[#b784ff]" />
+                <ArrowRight className="relative z-10 w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-300 group-hover:translate-x-1 text-[#b784ff]" />
               </a>
             </div>
           </motion.div>
