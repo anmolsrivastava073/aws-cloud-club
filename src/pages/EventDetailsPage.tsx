@@ -1,16 +1,12 @@
 import { useParams, Link } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import { Calendar, MapPin, Clock, ArrowLeft, Lock, Unlock } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { Calendar, MapPin, Clock, ArrowLeft, Lock } from 'lucide-react';
 import { motion } from 'motion/react';
 import { EVENTS } from '../constants';
 
 export default function EventDetailsPage() {
   const { id } = useParams();
   const event = EVENTS.find((e) => e.id === id);
-
-  const [activeTab, setActiveTab] = useState<'meetup' | 'classes'>('meetup');
-  const [accessCode, setAccessCode] = useState('');
-  const [isUnlocked, setIsUnlocked] = useState(false);
 
   const isEventExpired = (eventDate: string) => {
     const today = new Date();
@@ -21,15 +17,6 @@ export default function EventDetailsPage() {
   };
 
   const expired = event ? isEventExpired(event.date) : false;
-
-  const handleUnlock = () => {
-    if (accessCode.trim() === "AWS2026") {
-      setIsUnlocked(true);
-      setActiveTab("classes");
-    } else {
-      alert("Invalid Code ❌");
-    }
-  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -166,110 +153,24 @@ export default function EventDetailsPage() {
                   </p>
                 </div>
               ) : (
-                <>
-                  {/* UNLOCK SECTION */}
-                  {!isUnlocked && (
-                    <div className="mb-6 p-5 bg-[#fcfcfc] border border-black/5 rounded-lg">
-                      <div className="flex items-center gap-2 mb-3">
-                        <Lock className="w-4 h-4 text-[#9B5CFF]" />
-                        <h4 className="font-semibold text-sm">Access Event Resources</h4>
-                      </div>
-                      <p className="text-xs text-[#666666] mb-4">
-                        Enter the code provided during the session to unlock attendance and class resources.
-                      </p>
-                      <input
-                        value={accessCode}
-                        onChange={(e) => setAccessCode(e.target.value)}
-                        className="aws-input mb-3 bg-white"
-                        placeholder="e.g. AWS2026"
-                        type="password"
-                      />
-                      <button
-                        onClick={handleUnlock}
-                        className="aws-button-primary w-full text-sm flex justify-center items-center gap-2"
-                      >
-                        <Unlock className="w-4 h-4" /> Unlock Access
-                      </button>
-                    </div>
-                  )}
-
-                  {/* TABS */}
-                  <div className="flex gap-2 mb-5 p-1 bg-[#f3f4f6] rounded-lg">
-                    {['meetup', 'classes'].map((tab) => {
-                      const locked = !isUnlocked && tab !== 'meetup';
-                      return (
-                        <button
-                          key={tab}
-                          onClick={() => setActiveTab(tab as any)}
-                          className={`flex-1 flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-md transition-all ${
-                            activeTab === tab
-                              ? 'bg-white text-[#7C3AED] shadow-sm'
-                              : 'text-[#666666] hover:text-[#18181b]'
-                          }`}
-                        >
-                          <span className="capitalize">{tab}</span>
-                          {locked && <Lock className="w-3 h-3 opacity-60" />}
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  {/* MEETUP CONTENT */}
-                  {activeTab === 'meetup' && (
-                    <a
-                      href={event.meetupLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="aws-button-primary w-full flex justify-center text-sm"
-                    >
-                      Register on Meetup
-                    </a>
-                  )}
-
-                  {/* CLASSES CONTENT */}
-                  {activeTab === 'classes' && (
-                    !isUnlocked ? (
-                      <div className="text-center py-10 border-2 border-dashed border-black/10 rounded-lg">
-                        <Lock className="w-6 h-6 text-gray-300 mx-auto mb-2" />
-                        <p className="text-[#666666] text-sm font-medium">
-                          Content Locked
-                        </p>
-                      </div>
-                    ) : (
-                      <iframe
-                        src="https://forms.office.com/Pages/ResponsePage.aspx?id=3S8oJwtM-026kSKM2D_fcRezTgSnBGVIthb_f4OG52FUNkJNVkpMSjY0ODMwRjhTOUJYMzA2SkVLVC4u&embed=true"
-                        className="w-full h-[460px] rounded-lg border border-black/10 bg-[#f9f9f9]"
-                      />
-                    )
-                  )}
-                </>
+                <div className="space-y-4">
+                  <h3 className="text-base font-semibold mb-1 tracking-tight">
+                    Join This Event
+                  </h3>
+                  <p className="text-xs text-[#666666] mb-4">
+                    Secure your spot by registering directly on our official Meetup page.
+                  </p>
+                  <a
+                    href={event.meetupLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="aws-button-primary w-full flex justify-center text-sm py-3"
+                  >
+                    Register on Meetup
+                  </a>
+                </div>
               )}
             </div>
-
-            {/* STEPS TO ACCESS */}
-            {!expired && (
-              <div className="bg-white border border-black/10 rounded-xl p-6 shadow-[0_4px_24px_rgba(0,0,0,0.02)]">
-                <h3 className="text-base font-semibold mb-5 tracking-tight">
-                  Steps to Access
-                </h3>
-                <div className="space-y-4 text-sm text-[#52525b]">
-                  {[
-                    "Register on the official Meetup page.",
-                    "Attend the event to receive the secret access code.",
-                    "Enter the code in the widget above.",
-                    "Unlock the attendance and feedback forms.",
-                    "Submit your details to mark your attendance."
-                  ].map((step, idx) => (
-                    <div key={idx} className="flex gap-3">
-                      <span className="flex items-center justify-center w-5 h-5 rounded-full bg-[#9B5CFF]/15 text-[#7C3AED] font-bold text-xs shrink-0 mt-0.5">
-                        {idx + 1}
-                      </span>
-                      <p className="leading-snug">{step}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
           </motion.div>
         </div>
       </div>
