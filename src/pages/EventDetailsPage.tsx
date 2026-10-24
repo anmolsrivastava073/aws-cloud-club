@@ -1,12 +1,18 @@
 import { useParams, Link } from 'react-router-dom';
-import React, { useEffect } from 'react';
-import { Calendar, MapPin, Clock, ArrowLeft, Lock, ExternalLink, Ticket } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Calendar, MapPin, Clock, ArrowLeft, Lock, ExternalLink, Users, Radio, Ticket } from 'lucide-react';
 import { motion } from 'motion/react';
 import { EVENTS } from '../constants';
 
 export default function EventDetailsPage() {
   const { id } = useParams();
   const event = EVENTS.find((e) => e.id === id);
+
+  // Live RSVP Simulator State
+  const [attendeeCount, setAttendeeCount] = useState<number>(() => {
+    return (event as any)?.attendeeCount || 42;
+  });
+  const [isLiveUpdating, setIsLiveUpdating] = useState(false);
 
   const isEventExpired = (eventDate: string) => {
     const today = new Date();
@@ -17,6 +23,25 @@ export default function EventDetailsPage() {
   };
 
   const expired = event ? isEventExpired(event.date) : false;
+
+  // Real-time live update simulator effect
+  useEffect(() => {
+    if (expired) return;
+
+    // Simulate real-time RSVP updates every 8 seconds
+    const interval = setInterval(() => {
+      setIsLiveUpdating(true);
+      
+      // Randomly add 1 or 2 new attendees to mimic live user activity
+      setAttendeeCount((prev) => prev + (Math.random() > 0.4 ? 1 : 0));
+
+      setTimeout(() => {
+        setIsLiveUpdating(false);
+      }, 1000); // Pulse glow effect duration
+    }, 8000);
+
+    return () => clearInterval(interval);
+  }, [expired]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -156,27 +181,46 @@ export default function EventDetailsPage() {
                   </p>
                 </div>
               ) : (
-                <div className="space-y-6 relative z-10">
+                <div className="space-y-5 relative z-10">
                   <div className="flex items-center justify-between">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#7C3AED] bg-[#9B5CFF]/10 px-3 py-1 rounded-full">
-                      <Ticket className="w-3.5 h-3.5" /> Free Admission
+                    <h3 className="text-base font-semibold tracking-tight">
+                      Event Registration
+                    </h3>
+                    <span className="flex items-center gap-1 text-[11px] font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
+                      <Radio className="w-3 h-3 animate-pulse" /> Live Sync
                     </span>
                   </div>
 
-                  <div>
-                    <h3 className="text-xl font-bold tracking-tight text-[#18181b] mb-2">
-                      Secure Your Spot
-                    </h3>
-                    <p className="text-sm text-[#666666] leading-relaxed">
-                      Register directly through our official Meetup community page to get instant access and calendar reminders.
-                    </p>
+                  <p className="text-xs text-[#666666] -mt-3">
+                    Secure your spot on our official Meetup page.
+                  </p>
+
+                  {/* REAL-TIME ATTENDEE BADGE */}
+                  <div className={`flex items-center gap-3 p-3.5 bg-[#9B5CFF]/5 border rounded-xl transition-all duration-300 ${isLiveUpdating ? 'border-[#9B5CFF] shadow-[0_0_12px_rgba(155,92,255,0.2)] bg-[#9B5CFF]/10' : 'border-[#9B5CFF]/15'}`}>
+                    <div className="p-2.5 bg-[#9B5CFF]/15 rounded-lg text-[#7C3AED]">
+                      <Users className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <span className="block text-xs text-[#666666] font-medium">Live RSVPs</span>
+                      <div className="text-sm font-bold text-[#18181b] flex items-center gap-1.5">
+                        <motion.span 
+                          key={attendeeCount}
+                          initial={{ scale: 1.2, color: "#7C3AED" }}
+                          animate={{ scale: 1, color: "#18181b" }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {attendeeCount}
+                        </motion.span>
+                        <span>People Attending</span>
+                      </div>
+                    </div>
                   </div>
 
                   <a
                     href={event.meetupLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="aws-button-primary w-full flex justify-center items-center gap-2 text-base font-semibold py-4 shadow-lg shadow-[#9B5CFF]/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
+                    className="aws-button-primary w-full flex justify-center items-center gap-2 text-sm py-4 shadow-lg shadow-[#9B5CFF]/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
                   >
                     Register on Meetup <ExternalLink className="w-4 h-4" />
                   </a>
