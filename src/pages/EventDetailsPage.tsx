@@ -1,15 +1,12 @@
 import { useParams, Link } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
-import { Calendar, MapPin, Clock, ArrowLeft, Lock, ExternalLink, Users } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { Calendar, MapPin, Clock, ArrowLeft, Lock, ExternalLink } from 'lucide-react';
 import { motion } from 'motion/react';
 import { EVENTS } from '../constants';
 
 export default function EventDetailsPage() {
   const { id } = useParams();
   const event = EVENTS.find((e) => e.id === id);
-
-  const [attendeeCount, setAttendeeCount] = useState<number>(0);
-  const [isLoadingCount, setIsLoadingCount] = useState(true);
 
   const isEventExpired = (eventDate: string) => {
     const today = new Date();
@@ -21,37 +18,9 @@ export default function EventDetailsPage() {
 
   const expired = event ? isEventExpired(event.date) : false;
 
-  // Fetch the genuine Meetup RSVP count on load
   useEffect(() => {
     window.scrollTo(0, 0);
-
-    if (expired || !event || !event.meetupLink) {
-      setIsLoadingCount(false);
-      return;
-    }
-
-    const fetchMeetupCount = async () => {
-      try {
-        // Calls the Vercel Serverless Function we created in the /api folder
-        const response = await fetch(`/api/meetup-rsvps?url=${encodeURIComponent(event.meetupLink)}`);
-        const data = await response.json();
-
-        if (data.count !== undefined && data.count > 0) {
-          setAttendeeCount(data.count);
-        } else {
-          // Fallback to constants.ts if the API fails or returns 0
-          setAttendeeCount((event as any).attendeeCount || 0);
-        }
-      } catch (err) {
-        console.error('Error fetching Meetup count:', err);
-        setAttendeeCount((event as any).attendeeCount || 0);
-      } finally {
-        setIsLoadingCount(false);
-      }
-    };
-
-    fetchMeetupCount();
-  }, [expired, event]);
+  }, [id]);
 
   if (!event) {
     return (
@@ -196,31 +165,6 @@ export default function EventDetailsPage() {
                     <p className="text-[11px] sm:text-xs text-[#666666] leading-relaxed">
                       Secure your spot on our official Meetup page to get instant calendar invites.
                     </p>
-                  </div>
-
-                  {/* GENUINE MEETUP ATTENDEE BADGE */}
-                  <div className="flex items-center gap-2.5 sm:gap-3 p-3 sm:p-3.5 bg-[#9B5CFF]/5 border border-[#9B5CFF]/15 rounded-xl">
-                    <div className="p-2 sm:p-2.5 bg-[#9B5CFF]/15 rounded-lg text-[#7C3AED]">
-                      <Users className="w-4 h-4 sm:w-5 sm:h-5" />
-                    </div>
-                    <div>
-                      <span className="block text-[10px] sm:text-xs text-[#666666] font-medium">Current RSVPs</span>
-                      <div className="text-xs sm:text-sm font-bold text-[#18181b] flex items-center gap-1 sm:gap-1.5">
-                        {isLoadingCount ? (
-                          <div className="w-4 h-4 border-2 border-[#9B5CFF] border-t-transparent rounded-full animate-spin" />
-                        ) : (
-                          <motion.span 
-                            key={attendeeCount}
-                            initial={{ scale: 1.2, color: "#7C3AED" }}
-                            animate={{ scale: 1, color: "#18181b" }}
-                            transition={{ duration: 0.3 }}
-                          >
-                            {attendeeCount}
-                          </motion.span>
-                        )}
-                        <span>Attending</span>
-                      </div>
-                    </div>
                   </div>
 
                   <a
