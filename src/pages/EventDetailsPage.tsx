@@ -8,9 +8,8 @@ export default function EventDetailsPage() {
   const { id } = useParams();
   const event = EVENTS.find((e) => e.id === id);
 
-  const [attendeeCount] = useState<number>(() => {
-    return (event as any)?.attendeeCount || 42;
-  });
+  const [attendeeCount, setAttendeeCount] = useState<number>(0);
+  const [isLoadingCount, setIsLoadingCount] = useState(true);
 
   const isEventExpired = (eventDate: string) => {
     const today = new Date();
@@ -22,9 +21,37 @@ export default function EventDetailsPage() {
 
   const expired = event ? isEventExpired(event.date) : false;
 
+  // Fetch the genuine Meetup RSVP count on load
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+
+    if (expired || !event || !event.meetupLink) {
+      setIsLoadingCount(false);
+      return;
+    }
+
+    const fetchMeetupCount = async () => {
+      try {
+        // Calls the Vercel Serverless Function we created in the /api folder
+        const response = await fetch(`/api/meetup-rsvps?url=${encodeURIComponent(event.meetupLink)}`);
+        const data = await response.json();
+
+        if (data.count !== undefined && data.count > 0) {
+          setAttendeeCount(data.count);
+        } else {
+          // Fallback to constants.ts if the API fails or returns 0
+          setAttendeeCount((event as any).attendeeCount || 0);
+        }
+      } catch (err) {
+        console.error('Error fetching Meetup count:', err);
+        setAttendeeCount((event as any).attendeeCount || 0);
+      } finally {
+        setIsLoadingCount(false);
+      }
+    };
+
+    fetchMeetupCount();
+  }, [expired, event]);
 
   if (!event) {
     return (
@@ -171,7 +198,7 @@ export default function EventDetailsPage() {
                     </p>
                   </div>
 
-                  {/* STATIC ATTENDEE BADGE */}
+                  {/* GENUINE MEETUP ATTENDEE BADGE */}
                   <div className="flex items-center gap-2.5 sm:gap-3 p-3 sm:p-3.5 bg-[#9B5CFF]/5 border border-[#9B5CFF]/15 rounded-xl">
                     <div className="p-2 sm:p-2.5 bg-[#9B5CFF]/15 rounded-lg text-[#7C3AED]">
                       <Users className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -179,7 +206,18 @@ export default function EventDetailsPage() {
                     <div>
                       <span className="block text-[10px] sm:text-xs text-[#666666] font-medium">Current RSVPs</span>
                       <div className="text-xs sm:text-sm font-bold text-[#18181b] flex items-center gap-1 sm:gap-1.5">
-                        <span>{attendeeCount}</span>
+                        {isLoadingCount ? (
+                          <div className="w-4 h-4 border-2 border-[#9B5CFF] border-t-transparent rounded-full animate-spin" />
+                        ) : (
+                          <motion.span 
+                            key={attendeeCount}
+                            initial={{ scale: 1.2, color: "#7C3AED" }}
+                            animate={{ scale: 1, color: "#18181b" }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            {attendeeCount}
+                          </motion.span>
+                        )}
                         <span>Attending</span>
                       </div>
                     </div>
@@ -193,6 +231,10 @@ export default function EventDetailsPage() {
                   >
                     Register on Meetup <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </a>
+
+                  <p className="text-center text-[10px] sm:text-xs text-[#888888]">
+                    Free Admission • Open to all students
+                  </p>
                 </div>
               )}
             </div>
