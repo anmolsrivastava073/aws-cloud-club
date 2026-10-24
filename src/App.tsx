@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Preloader from './components/Preloader';
@@ -7,20 +7,13 @@ import LandingPage from './pages/LandingPage';
 import EventDetailsPage from './pages/EventDetailsPage';
 
 export default function App() {
-  const [showPreloader, setShowPreloader] = useState(true);
-
-  // Lock scrolling while the preloader is active
-  useEffect(() => {
-    if (showPreloader) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-  }, [showPreloader]);
+  // Only show the preloader if the user lands exactly on the root homepage
+  const [showPreloader, setShowPreloader] = useState(() => {
+    return window.location.pathname === '/';
+  });
 
   return (
     <Router>
-      {/* THIS is what actually renders your preloader! */}
       {showPreloader && <Preloader onComplete={() => setShowPreloader(false)} />}
       
       <Navbar />
