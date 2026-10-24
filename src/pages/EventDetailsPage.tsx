@@ -1,12 +1,17 @@
 import { useParams, Link } from 'react-router-dom';
-import React, { useEffect } from 'react';
-import { Calendar, MapPin, Clock, ArrowLeft, Lock } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Calendar, MapPin, Clock, ArrowLeft, Lock, CheckCircle2, User, Mail } from 'lucide-react';
 import { motion } from 'motion/react';
 import { EVENTS } from '../constants';
 
 export default function EventDetailsPage() {
   const { id } = useParams();
   const event = EVENTS.find((e) => e.id === id);
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const isEventExpired = (eventDate: string) => {
     const today = new Date();
@@ -17,6 +22,22 @@ export default function EventDetailsPage() {
   };
 
   const expired = event ? isEventExpired(event.date) : false;
+
+  const handleRegister = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !email.trim()) {
+      alert('Please fill in both your name and email.');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    // Simulate backend submission (Replace this with your API call / Supabase / Firebase / backend route)
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsRegistered(true);
+    }, 600);
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -132,13 +153,12 @@ export default function EventDetailsPage() {
             )}
           </motion.div>
 
-          {/* RIGHT SIDEBAR */}
+          {/* RIGHT SIDEBAR - NATIVE REGISTRATION WIDGET */}
           <motion.div 
             initial={{ opacity: 0, x: 20 }} 
             animate={{ opacity: 1, x: 0 }} 
             className="space-y-6"
           >
-            {/* WIDGET PANEL */}
             <div className="bg-white border border-black/10 rounded-xl p-6 sticky top-24 shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
               {expired ? (
                 <div className="text-center py-8">
@@ -152,20 +172,83 @@ export default function EventDetailsPage() {
                     Registrations are closed
                   </p>
                 </div>
-              ) : (
-                <div className="space-y-4">
-                  <h3 className="text-base font-semibold mb-1 tracking-tight">
-                    Register for Event
+              ) : isRegistered ? (
+                <div className="text-center py-6">
+                  <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle2 className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-[#18181b] text-lg font-bold mb-1">
+                    You're Registered! 🎉
                   </h3>
-                  <p className="text-xs text-[#666666] mb-4">
-                    Secure your spot directly below without leaving the page.
+                  <p className="text-[#666666] text-sm mb-4">
+                    We've saved your spot for <span className="font-semibold text-[#18181b]">{event.title}</span>. Confirmation details have been sent to <span className="font-medium text-[#18181b]">{email}</span>.
                   </p>
-                  <iframe
-                    src={event.meetupLink}
-                    title="Meetup Registration"
-                    className="w-full h-[460px] rounded-lg border border-black/10 bg-[#f9f9f9]"
-                  />
+                  <button
+                    onClick={() => setIsRegistered(false)}
+                    className="text-xs text-[#7C3AED] font-semibold hover:underline"
+                  >
+                    Register another attendee
+                  </button>
                 </div>
+              ) : (
+                <form onSubmit={handleRegister} className="space-y-4">
+                  <div>
+                    <h3 className="text-base font-semibold mb-1 tracking-tight">
+                      Register for Event
+                    </h3>
+                    <p className="text-xs text-[#666666]">
+                      Enter your details below to secure your spot instantly.
+                    </p>
+                  </div>
+
+                  <div className="space-y-3 pt-2">
+                    <div>
+                      <label className="block text-xs font-semibold text-[#52525b] mb-1">
+                        Full Name
+                      </label>
+                      <div className="relative">
+                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
+                          <User className="w-4 h-4" />
+                        </span>
+                        <input
+                          type="text"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          placeholder="Jane Doe"
+                          required
+                          className="w-full pl-9 pr-3 py-2 text-sm bg-[#fcfcfc] border border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9B5CFF]/30 focus:border-[#9B5CFF]"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold text-[#52525b] mb-1">
+                        Email Address
+                      </label>
+                      <div className="relative">
+                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
+                          <Mail className="w-4 h-4" />
+                        </span>
+                        <input
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="jane@example.com"
+                          required
+                          className="w-full pl-9 pr-3 py-2 text-sm bg-[#fcfcfc] border border-black/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#9B5CFF]/30 focus:border-[#9B5CFF]"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="aws-button-primary w-full flex justify-center items-center gap-2 text-sm py-2.5 mt-2 disabled:opacity-50"
+                  >
+                    {isSubmitting ? 'Securing Spot...' : 'Confirm Registration'}
+                  </button>
+                </form>
               )}
             </div>
           </motion.div>
