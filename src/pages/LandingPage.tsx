@@ -221,23 +221,17 @@ export default function LandingPage() {
   return (
     <div className="bg-[#f5f3ef] text-black aws-grid-bg overflow-x-hidden">
       {/* HERO SECTION - Absolutely Centered */}
-      <section 
-        className="relative px-4 sm:px-8 border-b border-black/10 overflow-hidden flex flex-col items-center justify-center min-h-[100dvh]"
-      >
+      <section className="relative w-full h-[100dvh] border-b border-black/10 overflow-hidden bg-[#f5f3ef]">
         <HeroAmbientGlow />
         
-        {/* EXACT SAME CORE AS PRELOADER (No spacers above it pushing it down) */}
-        <div className="relative z-10 w-full max-w-7xl flex flex-col items-center justify-center text-center mt-[-10vh] sm:mt-0">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="w-full flex flex-col items-center justify-center"
-          >
+        {/* ABSOLUTELY CENTERED CORE (Locked exactly to the middle of the screen) */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl flex flex-col items-center justify-center text-center z-10 px-2 sm:px-8">
+          <div className="w-full flex flex-col items-center justify-center">
+            
             <motion.div 
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
-              className="relative w-40 h-28 sm:w-64 sm:h-44 md:w-80 md:h-56 lg:w-96 lg:h-64 mb-4 sm:mb-8 mx-auto flex items-center justify-center overflow-visible origin-center group cursor-pointer"
+              className="relative w-44 h-32 sm:w-64 sm:h-44 md:w-80 md:h-56 lg:w-96 lg:h-64 mb-4 sm:mb-8 mx-auto flex items-center justify-center overflow-visible origin-center group cursor-pointer"
             >
               <div className="absolute inset-0 bg-[#9b5cff]/8 rounded-full blur-xl sm:blur-2xl pointer-events-none group-hover:bg-[#9b5cff]/15 transition-all duration-500" />
               <svg viewBox="0 0 640 500" className="w-full h-full overflow-visible transition-transform duration-300 group-hover:scale-[1.02]" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -248,41 +242,44 @@ export default function LandingPage() {
               </svg>
             </motion.div>
             
-            <div className="relative overflow-visible w-full flex items-center justify-center px-2">
-              <h1 className="text-[4.8vw] sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight flex flex-nowrap whitespace-nowrap items-center justify-center gap-x-1.5 sm:gap-x-4 md:gap-x-5">
-                {['AWS', 'STUDENT', 'BUILDER', 'GROUP'].map((word, wIdx) => (
-                  <span key={wIdx} className="inline-flex items-center flex-nowrap whitespace-nowrap transition-transform duration-200 hover:-translate-y-0.5">
-                    {word.split('').map((char, cIdx) => (
-                      <span key={cIdx} className="inline-block font-bold text-[#111111] hover:text-[#9b5cff] transition-colors duration-150">
-                        {char}
-                      </span>
-                    ))}
-                  </span>
-                ))}
-              </h1>
+            <div className="relative flex flex-col items-center justify-center w-full px-2">
+              <div className="relative overflow-visible w-full flex items-center justify-center px-2">
+                <h1 className="text-[4.8vw] sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight flex flex-nowrap whitespace-nowrap items-center justify-center gap-x-1.5 sm:gap-x-4 md:gap-x-5">
+                  {['AWS', 'STUDENT', 'BUILDER', 'GROUP'].map((word, wIdx) => (
+                    <span key={wIdx} className="inline-flex items-center flex-nowrap whitespace-nowrap transition-transform duration-200 hover:-translate-y-0.5">
+                      {word.split('').map((char, cIdx) => (
+                        <span key={cIdx} className="inline-block font-bold text-[#111111] hover:text-[#9b5cff] transition-colors duration-150">
+                          {char}
+                        </span>
+                      ))}
+                    </span>
+                  ))}
+                </h1>
+              </div>
+              
+              <div className="relative mt-2.5 sm:mt-5 overflow-visible w-full flex items-center justify-center px-4">
+                <h2 className="text-[2.2vw] sm:text-[11px] md:text-sm lg:text-base font-semibold tracking-[0.2em] sm:tracking-[0.25em] flex flex-nowrap whitespace-nowrap items-center justify-center gap-x-1.5 sm:gap-x-3.5 md:gap-x-4.5 uppercase text-center">
+                  {['MANIPAL', 'UNIVERSITY', 'JAIPUR'].map((word, wIdx) => (
+                    <span key={wIdx} className="inline-flex items-center flex-nowrap whitespace-nowrap">
+                      {word.split('').map((char, cIdx) => (
+                        <span key={cIdx} className="inline-block font-semibold text-[#9b5cff]">
+                          {char}
+                        </span>
+                      ))}
+                    </span>
+                  ))}
+                </h2>
+              </div>
+              
+              <div className="relative mt-3 sm:mt-6 flex items-center justify-center w-full">
+                <div className="w-32 sm:w-80 h-[1.5px] bg-gradient-to-r from-transparent via-[#9b5cff]/40 to-transparent" />
+              </div>
             </div>
-            
-            <div className="relative mt-2.5 sm:mt-5 overflow-visible w-full flex items-center justify-center px-4">
-              <h2 className="text-[2.2vw] sm:text-sm md:text-base lg:text-lg font-semibold tracking-[0.2em] sm:tracking-[0.25em] flex flex-nowrap whitespace-nowrap items-center justify-center gap-x-1.5 sm:gap-x-3.5 md:gap-x-4.5 uppercase text-center">
-                {['MANIPAL', 'UNIVERSITY', 'JAIPUR'].map((word, wIdx) => (
-                  <span key={wIdx} className="inline-flex items-center flex-nowrap whitespace-nowrap">
-                    {word.split('').map((char, cIdx) => (
-                      <span key={cIdx} className="inline-block font-semibold text-[#9b5cff]">
-                        {char}
-                      </span>
-                    ))}
-                  </span>
-                ))}
-              </h2>
-            </div>
-            
-            <div className="relative mt-3 sm:mt-6 flex items-center justify-center w-full">
-              <div className="w-32 sm:w-80 h-[1.5px] bg-gradient-to-r from-transparent via-[#9b5cff]/40 to-transparent" />
-            </div>
-          </motion.div>
+
+          </div>
         </div>
 
-        {/* EXTRA HERO CONTENT: Absolutely positioned so it never pushes the title upward */}
+        {/* EXTRA HERO CONTENT: Absolutely positioned at bottom so it NEVER pushes the core upwards */}
         <div className="absolute bottom-6 sm:bottom-12 left-0 right-0 w-full flex flex-col justify-end items-center z-20 px-4 sm:px-8 pointer-events-auto">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
