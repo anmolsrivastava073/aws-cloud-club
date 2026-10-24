@@ -7,20 +7,17 @@ import { motion, AnimatePresence } from 'motion/react';
  * 
  * Key Requirements:
  * 1. UNTOUCHED Cloud & Centered Smile:
- *    - Prominent size utilizing the upper space (w-52 h-36 up to lg:w-96 lg:h-64).
- *    - Starts large in center-stage (scale 1.5, y: 90) during vector drawing, then smoothly docks up.
+ *    - Prominent size utilizing the upper space.
+ *    - Starts large in center-stage (scale 1.5, y: 80) during vector drawing, then smoothly docks up.
  * 2. Guaranteed Single-Line Title with Clean Letter Spacing:
  *    - "AWS STUDENT BUILDER GROUP" strictly on one line (whitespace-nowrap flex-nowrap).
- *    - Letters have proper natural breathing room and will not merge into one another.
+ *    - Uses responsive vw units on mobile to guarantee no wrapping on small screens.
  * 3. Rapid Purple-White Jumble Flicker:
- *    - While scrambling, letters flicker between AWS purple (#B784FF / #9B5CFF) and creamy white (#FAF8F5).
+ *    - While scrambling, letters flicker between AWS purple and creamy white.
  *    - All letters lock into the exact same uniform Creamy White (#FAF8F5).
- * 4. No Running Purple Specular Beam:
- *    - Removed the moving purple sheen behind/across the text.
- * 5. Mandatory Playthrough (Unskippable):
- *    - Removed skip indicator and click/escape listeners so the full preloader is experienced.
- * 6. Smooth Dissolve Transition:
- *    - 1.2s silky dissolve fade-out into the main website's creamy white (#f5f3ef) page.
+ * 4. No Running Purple Specular Beam.
+ * 5. Mandatory Playthrough (Unskippable).
+ * 6. Smooth Dissolve Transition into the main website.
  */
 
 const TITLE_WORDS = ['AWS', 'STUDENT', 'BUILDER', 'GROUP'];
@@ -264,7 +261,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
           }
           exit={{ opacity: 0, filter: 'blur(12px)', scale: 1.04 }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-0 z-[99999] flex flex-col items-center justify-start pt-20 sm:pt-24 md:pt-28 px-4 sm:px-8 pb-8 select-none overflow-hidden bg-[#08040F] pointer-events-none"
+          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center h-[100dvh] px-2 sm:px-8 select-none overflow-hidden bg-[#08040F] pointer-events-none"
         >
           {/* Deep Velvet AWS Purple & Obsidian Aura Vignette */}
           <div className="absolute inset-0 bg-radial from-[#9b5cff]/20 via-[#08040F] to-[#05020a] pointer-events-none" />
@@ -280,11 +277,11 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
               repeat: Infinity,
               ease: 'easeInOut',
             }}
-            className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[450px] bg-gradient-to-tr from-[#9b5cff]/25 via-[#b784ff]/15 to-transparent rounded-full blur-3xl pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[250px] sm:h-[450px] bg-gradient-to-tr from-[#9b5cff]/25 via-[#b784ff]/15 to-transparent rounded-full blur-[80px] sm:blur-3xl pointer-events-none"
           />
 
           {/* Main Focused Stage */}
-          <div className="relative z-10 flex flex-col items-center justify-start text-center max-w-7xl w-full">
+          <div className="relative z-10 flex flex-col items-center justify-center text-center max-w-7xl w-full mt-[-10vh] sm:mt-0">
             
             {/* ☁️ 1. HERO AWS CLOUD & SMILE:
                    Starts Center-Stage & Large, then smoothly docks upward */}
@@ -299,7 +296,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
                 duration: 2.4,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="relative w-52 h-36 sm:w-64 sm:h-44 md:w-80 md:h-56 lg:w-96 lg:h-64 mb-6 sm:mb-8 flex items-center justify-center overflow-visible origin-center"
+              className="relative w-40 h-28 sm:w-64 sm:h-44 md:w-80 md:h-56 lg:w-96 lg:h-64 mb-4 sm:mb-8 flex items-center justify-center overflow-visible origin-center"
             >
               <svg
                 viewBox="0 0 640 500"
@@ -361,7 +358,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
             >
               {/* MAIN TITLE (NATURAL WORD COHESION, EQUAL & BALANCED SPACING) */}
               <div className="relative overflow-visible w-full flex items-center justify-center">
-                <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight flex flex-nowrap whitespace-nowrap items-center justify-center gap-x-3 sm:gap-x-4 md:gap-x-5">
+                <h1 className="text-[4.2vw] sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight flex flex-nowrap whitespace-nowrap items-center justify-center gap-x-1.5 sm:gap-x-4 md:gap-x-5">
                   {renderedTitleWords.map((wordObj, wIdx) => (
                     <span key={wIdx} className="inline-flex items-center flex-nowrap whitespace-nowrap">
                       {wordObj.chars.map((char, cIdx) => {
@@ -394,8 +391,8 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
               </div>
 
               {/* 🏛️ 3. SUBTITLE: "MANIPAL UNIVERSITY JAIPUR" */}
-              <div className="relative mt-3 sm:mt-5 overflow-visible w-full flex items-center justify-center">
-                <h2 className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold tracking-[0.2em] sm:tracking-[0.25em] flex flex-nowrap whitespace-nowrap items-center justify-center gap-x-2.5 sm:gap-x-3.5 md:gap-x-4.5 uppercase">
+              <div className="relative mt-2.5 sm:mt-5 overflow-visible w-full flex items-center justify-center">
+                <h2 className="text-[2.5vw] sm:text-sm md:text-base lg:text-lg font-semibold tracking-[0.2em] sm:tracking-[0.25em] flex flex-nowrap whitespace-nowrap items-center justify-center gap-x-1.5 sm:gap-x-3.5 md:gap-x-4.5 uppercase">
                   {renderedSubWords.map((wordObj, wIdx) => (
                     <span key={wIdx} className="inline-flex items-center flex-nowrap whitespace-nowrap">
                       {wordObj.chars.map((char, cIdx) => {
@@ -428,7 +425,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
               </div>
 
               {/* Luminous Accent Pedestal Hairline under University Title */}
-              <div className="relative mt-4 sm:mt-6 flex items-center justify-center w-full">
+              <div className="relative mt-3 sm:mt-6 flex items-center justify-center w-full">
                 <motion.div
                   initial={{ scaleX: 0, opacity: 0 }}
                   animate={{
@@ -436,7 +433,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
                     opacity: titleResolvedCount >= TITLE_PHRASE.length ? 0.75 : 0.25,
                   }}
                   transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-                  className="w-48 sm:w-80 h-[1px] bg-gradient-to-r from-transparent via-[#9b5cff] to-transparent"
+                  className="w-32 sm:w-80 h-[1px] bg-gradient-to-r from-transparent via-[#9b5cff] to-transparent"
                 />
               </div>
             </motion.div>
