@@ -220,17 +220,14 @@ export default function LandingPage() {
 
   return (
     <div className="bg-[#f5f3ef] text-black aws-grid-bg overflow-x-hidden">
-      {{/* HERO SECTION - Optimized with flex-1 springs for perfect sync with Preloader */}
+      {/* HERO SECTION - Absolutely Centered */}
       <section 
         className="relative px-4 sm:px-8 border-b border-black/10 overflow-hidden flex flex-col items-center justify-center min-h-[100dvh]"
       >
         <HeroAmbientGlow />
         
-        {/* Top Spacer - pushes core text to the exact vertical center */}
-        <div className="flex-1 w-full" />
-        
-        {/* MATCHING CORE: Identical sizes, gaps, and layouts as Preloader */}
-        <div className="relative z-10 w-full max-w-7xl flex flex-col items-center justify-center text-center">
+        {/* EXACT SAME CORE AS PRELOADER (No spacers above it pushing it down) */}
+        <div className="relative z-10 w-full max-w-7xl flex flex-col items-center justify-center text-center mt-[-10vh] sm:mt-0">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -285,21 +282,21 @@ export default function LandingPage() {
           </motion.div>
         </div>
 
-        {/* EXTRA HERO CONTENT: Placed in the bottom flex-1 block so it doesn't break centering */}
-        <div className="flex-1 w-full flex flex-col justify-start items-center relative z-20 mt-6 sm:mt-8 pb-10 sm:pb-0">
+        {/* EXTRA HERO CONTENT: Absolutely positioned so it never pushes the title upward */}
+        <div className="absolute bottom-6 sm:bottom-12 left-0 right-0 w-full flex flex-col justify-end items-center z-20 px-4 sm:px-8 pointer-events-auto">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex flex-col items-center justify-start w-full"
+            className="flex flex-col items-center justify-center w-full"
           >
-            <p className="text-[#5f5f5f] text-xs sm:text-sm md:text-base max-w-2xl mx-auto mb-7 sm:mb-9 leading-relaxed text-center px-4">
+            <p className="text-[#5f5f5f] text-xs sm:text-sm md:text-base max-w-2xl mx-auto mb-6 sm:mb-8 leading-relaxed text-center px-2">
               A student-led community at Manipal University Jaipur focused on learning,
               building, and growing with cloud technologies through real-world exposure
               and collaboration.
             </p>
             
-            <div className="flex flex-col sm:flex-row w-full sm:w-auto justify-center gap-3 sm:gap-4 px-4 sm:px-0">
+            <div className="flex flex-col sm:flex-row w-full sm:w-auto justify-center gap-3 sm:gap-4 px-2 sm:px-0">
               <a
                 href="#events"
                 className="group relative overflow-hidden w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#111111] text-white font-bold text-sm shadow-md transition-all duration-300 hover:shadow-[0_8px_30px_rgba(155,92,255,0.3)] hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center gap-2.5"
