@@ -109,6 +109,8 @@ function MemberCard({
             className={`rounded-full bg-[#9b5cff]/20 border border-[#9b5cff]/40 flex items-center justify-center font-bold text-[#b784ff] mb-2 shadow-inner ${
               isHero ? 'w-14 h-14 sm:w-16 sm:h-16 text-lg sm:text-xl' : 'w-10 h-10 sm:w-12 sm:h-12 text-sm sm:text-base'
             }`}
+          >
+            {getInitials(member.name)}
           </div>
           <span className="text-xs font-semibold text-white/90 truncate max-w-full px-2">{member.name}</span>
         </div>
