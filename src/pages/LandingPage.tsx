@@ -241,8 +241,8 @@ export default function LandingPage() {
   return (
     <div className="bg-[#f5f3ef] text-black aws-grid-bg overflow-x-hidden">
       
-      {/* 🚀 HERO SECTION — min-h-[750px] ensures it generates scrollbars instead of colliding when zoomed */}
-      <section className="relative w-full h-[100dvh] min-h-[750px] border-b border-black/10 overflow-hidden bg-[#f5f3ef]">
+      {/* 🚀 HERO SECTION — Increased to min-h-[900px] and removed restrictive overflow-hidden */}
+      <section className="relative w-full h-[100dvh] min-h-[900px] border-b border-black/10 bg-[#f5f3ef]">
         <HeroAmbientGlow />
 
         {/* EXACT MATHEMATICAL CENTER - Locked with absolute positioning */}
@@ -289,13 +289,6 @@ export default function LandingPage() {
             <div className="w-32 sm:w-80 h-[1.5px] bg-gradient-to-r from-transparent via-[#9b5cff]/40 to-transparent" />
           </div>
 
-          {/* 
-            🔥 FIX FOR ZOOM COLLISION: 
-            Instead of pinning to the screen's bottom (which crashes upwards on zoom), 
-            we pin it to the bottom of THIS centered title block. 
-            Because it is absolute (top-full), it does not add to the height of the 
-            title block, keeping the alignment with the Preloader perfectly intact.
-          */}
           <div className="absolute top-full left-0 w-full pt-8 sm:pt-12 flex flex-col items-center z-20 pointer-events-auto">
             <motion.div
               initial={{ opacity: 0, y: 15 }}
