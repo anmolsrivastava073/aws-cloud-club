@@ -155,7 +155,7 @@ export default function CloudVisual() {
 
   return (
 
-    <div className="relative w-full h-[460px] rounded-md bg-[#f8f8f8] border border-black/10 overflow-hidden">
+    <div className="relative w-full min-h-[300px] sm:min-h-[400px] h-[50vh] max-h-[600px] rounded-md bg-[#f8f8f8] border border-black/10 overflow-hidden">
 
       {/* SUBTLE BACKGROUND */}
       <div className="absolute inset-0">
