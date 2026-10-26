@@ -52,11 +52,6 @@
   box-sizing: border-box;
 }
 
-img, svg {
-  max-width: 100%;
-  height: auto;
-}
-
 body {
   font-family: "AWS Ember", system-ui, sans-serif;
   @apply antialiased bg-[#f5f3ef] text-[#111111];
