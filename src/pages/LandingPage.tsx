@@ -178,6 +178,14 @@ function MemberCard({
 }
 
 export default function LandingPage() {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant' 
+    });
+  }, []);
+
   const sortedEvents = [...EVENTS].sort((a, b) => {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   });
