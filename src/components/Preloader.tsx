@@ -200,7 +200,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
               initial={{ scale: 1.35, y: 80 }}
               animate={{ scale: [1.35, 1.35, 1.0], y: [80, 80, 0] }}
               transition={{ times: [0, 0.65, 1.0], duration: 2.4, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-48 sm:w-64 md:w-80 lg:w-96 aspect-[16/11] mb-6 sm:mb-8 mx-auto flex items-center justify-center overflow-visible origin-center"
+              className="relative w-48 sm:w-64 md:w-80 lg:w-96 aspect-[16/11] mb-6 sm:mb-8 mx-auto flex items-center justify-center overflow-visible origin-center shrink-0"
             >
               <svg viewBox="0 0 640 500" className="w-full h-full overflow-visible" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -238,9 +238,9 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
               transition={{ duration: 0.7, delay: 2.1, ease: [0.16, 1, 0.3, 1] }}
               className="relative flex flex-col items-center justify-center w-full"
             >
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight flex flex-wrap items-center justify-center gap-x-[0.35em] gap-y-1 leading-tight w-full max-w-[90vw]">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight flex flex-wrap items-center justify-center gap-x-[0.35em] gap-y-3 sm:gap-y-4 leading-normal w-full max-w-[90vw]">
                 {renderedTitleWords.map((wordObj, wIdx) => (
-                  <span key={wIdx} className="inline-flex items-center flex-nowrap whitespace-nowrap">
+                  <span key={wIdx} className="inline-block whitespace-nowrap">
                     {wordObj.chars.map((char, cIdx) => {
                       const globalIdx = wordObj.startIndex + cIdx;
                       const isLocked = globalIdx < titleResolvedCount;
@@ -252,7 +252,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
                             isLocked ? isJustLocked ? 'drop-shadow-[0_0_16px_#b784ff]' : 'drop-shadow-[0_0_10px_rgba(250,248,245,0.35)]' : 'drop-shadow-[0_0_8px_rgba(183,132,255,0.7)]'
                           }`}
                         >
-                          {char}
+                          {char === ' ' ? '\u00A0' : char}
                         </span>
                       );
                     })}
@@ -260,9 +260,9 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
                 ))}
               </h1>
 
-              <h2 className="mt-3 sm:mt-4 text-xs sm:text-[13px] md:text-sm lg:text-base font-semibold uppercase tracking-[0.2em] sm:tracking-[0.25em] flex flex-wrap items-center justify-center gap-x-[0.8em] gap-y-1 w-full max-w-[90vw] text-center">
+              <h2 className="mt-3 sm:mt-4 text-xs sm:text-[13px] md:text-sm lg:text-base font-semibold uppercase tracking-[0.2em] sm:tracking-[0.25em] flex flex-wrap items-center justify-center gap-x-[0.8em] gap-y-2 sm:gap-y-3 leading-normal w-full max-w-[90vw] text-center">
                 {renderedSubWords.map((wordObj, wIdx) => (
-                  <span key={wIdx} className="inline-flex items-center flex-nowrap whitespace-nowrap">
+                  <span key={wIdx} className="inline-block whitespace-nowrap">
                     {wordObj.chars.map((char, cIdx) => {
                       const globalIdx = wordObj.startIndex + cIdx;
                       const isLocked = globalIdx < subResolvedCount;
@@ -274,7 +274,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
                             isLocked ? isJustLocked ? 'drop-shadow-[0_0_14px_#b784ff]' : 'drop-shadow-[0_0_8px_rgba(250,248,245,0.3)]' : 'drop-shadow-[0_0_6px_rgba(183,132,255,0.5)]'
                           }`}
                         >
-                          {char}
+                          {char === ' ' ? '\u00A0' : char}
                         </span>
                       );
                     })}
