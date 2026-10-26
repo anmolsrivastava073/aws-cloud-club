@@ -184,18 +184,18 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
         >
           <div className="absolute inset-0 bg-radial from-[#9b5cff]/20 via-[#08040F] to-[#05020a] pointer-events-none" />
 
-          {/* BACKGROUND GLOW */}
+          {/* BACKGROUND GLOW - Shifted up */}
           <motion.div
             animate={{
               scale: [0.95, 1.25, 0.95],
               opacity: [0.25, 0.45, 0.25],
             }}
             transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute top-[45%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] max-w-[600px] aspect-[4/3] bg-gradient-to-tr from-[#9b5cff]/25 via-[#b784ff]/15 to-transparent rounded-full blur-[80px] sm:blur-3xl pointer-events-none"
+            className="absolute top-[38%] md:top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] max-w-[600px] aspect-[4/3] bg-gradient-to-tr from-[#9b5cff]/25 via-[#b784ff]/15 to-transparent rounded-full blur-[80px] sm:blur-3xl pointer-events-none"
           />
 
-          {/* EXACT MATHEMATICAL CENTER - Locked with absolute positioning */}
-          <div className="absolute top-[45%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl flex flex-col items-center justify-center text-center z-10 px-4 sm:px-8">
+          {/* EXACT MATHEMATICAL CENTER - Shifted up */}
+          <div className="absolute top-[38%] md:top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl flex flex-col items-center justify-center text-center z-10 px-4 sm:px-8">
             
             <motion.div
               initial={{ scale: 1.35, y: 80 }}
