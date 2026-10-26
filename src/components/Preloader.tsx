@@ -194,7 +194,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
           />
 
           {/* ABSOLUTELY CENTERED CORE: Matches LandingPage.tsx exactly */}
-          <div className="w-full max-w-7xl flex flex-col items-center justify-center text-center z-10 px-4 sm:px-8">
+          <div className="relative z-10 w-full max-w-7xl mx-auto flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-8 pt-24 pb-12">
             
             <motion.div
               initial={{ scale: 1.35, y: 80 }}
@@ -293,6 +293,23 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
             </motion.div>
 
           </div>
+
+          {/* GHOST BOTTOM CONTENT: Invisible, purely to push flex center up equally to LandingPage */}
+          <div className="relative z-20 w-full mt-auto shrink-0 flex flex-col items-center px-4 sm:px-8 pb-8 sm:pb-12 pointer-events-none opacity-0 invisible" aria-hidden="true">
+            <div className="flex flex-col items-center justify-center w-full">
+              <p className="text-xs sm:text-sm md:text-base max-w-2xl mx-auto mb-6 sm:mb-8 px-2">
+                A student-led community at Manipal University Jaipur focused on learning,
+                building, and growing with cloud technologies through real-world exposure
+                and collaboration.
+              </p>
+              <div className="flex flex-col sm:flex-row w-full sm:w-auto justify-center gap-3 sm:gap-4 px-2 sm:px-0">
+                <div className="w-full sm:w-auto px-7 py-3.5">
+                  Explore Events
+                </div>
+              </div>
+            </div>
+          </div>
+
         </motion.div>
       )}
     </AnimatePresence>
