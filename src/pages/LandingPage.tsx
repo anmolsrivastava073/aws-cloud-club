@@ -178,11 +178,12 @@ function MemberCard({
 }
 
 export default function LandingPage() {
+  // Force scroll to top instantly on initial mount
   useEffect(() => {
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: 'instant' 
+      behavior: 'instant'
     });
   }, []);
 
