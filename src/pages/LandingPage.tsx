@@ -241,8 +241,8 @@ export default function LandingPage() {
   return (
     <div className="bg-[#f5f3ef] text-black aws-grid-bg overflow-x-hidden">
       
-      {/* 🚀 HERO SECTION — Increased to min-h-[900px] and removed restrictive overflow-hidden */}
-      <section className="relative w-full h-[100dvh] min-h-[900px] border-b border-black/10 bg-[#f5f3ef]">
+      {/* 🚀 HERO SECTION — Min height matches Preloader. Removed overflow-hidden to prevent zoom cutoff. */}
+      <section className="relative w-full h-[100dvh] min-h-[850px] border-b border-black/10 bg-[#f5f3ef]">
         <HeroAmbientGlow />
 
         {/* EXACT MATHEMATICAL CENTER - Locked with absolute positioning */}
@@ -261,41 +261,47 @@ export default function LandingPage() {
             </svg>
           </motion.div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight flex flex-wrap items-center justify-center gap-x-[0.35em] gap-y-3 sm:gap-y-4 leading-normal w-full max-w-[90vw]">
-            {['AWS', 'STUDENT', 'BUILDER', 'GROUP'].map((word, wIdx) => (
-              <span key={wIdx} className="inline-block whitespace-nowrap transition-transform duration-200 hover:-translate-y-0.5">
-                {word.split('').map((char, cIdx) => (
-                  <span key={cIdx} className="inline-block font-bold text-[#111111] hover:text-[#9b5cff] transition-colors duration-150">
-                    {char}
-                  </span>
-                ))}
-              </span>
-            ))}
-          </h1>
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 2.1, ease: [0.16, 1, 0.3, 1] }}
+            className="relative flex flex-col items-center justify-center w-full"
+          >
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight flex flex-wrap items-center justify-center gap-x-[0.35em] gap-y-3 sm:gap-y-4 leading-normal w-full max-w-[90vw]">
+              {['AWS', 'STUDENT', 'BUILDER', 'GROUP'].map((word, wIdx) => (
+                <span key={wIdx} className="inline-block whitespace-nowrap transition-transform duration-200 hover:-translate-y-0.5">
+                  {word.split('').map((char, cIdx) => (
+                    <span key={cIdx} className="inline-block font-bold text-[#111111] hover:text-[#9b5cff] transition-colors duration-150">
+                      {char}
+                    </span>
+                  ))}
+                </span>
+              ))}
+            </h1>
 
-          <h2 className="mt-3 sm:mt-4 text-xs sm:text-[13px] md:text-sm lg:text-base font-semibold uppercase tracking-[0.2em] sm:tracking-[0.25em] flex flex-wrap items-center justify-center gap-x-[0.8em] gap-y-2 sm:gap-y-3 leading-normal w-full max-w-[90vw] text-center">
-            {['MANIPAL', 'UNIVERSITY', 'JAIPUR'].map((word, wIdx) => (
-              <span key={wIdx} className="inline-block whitespace-nowrap">
-                {word.split('').map((char, cIdx) => (
-                  <span key={cIdx} className="inline-block font-semibold text-[#9b5cff]">
-                    {char}
-                  </span>
-                ))}
-              </span>
-            ))}
-          </h2>
+            <h2 className="mt-3 sm:mt-4 text-xs sm:text-[13px] md:text-sm lg:text-base font-semibold uppercase tracking-[0.2em] sm:tracking-[0.25em] flex flex-wrap items-center justify-center gap-x-[0.8em] gap-y-2 sm:gap-y-3 leading-normal w-full max-w-[90vw] text-center">
+              {['MANIPAL', 'UNIVERSITY', 'JAIPUR'].map((word, wIdx) => (
+                <span key={wIdx} className="inline-block whitespace-nowrap">
+                  {word.split('').map((char, cIdx) => (
+                    <span key={cIdx} className="inline-block font-semibold text-[#9b5cff]">
+                      {char}
+                    </span>
+                  ))}
+                </span>
+              ))}
+            </h2>
 
-          <div className="mt-5 sm:mt-6 flex items-center justify-center w-full">
-            <div className="w-32 sm:w-80 h-[1.5px] bg-gradient-to-r from-transparent via-[#9b5cff]/40 to-transparent" />
-          </div>
+            <div className="mt-5 sm:mt-6 flex items-center justify-center w-full">
+              <div className="w-32 sm:w-80 h-[1.5px] bg-gradient-to-r from-transparent via-[#9b5cff]/40 to-transparent" />
+            </div>
 
-          <div className="absolute top-full left-0 w-full pt-8 sm:pt-12 flex flex-col items-center z-20 pointer-events-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex flex-col items-center justify-center w-full"
-            >
+            {/* 
+              🔥 FIX FOR ZOOM COLLISION: 
+              Attached to the bottom of the absolutely centered title block.
+              Since this flows down from the center, it never affects the height of the core layout,
+              keeping the Preloader perfectly aligned while avoiding the collision.
+            */}
+            <div className="absolute top-full left-0 w-full pt-8 sm:pt-12 flex flex-col items-center z-20 pointer-events-auto">
               <p className="text-[#5f5f5f] text-xs sm:text-sm md:text-base max-w-2xl mx-auto mb-6 sm:mb-8 leading-relaxed text-center px-2">
                 A student-led community at Manipal University Jaipur focused on learning,
                 building, and growing with cloud technologies through real-world exposure
@@ -318,9 +324,9 @@ export default function LandingPage() {
                   Learn More
                 </a>
               </div>
-            </motion.div>
-          </div>
-          
+            </div>
+            
+          </motion.div>
         </div>
       </section>
 
