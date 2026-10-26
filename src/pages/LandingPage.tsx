@@ -245,8 +245,8 @@ export default function LandingPage() {
       <section className="relative w-full h-[100dvh] min-h-[850px] border-b border-black/10 bg-[#f5f3ef]">
         <HeroAmbientGlow />
 
-        {/* EXACT MATHEMATICAL CENTER - Locked with absolute positioning */}
-        <div className="absolute top-[45%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl flex flex-col items-center justify-center text-center z-10 px-4 sm:px-8">
+        {/* EXACT MATHEMATICAL CENTER - Shifted up */}
+        <div className="absolute top-[38%] md:top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl flex flex-col items-center justify-center text-center z-10 px-4 sm:px-8">
           
           <motion.div
             animate={{ y: [0, -6, 0] }}
