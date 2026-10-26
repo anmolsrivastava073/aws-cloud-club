@@ -180,21 +180,22 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
           }
           exit={{ opacity: 0, filter: 'blur(12px)', scale: 1.04 }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-0 z-[99999] h-[100dvh] w-full select-none overflow-hidden bg-[#08040F] pointer-events-none flex flex-col items-center justify-center"
+          className="fixed inset-0 z-[99999] h-[100dvh] min-h-[750px] w-full select-none overflow-hidden bg-[#08040F] pointer-events-none"
         >
           <div className="absolute inset-0 bg-radial from-[#9b5cff]/20 via-[#08040F] to-[#05020a] pointer-events-none" />
 
+          {/* BACKGROUND GLOW */}
           <motion.div
             animate={{
               scale: [0.95, 1.25, 0.95],
               opacity: [0.25, 0.45, 0.25],
             }}
             transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] max-w-[600px] aspect-[4/3] bg-gradient-to-tr from-[#9b5cff]/25 via-[#b784ff]/15 to-transparent rounded-full blur-[80px] sm:blur-3xl pointer-events-none"
+            className="absolute top-[45%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] max-w-[600px] aspect-[4/3] bg-gradient-to-tr from-[#9b5cff]/25 via-[#b784ff]/15 to-transparent rounded-full blur-[80px] sm:blur-3xl pointer-events-none"
           />
 
-          {/* ABSOLUTELY CENTERED CORE: Matches LandingPage.tsx exactly */}
-          <div className="relative z-10 w-full max-w-7xl mx-auto flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-8 pt-24 pb-12">
+          {/* EXACT MATHEMATICAL CENTER - Locked with absolute positioning */}
+          <div className="absolute top-[45%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl flex flex-col items-center justify-center text-center z-10 px-4 sm:px-8">
             
             <motion.div
               initial={{ scale: 1.35, y: 80 }}
@@ -293,23 +294,6 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
             </motion.div>
 
           </div>
-
-          {/* GHOST BOTTOM CONTENT: Invisible, purely to push flex center up equally to LandingPage */}
-          <div className="relative z-20 w-full mt-auto shrink-0 flex flex-col items-center px-4 sm:px-8 pb-8 sm:pb-12 pointer-events-none opacity-0 invisible" aria-hidden="true">
-            <div className="flex flex-col items-center justify-center w-full">
-              <p className="text-xs sm:text-sm md:text-base max-w-2xl mx-auto mb-6 sm:mb-8 px-2">
-                A student-led community at Manipal University Jaipur focused on learning,
-                building, and growing with cloud technologies through real-world exposure
-                and collaboration.
-              </p>
-              <div className="flex flex-col sm:flex-row w-full sm:w-auto justify-center gap-3 sm:gap-4 px-2 sm:px-0">
-                <div className="w-full sm:w-auto px-7 py-3.5">
-                  Explore Events
-                </div>
-              </div>
-            </div>
-          </div>
-
         </motion.div>
       )}
     </AnimatePresence>
