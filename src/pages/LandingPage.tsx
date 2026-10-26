@@ -178,13 +178,32 @@ function MemberCard({
 }
 
 export default function LandingPage() {
-  // Force scroll to top instantly on initial mount
+  
+  // 🔥 THE FIX: Prevent browser from overriding scroll position on refresh
   useEffect(() => {
+    // 1. Tell the browser NOT to remember the scroll position on refresh
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    // 2. Clear any #hash in the URL (like /#events) that forces the page down
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+    
+    // 3. Force window to absolute top instantly
     window.scrollTo({
       top: 0,
       left: 0,
       behavior: 'instant'
     });
+
+    // Cleanup: restore default browser behavior when leaving the page
+    return () => {
+      if ('scrollRestoration' in window.history) {
+        window.history.scrollRestoration = 'auto';
+      }
+    };
   }, []);
 
   const sortedEvents = [...EVENTS].sort((a, b) => {
