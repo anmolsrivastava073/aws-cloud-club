@@ -190,7 +190,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
               opacity: [0.25, 0.45, 0.25],
             }}
             transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[600px] h-[250px] sm:h-[450px] bg-gradient-to-tr from-[#9b5cff]/25 via-[#b784ff]/15 to-transparent rounded-full blur-[80px] sm:blur-3xl pointer-events-none"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] max-w-[600px] aspect-[4/3] bg-gradient-to-tr from-[#9b5cff]/25 via-[#b784ff]/15 to-transparent rounded-full blur-[80px] sm:blur-3xl pointer-events-none"
           />
 
           {/* ABSOLUTELY CENTERED CORE */}
@@ -240,7 +240,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
                 className="relative flex flex-col items-center justify-center w-full px-2"
               >
                 <div className="relative overflow-visible w-full flex items-center justify-center px-2">
-                  <h1 className="text-[4.8vw] sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight flex flex-nowrap whitespace-nowrap items-center justify-center gap-x-1.5 sm:gap-x-4 md:gap-x-5">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight flex flex-nowrap items-center justify-center gap-x-1.5 sm:gap-x-4 md:gap-x-5 flex-wrap">
                     {renderedTitleWords.map((wordObj, wIdx) => (
                       <span key={wIdx} className="inline-flex items-center flex-nowrap whitespace-nowrap">
                         {wordObj.chars.map((char, cIdx) => {
@@ -264,7 +264,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
                 </div>
 
                 <div className="relative mt-2.5 sm:mt-5 overflow-visible w-full flex items-center justify-center px-4">
-                  <h2 className="text-[2.2vw] sm:text-[11px] md:text-sm lg:text-base font-semibold tracking-[0.2em] sm:tracking-[0.25em] flex flex-nowrap whitespace-nowrap items-center justify-center gap-x-1.5 sm:gap-x-3.5 md:gap-x-4.5 uppercase">
+                  <h2 className="text-xs sm:text-[11px] md:text-sm lg:text-base font-semibold tracking-[0.2em] sm:tracking-[0.25em] flex flex-wrap items-center justify-center gap-x-1.5 sm:gap-x-3.5 md:gap-x-4.5 uppercase">
                     {renderedSubWords.map((wordObj, wIdx) => (
                       <span key={wIdx} className="inline-flex items-center flex-nowrap whitespace-nowrap">
                         {wordObj.chars.map((char, cIdx) => {
@@ -274,33 +274,4 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
                           const currentColor = wordObj.colors[cIdx] || '#FAF8F5';
                           return (
                             <span key={cIdx} style={{ color: isLocked ? '#FAF8F5' : currentColor }}
-                              className={`inline-block font-semibold transition-colors duration-100 ${
-                                isLocked ? isJustLocked ? 'drop-shadow-[0_0_14px_#b784ff]' : 'drop-shadow-[0_0_8px_rgba(250,248,245,0.3)]' : 'drop-shadow-[0_0_6px_rgba(183,132,255,0.5)]'
-                              }`}
-                            >
-                              {char}
-                            </span>
-                          );
-                        })}
-                      </span>
-                    ))}
-                  </h2>
-                </div>
-
-                <div className="relative mt-3 sm:mt-6 flex items-center justify-center w-full">
-                  <motion.div
-                    initial={{ scaleX: 0, opacity: 0 }}
-                    animate={{ scaleX: titleResolvedCount >= TITLE_PHRASE.length ? 1 : 0.4, opacity: titleResolvedCount >= TITLE_PHRASE.length ? 0.75 : 0.25 }}
-                    transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-                    className="w-32 sm:w-80 h-[1.5px] bg-gradient-to-r from-transparent via-[#9b5cff] to-transparent"
-                  />
-                </div>
-              </motion.div>
-
-            </div>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
+                              className={`inline-block font
