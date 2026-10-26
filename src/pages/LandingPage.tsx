@@ -103,7 +103,6 @@ function MemberCard({
       } ${className}`}
     >
       <div className="aspect-[3/4] relative overflow-hidden bg-[#18181b]">
-        {/* Fallback avatar initials */}
         <div className={`absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-[#1e1b2e] to-[#120f1d] text-center ${isHero ? 'p-4' : 'p-3'}`}>
           <div
             className={`rounded-full bg-[#9b5cff]/20 border border-[#9b5cff]/40 flex items-center justify-center font-bold text-[#b784ff] mb-2 shadow-inner ${
@@ -125,7 +124,6 @@ function MemberCard({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none z-20" />
         
-        {/* 🔗 LinkedIn button */}
         {linkedin && (
           <>
           <div
@@ -179,7 +177,6 @@ function MemberCard({
 
 export default function LandingPage() {
   
-  // 🔥 Lock scroll position to top and clear anchors on refresh
   useEffect(() => {
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
@@ -241,17 +238,15 @@ export default function LandingPage() {
   return (
     <div className="bg-[#f5f3ef] text-black aws-grid-bg overflow-x-hidden">
       
-      {/* 🚀 HERO SECTION — Unified layout mirroring the preloader */}
       <section className="relative w-full h-[100dvh] min-h-[600px] border-b border-black/10 overflow-hidden bg-[#f5f3ef] flex flex-col items-center justify-center">
         <HeroAmbientGlow />
 
-        {/* CORE: Perfectly centered in the viewport */}
-        <div className="w-full max-w-7xl flex flex-col items-center justify-center text-center z-10 px-4 sm:px-8">
+        <div className="w-full max-w-7xl flex flex-col items-center justify-center text-center z-10 px-4 sm:px-8 py-10">
           
           <motion.div
             animate={{ y: [0, -6, 0] }}
             transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
-            className="relative w-48 sm:w-64 md:w-80 lg:w-96 aspect-[16/11] mb-6 sm:mb-8 mx-auto flex items-center justify-center overflow-visible origin-center group cursor-pointer"
+            className="relative w-48 sm:w-64 md:w-80 lg:w-96 aspect-[16/11] mb-6 sm:mb-8 mx-auto flex items-center justify-center overflow-visible origin-center group cursor-pointer shrink-0"
           >
             <div className="absolute inset-0 bg-[#9b5cff]/8 rounded-full blur-xl sm:blur-2xl pointer-events-none group-hover:bg-[#9b5cff]/15 transition-all duration-500" />
             <svg viewBox="0 0 640 500" className="w-full h-full overflow-visible transition-transform duration-300 group-hover:scale-[1.02]" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -260,7 +255,7 @@ export default function LandingPage() {
             </svg>
           </motion.div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight flex flex-wrap items-center justify-center gap-x-[0.35em] gap-y-1 leading-tight w-full max-w-[90vw]">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight flex flex-wrap items-center justify-center gap-x-[0.35em] gap-y-3 sm:gap-y-4 leading-normal w-full max-w-[90vw]">
             {['AWS', 'STUDENT', 'BUILDER', 'GROUP'].map((word, wIdx) => (
               <span key={wIdx} className="inline-flex items-center flex-nowrap whitespace-nowrap transition-transform duration-200 hover:-translate-y-0.5">
                 {word.split('').map((char, cIdx) => (
@@ -272,7 +267,7 @@ export default function LandingPage() {
             ))}
           </h1>
 
-          <h2 className="mt-3 sm:mt-4 text-xs sm:text-[13px] md:text-sm lg:text-base font-semibold uppercase tracking-[0.2em] sm:tracking-[0.25em] flex flex-wrap items-center justify-center gap-x-[0.8em] gap-y-1 w-full max-w-[90vw] text-center">
+          <h2 className="mt-3 sm:mt-4 text-xs sm:text-[13px] md:text-sm lg:text-base font-semibold uppercase tracking-[0.2em] sm:tracking-[0.25em] flex flex-wrap items-center justify-center gap-x-[0.8em] gap-y-2 sm:gap-y-3 leading-normal w-full max-w-[90vw] text-center">
             {['MANIPAL', 'UNIVERSITY', 'JAIPUR'].map((word, wIdx) => (
               <span key={wIdx} className="inline-flex items-center flex-nowrap whitespace-nowrap">
                 {word.split('').map((char, cIdx) => (
