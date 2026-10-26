@@ -44,6 +44,17 @@
 :root {
   background-color: #f5f3ef;
   color: #111111;
+  font-size: 100%; /* Fluid font scaling foundation */
+}
+
+/* Ensure all elements respect boundary constraints when zoomed */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+img, svg {
+  max-width: 100%;
+  height: auto;
 }
 
 body {
@@ -52,6 +63,10 @@ body {
 
   /* ✨ cleaner editorial feel */
   letter-spacing: -0.015em;
+  
+  /* Prevent horizontal scroll on aggressive zoom */
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* ✨ TYPOGRAPHY */
