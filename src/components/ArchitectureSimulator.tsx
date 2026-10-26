@@ -116,7 +116,7 @@ export default function ArchitectureSimulator() {
       </div>
 
       {/* RIGHT: DYNAMIC CANVAS & INTERACTIVE SIMULATOR */}
-      <div className="lg:col-span-7 bg-[#0c121d] rounded-xl border border-white/10 overflow-hidden relative min-h-[380px] flex flex-col p-6">
+      <div className="lg:col-span-7 bg-[#0c121d] rounded-xl border border-white/10 overflow-hidden relative min-h-[20rem] h-auto flex flex-col p-6">
         {/* Background Grid */}
         <div className="absolute inset-0 aws-grid-bg opacity-30 pointer-events-none" />
 
@@ -133,7 +133,7 @@ export default function ArchitectureSimulator() {
         </div>
 
         {/* WORKFLOW CONTENT SWITCHER */}
-        <div className="flex-grow flex items-center justify-center relative z-10">
+        <div className="flex-grow flex items-center justify-center relative z-10 py-4">
           <AnimatePresence mode="wait">
             {activeStep === 0 && (
               <motion.div
@@ -174,10 +174,10 @@ export default function ArchitectureSimulator() {
                 exit={{ opacity: 0, scale: 1.05 }}
                 className="w-full flex flex-col items-center justify-center gap-4"
               >
-                <div className="w-full max-w-md bg-[#161E2D] rounded-xl border border-white/10 p-4 font-mono text-xs space-y-2">
+                <div className="w-full max-w-md bg-[#161E2D] rounded-xl border border-white/10 p-4 font-mono text-xs space-y-2 break-all overflow-x-hidden">
                   <div className="flex items-center justify-between border-b border-white/10 pb-2 text-gray-400 text-[11px]">
                     <span>AWS CloudShell Sandbox Session</span>
-                    <span className="text-emerald-400">● CONNECTED</span>
+                    <span className="text-emerald-400 shrink-0">● CONNECTED</span>
                   </div>
                   <p className="text-gray-300"><span className="text-emerald-400">user@cloudshell:~$</span> aws configure</p>
                   <p className="text-gray-400 pl-2">AWS Access Key ID: [****************4X7A]</p>
@@ -200,14 +200,14 @@ export default function ArchitectureSimulator() {
                 className="w-full flex flex-col items-center justify-center gap-6"
               >
                 {/* INTERACTIVE SERVERLESS PIPELINE */}
-                <div className="flex items-center justify-center gap-2 sm:gap-4 w-full max-w-lg relative">
+                <div className="flex items-center justify-center gap-2 sm:gap-4 w-full max-w-lg relative flex-wrap sm:flex-nowrap">
                   {/* CLIENT */}
                   <div className="flex flex-col items-center p-3 rounded-xl bg-[#161E2D] border border-white/10 text-center w-24">
                     <Globe className="w-6 h-6 text-cyan-400 mb-1" />
                     <span className="text-[10px] font-mono font-bold text-gray-300">HTTP Client</span>
                   </div>
 
-                  <ArrowRight className={`w-4 h-4 transition-colors ${isPacketAnimating ? 'text-aws-orange animate-pulse' : 'text-gray-600'}`} />
+                  <ArrowRight className={`hidden sm:block w-4 h-4 transition-colors ${isPacketAnimating ? 'text-aws-orange animate-pulse' : 'text-gray-600'}`} />
 
                   {/* API GATEWAY */}
                   <div className="flex flex-col items-center p-3 rounded-xl bg-[#161E2D] border border-white/10 text-center w-24">
@@ -215,7 +215,7 @@ export default function ArchitectureSimulator() {
                     <span className="text-[10px] font-mono font-bold text-gray-300">API Gateway</span>
                   </div>
 
-                  <ArrowRight className={`w-4 h-4 transition-colors ${isPacketAnimating ? 'text-aws-orange animate-pulse' : 'text-gray-600'}`} />
+                  <ArrowRight className={`hidden sm:block w-4 h-4 transition-colors ${isPacketAnimating ? 'text-aws-orange animate-pulse' : 'text-gray-600'}`} />
 
                   {/* LAMBDA */}
                   <div className="flex flex-col items-center p-3 rounded-xl bg-[#161E2D] border border-aws-orange/40 text-center w-24 shadow-[0_0_15px_rgba(255,153,0,0.2)]">
@@ -223,7 +223,7 @@ export default function ArchitectureSimulator() {
                     <span className="text-[10px] font-mono font-bold text-white">AWS Lambda</span>
                   </div>
 
-                  <ArrowRight className={`w-4 h-4 transition-colors ${isPacketAnimating ? 'text-aws-orange animate-pulse' : 'text-gray-600'}`} />
+                  <ArrowRight className={`hidden sm:block w-4 h-4 transition-colors ${isPacketAnimating ? 'text-aws-orange animate-pulse' : 'text-gray-600'}`} />
 
                   {/* DYNAMODB */}
                   <div className="flex flex-col items-center p-3 rounded-xl bg-[#161E2D] border border-white/10 text-center w-24">
@@ -236,14 +236,14 @@ export default function ArchitectureSimulator() {
                 <button
                   onClick={triggerPacketFlow}
                   disabled={isPacketAnimating}
-                  className="px-4 py-2 rounded-lg bg-aws-orange hover:bg-aws-orange-light text-aws-navy font-bold text-xs flex items-center gap-2 transition-all disabled:opacity-50"
+                  className="px-4 py-2 rounded-lg bg-aws-orange hover:bg-aws-orange-light text-aws-navy font-bold text-xs flex items-center justify-center gap-2 transition-all disabled:opacity-50 w-full sm:w-auto"
                 >
-                  <Send className="w-3.5 h-3.5" />
+                  <Send className="w-3.5 h-3.5 shrink-0" />
                   <span>{isPacketAnimating ? 'Executing Serverless Request...' : 'Click to Simulate Live Request'}</span>
                 </button>
 
                 {isPacketAnimating && (
-                  <motion.div initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} className="p-2 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono">
+                  <motion.div initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} className="p-2 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono break-all text-center">
                     HTTP 200 OK • Lambda Duration: 42ms • ReadCapacityUnits: 1
                   </motion.div>
                 )}
@@ -258,7 +258,7 @@ export default function ArchitectureSimulator() {
                 exit={{ opacity: 0, scale: 1.05 }}
                 className="w-full flex flex-col items-center justify-center gap-6"
               >
-                <div className="flex items-center gap-4 sm:gap-8">
+                <div className="flex flex-wrap sm:flex-nowrap justify-center items-center gap-4 sm:gap-8">
                   <div className="flex flex-col items-center text-center">
                     <div className="w-12 h-12 rounded-xl bg-gray-800 border border-white/10 flex items-center justify-center text-white mb-2">
                       <GitBranch className="w-6 h-6" />
@@ -266,7 +266,7 @@ export default function ArchitectureSimulator() {
                     <span className="text-xs font-mono font-bold text-gray-300">git push</span>
                   </div>
 
-                  <ArrowRight className="w-5 h-5 text-aws-orange" />
+                  <ArrowRight className="hidden sm:block w-5 h-5 text-aws-orange" />
 
                   <div className="flex flex-col items-center text-center">
                     <div className="w-12 h-12 rounded-xl bg-aws-orange/15 border border-aws-orange/40 flex items-center justify-center text-aws-orange mb-2">
@@ -275,7 +275,7 @@ export default function ArchitectureSimulator() {
                     <span className="text-xs font-mono font-bold text-gray-300">CI/CD Build</span>
                   </div>
 
-                  <ArrowRight className="w-5 h-5 text-aws-orange" />
+                  <ArrowRight className="hidden sm:block w-5 h-5 text-aws-orange" />
 
                   <div className="flex flex-col items-center text-center">
                     <div className="w-12 h-12 rounded-xl bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center text-emerald-400 mb-2">
@@ -288,18 +288,18 @@ export default function ArchitectureSimulator() {
                 <button
                   onClick={triggerPipeline}
                   disabled={pipelineState === 'running'}
-                  className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white font-bold text-xs flex items-center gap-2 border border-white/20 transition-all"
+                  className="px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white font-bold text-xs flex items-center justify-center gap-2 border border-white/20 transition-all w-full sm:w-auto"
                 >
-                  <Play className="w-3.5 h-3.5 text-aws-orange" />
+                  <Play className="w-3.5 h-3.5 text-aws-orange shrink-0" />
                   <span>{pipelineState === 'running' ? 'Deploying to CloudFront...' : 'Run Automated Pipeline Test'}</span>
                 </button>
 
                 {pipelineState === 'success' && (
-                  <div className="flex gap-2">
-                    <span className="px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono rounded flex items-center gap-1.5 font-bold">
+                  <div className="flex flex-wrap justify-center gap-2 w-full">
+                    <span className="px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono rounded flex items-center justify-center gap-1.5 font-bold">
                       <CheckCircle2 className="w-3.5 h-3.5" /> 100% Tests Passed
                     </span>
-                    <span className="px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono rounded font-bold">
+                    <span className="px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-mono rounded font-bold text-center">
                       Global Edge Cache Deployed
                     </span>
                   </div>
