@@ -739,7 +739,7 @@ export default function LandingPage() {
           <motion.div
             animate={{ scale: [1, 1.15, 1], opacity: [0.15, 0.3, 0.15], x: [0, 20, 0] }}
             transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[650px] aspect-square bg-[#9B5CFF]/15 blur-[100px] sm:blur-[130px] rounded-full"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[650px] h-[250px] sm:h-[380px] bg-[#9B5CFF]/15 blur-[100px] sm:blur-[130px] rounded-full"
           />
         </div>
         <div className="max-w-5xl mx-auto px-4 relative z-10 text-center">
