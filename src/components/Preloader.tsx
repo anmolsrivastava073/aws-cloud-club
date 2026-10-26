@@ -274,4 +274,33 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
                           const currentColor = wordObj.colors[cIdx] || '#FAF8F5';
                           return (
                             <span key={cIdx} style={{ color: isLocked ? '#FAF8F5' : currentColor }}
-                              className={`inline-block font
+                              className={`inline-block font-semibold transition-colors duration-100 ${
+                                isLocked ? isJustLocked ? 'drop-shadow-[0_0_14px_#b784ff]' : 'drop-shadow-[0_0_8px_rgba(250,248,245,0.3)]' : 'drop-shadow-[0_0_6px_rgba(183,132,255,0.5)]'
+                              }`}
+                            >
+                              {char}
+                            </span>
+                          );
+                        })}
+                      </span>
+                    ))}
+                  </h2>
+                </div>
+
+                <div className="relative mt-3 sm:mt-6 flex items-center justify-center w-full">
+                  <motion.div
+                    initial={{ scaleX: 0, opacity: 0 }}
+                    animate={{ scaleX: titleResolvedCount >= TITLE_PHRASE.length ? 1 : 0.4, opacity: titleResolvedCount >= TITLE_PHRASE.length ? 0.75 : 0.25 }}
+                    transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-32 sm:w-80 h-[1.5px] bg-gradient-to-r from-transparent via-[#9b5cff] to-transparent"
+                  />
+                </div>
+              </motion.div>
+
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
