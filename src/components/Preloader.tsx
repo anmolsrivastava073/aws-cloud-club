@@ -180,7 +180,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
           }
           exit={{ opacity: 0, filter: 'blur(12px)', scale: 1.04 }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-0 z-[99999] h-[100dvh] min-h-[750px] w-full select-none overflow-hidden bg-[#08040F] pointer-events-none"
+          className="fixed inset-0 z-[99999] h-[100dvh] min-h-[850px] w-full select-none overflow-hidden bg-[#08040F] pointer-events-none"
         >
           <div className="absolute inset-0 bg-radial from-[#9b5cff]/20 via-[#08040F] to-[#05020a] pointer-events-none" />
 
