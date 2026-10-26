@@ -34,14 +34,14 @@ export const EVENTS: Event[] = [
     recap: {
       title: 'Test recap',
       paragraphs: [
-        'paragraph 1',
-        'paragraph 2',
-        'paragraph 3',
+        'The recent "Cloud Quest" event proved to be an invaluable experience for students eager to navigate the ever-evolving world of cloud computing. Led by industry veteran Mr. Chetan Agrawal, the session provided a highly interactive platform where attendees could openly ask burning questions and clear their lingering doubts. Through dedicated Q&A segments and expert guidance, students gained much-needed clarity on complex cloud concepts and received direct, actionable insights on how to align their foundational knowledge with current industry expectations.',
+        'Beyond just answering questions, the event broke down exactly how the cloud works behind the scenes. The session demystified the transition from traditional on-premise servers to elastic, on-demand cloud infrastructure. Participants learned the core mechanics of virtualized compute power, scalable storage, and secure networking, giving them a solid, practical understanding of how data and applications are seamlessly hosted, routed, and managed across distributed global data centers.',
+        'Finally, the session highlighted exactly what the cloud does for modern businesses and end users. The discussion showcased real world applications, illustrating how global enterprises leverage AWS services to drive innovation, scale rapidly during high traffic spikes, and maintain robust security. By exploring these practical use cases from hosting simple web apps to running complex machine learning models, attendees gained a comprehensive view of the cloud capabilities. To cap off the event, we hosted an exciting cloud quiz round where the top 3 students were rewarded with exclusive goodies, leaving everyone deeply inspired and well prepared to start building their own cloud native solutions.',
       ],
       photos: [
-        '/images/img1.jpeg',
-        '/images/img2.png',
-        '/images/img3.jpeg',
+        '/images/cloudquestimg1.png',
+        '/images/cloudquestimg2.png',
+        '/images/cloudquestimg3.png',
       ],
     },
   },
