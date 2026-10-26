@@ -39,7 +39,7 @@ export default function EventCard({
         <div className="flex flex-col h-full bg-white rounded-none border border-gray-200 overflow-hidden shadow-sm group-hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] transition-all duration-300">
           
           {/* FADED SECTION (Image & Text details faded to 50% for past events, full on hover) */}
-          <div className={`transition-opacity duration-300 ${expired ? 'opacity-50 group-hover:opacity-100' : 'opacity-100'}`}>
+          <div className={`transition-opacity duration-300 flex-1 ${expired ? 'opacity-50 group-hover:opacity-100' : 'opacity-100'}`}>
             
             {/* 1. VISUAL SECTION */}
             <div className="relative w-full h-56 flex-shrink-0 bg-gray-100 overflow-hidden border-b border-gray-200">
@@ -62,13 +62,13 @@ export default function EventCard({
               </div>
 
               {/* TITLE */}
-              <h3 className="text-xl font-bold text-gray-900 truncate mb-2 group-hover:text-[#9b5cff] transition-colors duration-200">
+              <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#9b5cff] transition-colors duration-200">
                 {event.title}
               </h3>
 
-              {/* DESCRIPTION */}
-              <div className="h-[40px] mb-4">
-                <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed">
+              {/* DESCRIPTION - Height unconstrained to prevent zoom truncation */}
+              <div className="min-h-[3rem] h-auto mb-4">
+                <p className="text-sm text-gray-500 line-clamp-3 leading-relaxed">
                   {event.shortDescription}
                 </p>
               </div>
@@ -76,11 +76,11 @@ export default function EventCard({
               {/* META INFO (Venue & Time) */}
               <div className="flex flex-col gap-2 text-xs text-gray-500">
                 <div className="flex items-center gap-2">
-                  <MapPin className="w-3.5 h-3.5 text-[#9b5cff]" />
-                  <span className="truncate font-medium">{event.venue}</span>
+                  <MapPin className="w-3.5 h-3.5 text-[#9b5cff] shrink-0" />
+                  <span className="font-medium">{event.venue}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Clock className="w-3.5 h-3.5 text-[#9b5cff]" />
+                  <Clock className="w-3.5 h-3.5 text-[#9b5cff] shrink-0" />
                   <span className="font-medium">{event.time}</span>
                 </div>
               </div>
