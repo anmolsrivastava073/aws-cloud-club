@@ -241,12 +241,12 @@ export default function LandingPage() {
   return (
     <div className="bg-[#f5f3ef] text-black aws-grid-bg overflow-x-hidden">
       
-      {/* 🚀 HERO SECTION — Pure Flex Layout (No absolute bottom positioning) */}
-      <section className="relative w-full min-h-[100dvh] border-b border-black/10 overflow-hidden bg-[#f5f3ef] flex flex-col">
+      {/* 🚀 HERO SECTION — min-h-[750px] ensures space for Absolute Center + Absolute Bottom without collision */}
+      <section className="relative w-full h-[100dvh] min-h-[750px] border-b border-black/10 overflow-hidden bg-[#f5f3ef]">
         <HeroAmbientGlow />
 
-        {/* CORE: flex-1 ensures it centers in the remaining space naturally */}
-        <div className="relative z-10 w-full max-w-7xl mx-auto flex-1 flex flex-col items-center justify-center text-center px-4 sm:px-8 pt-24 pb-12">
+        {/* EXACT MATHEMATICAL CENTER - Locked with absolute positioning */}
+        <div className="absolute top-[45%] md:top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl flex flex-col items-center justify-center text-center z-10 px-4 sm:px-8">
           
           <motion.div
             animate={{ y: [0, -6, 0] }}
@@ -297,8 +297,8 @@ export default function LandingPage() {
 
         </div>
 
-        {/* BOTTOM CONTENT: Uses mt-auto to sit at the bottom but stays inside the normal flex document flow. No collisions! */}
-        <div className="relative z-20 w-full mt-auto shrink-0 flex flex-col items-center px-4 sm:px-8 pb-8 sm:pb-12 pointer-events-auto">
+        {/* BOTTOM CONTENT: Absolute at bottom to not push the core up */}
+        <div className="absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 w-full flex flex-col items-center px-4 sm:px-8 z-20 pointer-events-auto">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
