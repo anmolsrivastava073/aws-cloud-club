@@ -839,7 +839,7 @@ export default function LandingPage() {
                   <Linkedin className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <div className="text-[11px] sm:text-xs font-mono text-[#0A66C2] font-semibold mb-1">
-                  AWS Cloud Club MUJ
+                  AWS Student Builder Group MUJ
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold tracking-tight text-[#18181b] group-hover:text-[#7C3AED] transition-colors mb-2">
                   LinkedIn
