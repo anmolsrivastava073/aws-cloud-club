@@ -95,15 +95,15 @@ export default function EventCard({
               src={event.banner || '/images/default-banner.jpg'}
               alt={event.title}
               loading="lazy"
-              className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-105 ${
+              className={`w-full h-full object-cover brightness-[0.8] group-hover:brightness-[0.92] transition-all duration-700 group-hover:scale-105 ${
                 expired ? 'grayscale-[60%] group-hover:grayscale-0' : ''
               }`}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/5 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/10 to-black/60 pointer-events-none" />
 
             {/* Date block */}
             {validDate && (
-              <div className="absolute top-4 left-4 flex flex-col items-center justify-center w-14 py-2 bg-white shadow-md">
+              <div className="absolute top-4 left-4 flex flex-col items-center justify-center w-14 py-2 bg-white shadow-lg">
                 <span className="text-xl font-extrabold leading-none text-gray-900">{day}</span>
                 <span className="text-[11px] font-semibold text-[#7c3aed] mt-1 leading-none">{month}</span>
                 <span className="text-[9px] text-gray-400 mt-0.5 leading-none">{year}</span>
@@ -116,8 +116,8 @@ export default function EventCard({
                 today
                   ? 'bg-[#9b5cff] text-white'
                   : expired
-                  ? 'bg-black/60 text-white/90 backdrop-blur'
-                  : 'bg-white text-gray-900'
+                  ? 'bg-white text-gray-900 shadow-md'
+                  : 'bg-[#18181b]/90 text-white backdrop-blur ring-1 ring-white/20'
               }`}
             >
               {today && (
