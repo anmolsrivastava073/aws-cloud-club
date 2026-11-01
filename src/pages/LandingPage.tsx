@@ -43,7 +43,15 @@ const CLUB_PILLARS = [
   }
 ];
 
-const TEAM_CARD_CLASS = 'w-full h-auto';
+// Same column counts as before (2 / 3 / 4 / 5), but leftover cards center on the last row
+const TEAM_GRID_CLASS =
+  'flex flex-wrap justify-center gap-3 sm:gap-5 max-w-6xl mx-auto';
+
+const TEAM_CARD_CLASS =
+  'w-[calc((100%-0.75rem)/2)] sm:w-[calc((100%-2.5rem)/3)] md:w-[calc((100%-3.75rem)/4)] lg:w-[calc((100%-5rem)/5)] h-auto';
+
+const HERO_CARD_CLASS =
+  'w-[calc((100%-0.75rem)/2)] sm:w-[calc((100%-1.5rem)/2)] h-auto';
 
 const getInitials = (name: string) =>
   name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase();
@@ -622,9 +630,13 @@ export default function LandingPage() {
               {/* TIER 1 */}
               {(captain || coCaptain) && (
                 <div className="mb-10 sm:mb-16">
-                  <div className="grid grid-cols-2 gap-3 sm:gap-6 max-w-lg mx-auto">
-                    {captain && <MemberCard member={captain} variant="hero" />}
-                    {coCaptain && <MemberCard member={coCaptain} variant="hero" delay={0.1} />}
+                  <div className="flex justify-center gap-3 sm:gap-6 max-w-lg mx-auto">
+                    {captain && (
+                      <MemberCard member={captain} variant="hero" className={HERO_CARD_CLASS} />
+                    )}
+                    {coCaptain && (
+                      <MemberCard member={coCaptain} variant="hero" delay={0.1} className={HERO_CARD_CLASS} />
+                    )}
                   </div>
                 </div>
               )}
@@ -638,7 +650,7 @@ export default function LandingPage() {
                   </div>
                   {teamLeads.length > 0 && (
                     <div className="mb-5 sm:mb-6">
-                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-5 max-w-6xl mx-auto">
+                      <div className={TEAM_GRID_CLASS}>
                         {teamLeads.map((member, i) => (
                           <MemberCard
                             key={member.id}
@@ -652,7 +664,7 @@ export default function LandingPage() {
                   )}
                   {teamCoLeads.length > 0 && (
                     <div>
-                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-5 max-w-6xl mx-auto">
+                      <div className={TEAM_GRID_CLASS}>
                         {teamCoLeads.map((member, i) => (
                           <MemberCard
                             key={member.id}
@@ -674,7 +686,7 @@ export default function LandingPage() {
                       {activeSession.workingTeamLabel}
                     </h3>
                   </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-5 max-w-6xl mx-auto">
+                  <div className={TEAM_GRID_CLASS}>
                     {swtMembers.map((member, i) => (
                       <MemberCard
                         key={member.id}
